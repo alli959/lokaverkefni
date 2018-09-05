@@ -1,0 +1,28 @@
+{
+  "name": "lokaverkefni",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alli959/lokaverkefni.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alli959/lokaverkefni/issues"
+  },
+  "homepage": "https://github.com/alli959/lokaverkefni#readme",
+  "dependencies": {
+    "csv": "^3.1.0",
+    "csvtojson": "^2.0.8",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "pg": "^7.4.3",
+    "xss": "^1.0.3"
+  }
+}
