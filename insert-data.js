@@ -9,7 +9,8 @@ const {
 const food = [];
 
 async function insert() {
-    for (let i = 0; i < food.length; i++) {
+    for (let i = 0; i < food.length; i += 1) {
+        console.log(food);
       await saveFood(food[i]); // eslint-disable-line
     }
     console.info('Finished inserting data');
@@ -38,13 +39,9 @@ function readJson(){
         .on('done', async () => {
             console.info('Finished reading data');
             await insert();
+            
         });
 
 }
 
-csv()
-.on('done', () => {
-    console.info('Finished creating categories');
-    setTimeout(readJson, 2000);
-  });
-
+readJson();
