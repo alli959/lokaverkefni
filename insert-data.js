@@ -1,47 +1,50 @@
 const csv = require('csvtojson');
 const xss = require('xss');
 const csvFilePath = './data/food.csv';
+const jsonFilePath = require('./data/food.json');
+
 
 const {
     saveFood,
+    saveMaterials,
 } = require('./food-db');
 
 const food = [];
 
-async function insert() {
-    for (let i = 0; i < food.length; i += 1) {
-        console.log(food);
+
+
+
+async function insertFood() {
+  const food = jsonFilePath.food;
+  for (let i = 0; i < food.length; i += 1) {
+    try{
       await saveFood(food[i]); // eslint-disable-line
+    } catch(err){
+      console.error("Error inserting food");
+      throw err;
     }
-    console.info('Finished inserting data');
+  }
+    console.info('Finished inserting food');
   }
 
-function readJson(){
-    csv()
-        .fromFile(csvFilePath)
-        .on('json', (jsonObj) => {
-            const {
-                name,
-                description,
-                price,
-                time,
-            } = jsonObj;
+  async function insertMaterials() {
+    const materials = jsonFilePath.materials;
+    for(let i = 0; i<materials.length; i += 1) {
+      try{
+        await saveMaterials(materials[i]);
+      }catch(err){
+        console.error("Error inserting materials");
+        throw err;
+      }
+    }
+    console.info('Finished inserting materials');
+    insertFood();
+  }
 
-            const data = {
-                name: xss(name),
-                description: xss(description),
-                price: xss(price),
-                time: xss(time),
-            };
 
-            food.push(data);
-        })
-        .on('done', async () => {
-            console.info('Finished reading data');
-            await insert();
-            
-        });
+setTimeout(insertMaterials,2000);
 
-}
 
-readJson();
+
+
+
