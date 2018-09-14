@@ -13,3 +13,9 @@ CREATE Table materials(
     price Integer
 );
 
+CREATE Table orders(
+    id serial PRIMARY KEY,
+    name Varchar(255),
+    minus text
+);
+
