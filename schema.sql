@@ -15,7 +15,10 @@ CREATE Table materials(
 
 CREATE Table orders(
     id serial PRIMARY KEY,
-    name Varchar(255),
-    minus text
+    name text,
+    minus text,
+    plus text,
+    totalprice Integer,
+    time Integer
 );
 

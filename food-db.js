@@ -78,9 +78,50 @@ async function saveMaterials(data) {
   }
 }
 
+
+
+async function order(data) {
+  const client = new Client({ connectionString });
+  const {
+    name,
+    minus,
+    plus,
+    totalprice,
+    time,
+  } = data;
+
+  const bname = xss(name);
+  const bminus = xss(minus);
+  const bplus = xss(plus);
+  const btotalprice = xss(totalprice);
+  const btime = xss(time)
+
+
+  await client.connect();
+
+  const query =
+  `INSERT INTO orders(name, minus, plus, totalprice, time) VALUES($1, $2, $3, $4, $5) returning *`;
+
+  const values = [
+    bname, bminus, bplus, btotalprice, btime
+  ];
+
+  try {
+    const result = await client.query(query, values);
+    const { rows } = result;
+    return rows;
+  } catch (err) {
+    console.error('Error inserting data');
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
 module.exports = {
     saveFood,
     saveMaterials,
+    order,
 };
 
 
