@@ -72,6 +72,103 @@
       "price": 920,
       "description": "Inniheldur ost , hamborgara sósu, kál og tómat",
       "time": 120
+    },
+    {
+      "name": "Barnaborgari",
+      "price": 690,
+      "description": "Inniheldur hamborgara sósu",
+      "time": 180
+    },
+    {
+      "name": "Hamborgari",
+      "price": 800,
+      "description": "Inniheldur hamborgara sósu, kál og tómat",
+      "time": 120
+    },
+    {
+      "name": "Bernesborgari",
+      "price": 920,
+      "description": "Inniheldur ost, kál, lauk, papriku og bernessósu",
+      "time": 120
+    },
+    {
+      "name": "Beikonborgari",
+      "price": 1020,
+      "description": "Inniheldur ost, beikon, hamborgara sósu, kál og tómat",
+      "time": 120
+    },
+    {
+      "name": "PalliSpes",
+      "price": 1100,
+      "description": "Inniheldur ost, beikon, skinku, sveppi og hamborgara sósu",
+      "time": 150
+    },
+    {
+      "name": "BBQborgari",
+      "price": 1000,
+      "description": "Inniheldur beikon, kál, lauk tómat og BBQ sósu",
+      "time": 120
+    },
+    {
+      "name": "Kjúklingaborgari",
+      "price": 1050,
+      "description": "Inniheldur lauk, gúrku, kál og sósu",
+      "time": 270
+    },
+    {
+      "name": "Tvöfaldur Hamborgari",
+      "price": 1050,
+      "description": "Inniheldur kál, tómat og sósu",
+      "time": 120
+    },
+    {
+      "name": "Tvöfaldur ostborgari",
+      "price": 1090,
+      "description": "Inniheldur hamborgara sósu, kál og tómat",
+      "time": 120
+    },
+
+    {
+      "name": "Hamborgari",
+      "price": 1300,
+      "description": "Inniheldur hamborgara sósu, kál og tómat",
+      "time": 180
+    },
+    {
+      "name": "Skinkubátur",
+      "price": 1300,
+      "description": "Inniheldur skinku, ost, beikon, kál, papriku, gúrku, ananas og lauksósu",
+      "time": 180
+    },
+    {
+      "name": "Roastbeefbátur",
+      "price": 1300,
+      "description": "Inniheldur Roastbeef, lauk, sveppi, papriku, kál og sinnepssósu",
+      "time": 180
+    },
+    {
+      "name": "Rækjubátur",
+      "price": 1300,
+      "description": "Inniheldur Rækjur, skinku, ost, kál og sinnepssósu",
+      "time": 180
+    },
+    {
+      "name": "Pepperonibðatur",
+      "price": 1300,
+      "description": "Inniheldur Pepperoni, skinku, ost, kál og sinnepssósu",
+      "time": 180
+    },
+    {
+      "name": "Samloka",
+      "price": 780,
+      "description": "Inniheldur Skinku, ost, kál og sósu",
+      "time": 90
+    },
+    {
+      "name": "Klúbbsamloka",
+      "price": 830,
+      "description": "Inniheldur skinku, ost, beikon, sveppi, kál, tómat og hamborgara sósu",
+      "time": 120
     }
   ],
   "materials": [

@@ -80,7 +80,7 @@ async function saveMaterials(data) {
 
 
 
-async function order(data) {
+async function addOrder(data) {
   const client = new Client({ connectionString });
   const {
     name,
@@ -118,10 +118,12 @@ async function order(data) {
   }
 }
 
+
+
 module.exports = {
     saveFood,
     saveMaterials,
-    order,
+    addOrder,
 };
 
 
