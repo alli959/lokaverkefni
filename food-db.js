@@ -83,6 +83,8 @@ async function saveMaterials(data) {
 async function addOrder(data) {
   const client = new Client({ connectionString });
   const {
+    orderId,
+    orderName,
     name,
     minus,
     plus,
@@ -90,6 +92,8 @@ async function addOrder(data) {
     time,
   } = data;
 
+  const borderId = xss(orderId);
+  const borderName = xss(orderName);
   const bname = xss(name);
   const bminus = xss(minus);
   const bplus = xss(plus);
@@ -100,10 +104,10 @@ async function addOrder(data) {
   await client.connect();
 
   const query =
-  `INSERT INTO orders(name, minus, plus, totalprice, time) VALUES($1, $2, $3, $4, $5) returning *`;
+  `INSERT INTO orders(orderId, orderName, name, minus, plus, totalprice, time) VALUES($1, $2, $3, $4, $5, $6, $7) returning *`;
 
   const values = [
-    bname, bminus, bplus, btotalprice, btime
+    borderId, borderName, bname, bminus, bplus, btotalprice, btime
   ];
 
   try {
