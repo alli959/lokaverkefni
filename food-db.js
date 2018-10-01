@@ -85,7 +85,7 @@ async function addOrder(data) {
   const {
     orderId,
     orderName,
-    name,
+    foodName,
     minus,
     plus,
     totalprice,
@@ -94,7 +94,7 @@ async function addOrder(data) {
 
   const borderId = xss(orderId);
   const borderName = xss(orderName);
-  const bname = xss(name);
+  const bname = xss(foodName);
   const bminus = xss(minus);
   const bplus = xss(plus);
   const btotalprice = xss(totalprice);
@@ -104,7 +104,7 @@ async function addOrder(data) {
   await client.connect();
 
   const query =
-  `INSERT INTO orders(orderId, orderName, name, minus, plus, totalprice, time) VALUES($1, $2, $3, $4, $5, $6, $7) returning *`;
+  `INSERT INTO orders(orderId, orderName, foodName, minus, plus, totalprice, time) VALUES($1, $2, $3, $4, $5, $6, $7) returning *`;
 
   const values = [
     borderId, borderName, bname, bminus, bplus, btotalprice, btime

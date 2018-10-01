@@ -13,18 +13,14 @@ CREATE Table materials(
     price Integer
 );
 
-CREATE Table orderBy(
-    id serial PRIMARY KEY UNIQUE,
-    name Varchar(255) UNIQUE
-);
 
 CREATE Table orders(
     id serial PRIMARY KEY,
-    orderId Integer REFERENCES orderBy(id),
-    orderName Varchar(255) REFERENCES OrderBy(name),
-    name text,
-    minus text,
-    plus text,
+    orderId Integer,
+    orderName Varchar(255),
+    foodName Varchar(255),
+    minus Varchar(255),
+    plus Varchar(255),
     totalprice Integer,
     time Integer
 );
