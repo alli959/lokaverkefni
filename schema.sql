@@ -21,8 +21,9 @@ CREATE Table orders(
     foodName Varchar(255),
     minus Varchar(255),
     plus Varchar(255),
+    price Integer,
     totalprice Integer,
-    time Integer
+    totalTime Integer
 );
 
 

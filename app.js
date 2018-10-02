@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 
+const food = require('./orderFood');
+
 
 const {
     PORT: port = 3000,
@@ -8,6 +10,9 @@ const {
 } = process.env;
 
 const app = express();
+
+app.use(express.json());
+app.use('/', food);
 
 function notFoundHandler(req, res, next) {
     res.status(404).json({error: 'Not found'});
