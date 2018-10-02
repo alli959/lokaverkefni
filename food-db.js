@@ -6,6 +6,8 @@ const connectionString = process.env.DATABASE_URL;
 
 console.log(connectionString);
 
+
+//Food insert
 async function saveFood(data) {
     const client = new Client({ connectionString });
     const {
@@ -44,6 +46,7 @@ async function saveFood(data) {
 }
 
 
+//Material insert
 async function saveMaterials(data) {
   const client = new Client({ connectionString });
   const {
@@ -79,7 +82,7 @@ async function saveMaterials(data) {
 }
 
 
-
+//order creation
 async function addOrder(data) {
   const client = new Client({ connectionString });
   const {
@@ -93,15 +96,6 @@ async function addOrder(data) {
     totalTime,
   } = data;
 
-  const borderId = xss(orderId);
-  const borderName = xss(orderName);
-  const bname = xss(foodName);
-  const bminus = xss(minus);
-  const bplus = xss(plus);
-  const bprice = xss(price);
-  const btotalprice = xss(totalprice);
-  const btime = xss(totalTime)
-
 
   await client.connect();
 
@@ -109,8 +103,9 @@ async function addOrder(data) {
   `INSERT INTO orders(orderId, orderName, foodName, minus, plus, price, totalprice, totalTime) VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
 
   const values = [
-    orderId, orderName, foodName, minus, plus, price, totalprice, btime
+    orderId, orderName, foodName, minus, plus, price, totalprice, totalTime
   ];
+
 
   try {
     const result = await client.query(query, values);
@@ -124,12 +119,74 @@ async function addOrder(data) {
   }
 }
 
+//get Price of each material
+async function getMaterialPrice(material){
+  const client = new Client({ connectionString});
+  const query = 'SELECT price FROM materials WHERE material = $1';
+  await client.connect();
+  console.log(material);
+
+  try{
+    const data = await client.query(query, [material]);
+    const { rows } = data;
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+//get Price of food
+async function getFoodPrice(food){
+  const client = new Client({ connectionString});
+  const query = 'SELECT price FROM food WHERE name = $1';
+  await client.connect();
+
+  try{
+    const data = await client.query(query, [food]);
+    const { rows } = data;
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+//get highest order id
+async function getHighestId(){
+  const client = new Client({ connectionString });
+  const query = 'SELECT max(orderId) FROM orders';
+  await client.connect();
+
+  try{
+    const data = await client.query(query);
+    const { rows } = data;
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+
+
+
+
 
 
 module.exports = {
     saveFood,
     saveMaterials,
     addOrder,
+    getMaterialPrice,
+    getFoodPrice,
+    getHighestId,
 };
 
 

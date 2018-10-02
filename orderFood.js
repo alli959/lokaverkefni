@@ -9,18 +9,15 @@ router.use(express.urlencoded({ extended: true}));
 
 router.post('/', async (req, res) => {
     const {
-        orderId,
         orderName,
         foodName,
         minus,
         plus,
-        price,
-        totalprice,
         totalTime,
     } = req.body;
 
     const {status, data} = await newOrder({
-        orderId, orderName, foodName, minus, plus, price, totalprice, totalTime,
+        orderName, foodName, minus, plus, totalTime,
     });
 
     return res.status(status).json(data);

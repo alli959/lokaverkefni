@@ -1,6 +1,10 @@
 const {
     addOrder,
+    getMaterialPrice,
+    getFoodPrice,
+    getHighestId,
 } = require('./food-db');
+const xss = require('xss');
 
 
 const validator = require('validator');
@@ -26,6 +30,7 @@ const validator = require('validator');
 
 
 
+
 /**
  * Add order
  * 
@@ -35,43 +40,58 @@ const validator = require('validator');
  * @param {Array} order.name - name of the order
  * @param {Array} order.minus - items the person doesn't want
  * @param {Array} order.plus  - items the person wants extra
- * @param {Array} order.price  - price of each item
- * @param {Int} order.totalprice - total price of the order
  * @param {Int} order.totalTime - time it takes to do the order
  * 
  * @returns {Promise}
  */
 
  async function newOrder({
-     orderId,
      orderName,
      foodName,
      minus,
      plus,
-     price,
-     totalprice,
      totalTime,
  } = {}) {
      console.log("validation here");
 
- 
-
+     
+    const tempId = await getHighestId();
+    const id = tempId[0].max + 1;
     const arr = [];
-    console.log(orderId)
 
+    let totalPrice = 0;
     for(let i = 0; i<foodName.length; i++){
+        let materialPrice = 0;
+        if(plus[i] === undefined){
+            materialPrice = 0;
+        }
+        else{
+            const materials = await plus[i].split(',');
+
+            for(let j = 0; j<materials.length; j++){
+                const temp = await getMaterialPrice(materials[j])
+                materialPrice += temp[0].price;
+                if(materialPrice == undefined){
+                    materialPrice = 0;
+                }
+            }
+        }
+
+
+        const foodPrice = await getFoodPrice(foodName[i]);
+        const foodmaterialPrice = materialPrice + foodPrice[0].price;
+        totalPrice += foodmaterialPrice;
         const data = {
-            orderId: orderId,
-            orderName: orderName,
-            foodName: foodName[i],
-            minus: minus[i],
-            plus: plus[i],
-            price: price[i],
-            totalprice: totalprice,
+            orderId: id,
+            orderName: xss(orderName),
+            foodName: xss(foodName[i]),
+            minus: xss(minus[i]),
+            plus: xss(plus[i]),
+            price: foodmaterialPrice,
+            totalprice: totalPrice,
             totalTime: totalTime,
         };
         await arr.push(data);
-        console.log(arr);
     }
     for (let i = 0; i < arr.length; i += 1) {
         try{
@@ -86,6 +106,8 @@ const validator = require('validator');
     return ({ status: 200, output: arr });
   
 }
+
+
 
 module.exports = {
     newOrder,
