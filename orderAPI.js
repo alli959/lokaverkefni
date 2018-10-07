@@ -79,7 +79,9 @@ const validator = require('validator');
 
 
         const foodPrice = await getFoodPrice(foodName[i]);
+        console.log(foodName[i]);
         const foodmaterialPrice = materialPrice + foodPrice[0].price;
+        console.log(foodmaterialPrice);
         totalPrice += foodmaterialPrice;
         const data = {
             orderId: id,

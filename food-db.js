@@ -143,6 +143,7 @@ async function getFoodPrice(food){
   const client = new Client({ connectionString});
   const query = 'SELECT price FROM food WHERE name = $1';
   await client.connect();
+  console.log(food);
 
   try{
     const data = await client.query(query, [food]);
