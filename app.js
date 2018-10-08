@@ -5,7 +5,7 @@ const food = require('./orderFood');
 
 
 const {
-    PORT: port = 3000,
+    PORT: port = 5000,
     HOST: host = '127.0.0.1',
 } = process.env;
 

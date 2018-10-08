@@ -1,6 +1,7 @@
 const express = require('express');
 const {
     newOrder,
+    getallFood,
 } = require('./orderAPI');
 
 const router = express.Router();
@@ -21,6 +22,14 @@ router.post('/', async (req, res) => {
     });
 
     return res.status(status).json(data);
+});
+
+router.get('/hello', async  (req, res) => {
+    const arr = [
+        {"id":"1","pepp":"hello"},
+        {"id":"2","pepp":"hello"}
+    ];
+    await res.json(arr);
 });
 
 module.exports = router;

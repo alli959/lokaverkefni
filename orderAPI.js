@@ -3,6 +3,7 @@ const {
     getMaterialPrice,
     getFoodPrice,
     getHighestId,
+    getFood,
 } = require('./food-db');
 const xss = require('xss');
 
@@ -79,7 +80,6 @@ const validator = require('validator');
 
 
         const foodPrice = await getFoodPrice(foodName[i]);
-        console.log(foodName[i]);
         const foodmaterialPrice = materialPrice + foodPrice[0].price;
         console.log(foodmaterialPrice);
         totalPrice += foodmaterialPrice;
@@ -109,10 +109,22 @@ const validator = require('validator');
   
 }
 
+/**
+ * get food
+ * 
+ * @returns {promise}
+ */
+
+ async function getallFood(){
+     const data = await getFood();
+     return data;
+}
+
 
 
 module.exports = {
     newOrder,
+    getallFood,
 };
  
 

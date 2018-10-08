@@ -175,6 +175,27 @@ async function getHighestId(){
   }
 }
 
+//test to get json
+
+async function getFood(){
+  const client = new Client({ connectionString });
+  const query = 'SELECT * FROM food';
+  await client.connect();
+
+  try{
+    const data = await client.query(query,null);
+    const { rows } = data;
+    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
+
 
 
 
@@ -188,6 +209,7 @@ module.exports = {
     getMaterialPrice,
     getFoodPrice,
     getHighestId,
+    getFood,
 };
 
 
