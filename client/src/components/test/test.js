@@ -17,7 +17,11 @@ class Test extends Component {
   render() {
     return (
       <div>
-      
+      <ul>
+        {this.state.food.map(foods =>
+        <li key={foods.id}>{ foods.name } { foods.description } { foods.price }</li>
+        )}
+      </ul>
       </div>
     );
   }

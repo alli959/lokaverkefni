@@ -2,6 +2,7 @@ const express = require('express');
 const {
     newOrder,
     getallFood,
+    getOffer,
 } = require('./orderAPI');
 
 const router = express.Router();
@@ -24,12 +25,15 @@ router.post('/', async (req, res) => {
     return res.status(status).json(data);
 });
 
-router.get('/hello', async  (req, res) => {
-    const arr = [
-        {"id":"1","pepp":"hello"},
-        {"id":"2","pepp":"hello"}
-    ];
-    await res.json(arr);
+router.get('/food', async  (req, res) => {
+    const food = await getallFood();
+    await res.json(food);
 });
+
+router.get('/offers', async (req,res) => {
+    const offers = await getOffer();
+    console.log(offers);
+    await res.json(offers);
+})
 
 module.exports = router;

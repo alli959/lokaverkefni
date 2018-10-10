@@ -196,6 +196,27 @@ async function getFood(){
 
 }
 
+async function getOffers(){
+  const client = new Client({ connectionString });
+  const query = `SELECT * FROM food WHERE name like 'Tilboð%' `;
+  await client.connect();
+
+  try{
+    const data = await client.query(query,null);
+    const { rows } = data;
+    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
+
+
+
 
 
 
@@ -210,6 +231,7 @@ module.exports = {
     getFoodPrice,
     getHighestId,
     getFood,
+    getOffers,
 };
 
 

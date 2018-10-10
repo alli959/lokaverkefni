@@ -4,6 +4,7 @@ const {
     getFoodPrice,
     getHighestId,
     getFood,
+    getOffers,
 } = require('./food-db');
 const xss = require('xss');
 
@@ -121,10 +122,23 @@ const validator = require('validator');
 }
 
 
+/**
+ * get offer
+ * 
+ * @returns {promise}
+ */
+async function getOffer(){
+    const data = await getOffers();
+    return data;
+
+}
+
+
 
 module.exports = {
     newOrder,
     getallFood,
+    getOffer,
 };
  
 

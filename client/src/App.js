@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Test from './components/test'
+import Test from './components/test/test'
+import Offer from './components/offers/offer';
 
 class App extends Component {
   render() {
@@ -9,7 +10,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Test />
+          <Offer />
+          
           <a
             className="App-link"
             href="https://reactjs.org"
