@@ -22,9 +22,11 @@ class Offer extends Component {
     }
 
     async componentDidMount() {
-        const { dispatch } = this.props;
-        console.log(dispatch);
-
+        const { dispatch } = await this.props;
+        let offers = await this.props.offer;
+        this.setState({
+            offer: offers,
+        })
         dispatch(fetchOffers());
     }
 
@@ -58,8 +60,7 @@ class Offer extends Component {
     );
   }
 }
-
-/*const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
       isFetching: state.getOffers.isFetching,
       offer: state.getOffers.offer,
@@ -68,5 +69,4 @@ class Offer extends Component {
   }
   
 export default connect(mapStateToProps)(Offer);
-*/
-export default Offer;
+

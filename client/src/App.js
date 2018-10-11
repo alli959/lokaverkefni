@@ -1,29 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Test from './components/test/test'
-import Offer from './components/offers/offer';
+import { connect } from 'react-redux';
+import { Route, Switch, withRouter } from 'react-router-dom'
+import Offer from './components/offers/';
 
 class App extends Component {
+
+  async componentDidMount() {
+
+    const { dispatch } = await this.props;
+    console.log(dispatch);
+    
+
+  }
   render() {
+    console.log(this.props)
+    const { isFetching } = this.props;
+    console.log(isFetching);
+
+    if(isFetching) {
+      return (
+        <main className="main">
+          <h1>Augnablik...</h1>
+        </main>
+      )
+    }
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Offer />
-          
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <main className="main">
+          <div className="main__content">
+            <h2>Hello World</h2>
+            <Offer />
+          </div>
+      </main>
     );
   }
 }
 
-export default App;
+export default withRouter(connect()(App));
