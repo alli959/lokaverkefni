@@ -5,7 +5,6 @@ async function get(endpoint){
 
     const token = window.localStorage.getItem('token');
 
-    console.log(token);
 
     const url = `${baseurl}${endpoint}`;
 

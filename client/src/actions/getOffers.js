@@ -40,7 +40,7 @@ export const fetchOffers = () => {
         let offers;
         try{
             offers = await api.get(endpoint);
-            console.info(offers);
+            
         } catch (error) {
             dispatch(offerError(error));
         }

@@ -22,12 +22,14 @@ class Offer extends Component {
     }
 
     async componentDidMount() {
-        const { dispatch } = await this.props;
+        
+        const { dispatch } = this.props;
         let offers = await this.props.offer;
-        this.setState({
+        await this.setState({
             offer: offers,
         })
         dispatch(fetchOffers());
+
     }
 
     render() {
@@ -39,8 +41,10 @@ class Offer extends Component {
                 </div>
             );
         }
-        const { result: { items } } = offer;
-        if(!items){
+        let { result } = offer;
+        
+        
+        if(!result){
             return(
                 <div>
                     <h2>Síða finnst ekki, vinsamlegast reyndu aftur</h2>
@@ -48,11 +52,11 @@ class Offer extends Component {
             )
         }
     
-
     return (
+        
       <div>
         <ul>
-            {this.state.offer.map(offers =>
+            {result.map(offers =>
             <li key={offers.id}>{ offers.name } { offers.description } { offers.price }</li>
             )}
         </ul>

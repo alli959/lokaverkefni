@@ -14,6 +14,7 @@ import {
     export default (state = initialState, action) => {
         switch (action.type) {
         case OFFER_REQUEST:
+
             return {
               ...state,
               isFetching: action.isFetching,
@@ -22,7 +23,7 @@ import {
           return {
             ...state,
              isFetching: action.isFetching,
-             order: action.order,
+             offer: action.offer,
           }
           case OFFER_FAILURE:
           return{

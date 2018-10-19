@@ -2,21 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom'
-import Offer from './components/offers/';
+import Offer from './routes/offers/';
 
 class App extends Component {
 
   async componentDidMount() {
 
     const { dispatch } = await this.props;
-    console.log(dispatch);
     
 
   }
   render() {
-    console.log(this.props)
     const { isFetching } = this.props;
-    console.log(isFetching);
 
     if(isFetching) {
       return (
@@ -29,7 +26,9 @@ class App extends Component {
       <main className="main">
           <div className="main__content">
             <h2>Hello World</h2>
-            <Offer />
+            <Switch location={this.props.location}>
+              <Route path="/" exact component={Offer} />
+            </Switch>
           </div>
       </main>
     );
@@ -37,3 +36,7 @@ class App extends Component {
 }
 
 export default withRouter(connect()(App));
+
+
+
+
