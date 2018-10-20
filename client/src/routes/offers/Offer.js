@@ -21,8 +21,13 @@ class Offer extends Component {
         message: PropTypes.object,
     }
 
+
+
+
+
+
+
     async componentDidMount() {
-        
         const { dispatch } = this.props;
         let offers = await this.props.offer;
         await this.setState({
@@ -55,9 +60,30 @@ class Offer extends Component {
     return (
         
       <div>
-        <ul>
+
+        <ul class = "offer-list">
             {result.map(offers =>
-            <li key={offers.id}>{ offers.name } { offers.description } { offers.price }</li>
+                <li key={offers.id}>
+                    <div class = "offer-item">
+                        <div class = "name">
+                            <span> {offers.name} </span>
+                        </div>
+                        <div class = "offerImage">
+                            <img src={require('../../Images/Menu-items/' + offers.name + '.png')} />
+
+
+                        </div>
+                        <div class = "price">
+                            {offers.price}
+
+                        </div>
+                        <div class = "description">
+                            {offers.description}
+                        </div>
+                    </div>
+                </li>
+                
+                
             )}
         </ul>
       </div>
