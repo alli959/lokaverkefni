@@ -69,8 +69,7 @@ class Offer extends Component {
                             <span> {offers.name} </span>
                         </div>
                         <div class = "offerImage">
-                            <img src={require('../../Images/Menu-items/' + offers.name + '.png')} />
-
+                            <img src={require('../../Images/Menu-items/' + offers.name + '.png')} alt = "Mynd finst ekki" />
 
                         </div>
                         <div class = "price">

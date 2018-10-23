@@ -98,7 +98,7 @@
       "time": 120
     },
     {
-      "name": "PalliSpes",
+      "name": "PalliSpes Ostborgari",
       "price": 1100,
       "description": "Inniheldur ost, beikon, skinku, sveppi og hamborgara sósu",
       "time": 150
@@ -106,7 +106,7 @@
     {
       "name": "BBQborgari",
       "price": 1000,
-      "description": "Inniheldur beikon, kál, lauk tómat og BBQ sósu",
+      "description": "Inniheldur beikon, kál, lauk, tómat og BBQ sósu",
       "time": 120
     },
     {
@@ -122,7 +122,7 @@
       "time": 120
     },
     {
-      "name": "Tvöfaldur ostborgari",
+      "name": "Tvöfaldur Ostborgari",
       "price": 1090,
       "description": "Inniheldur hamborgara sósu, kál og tómat",
       "time": 120
@@ -153,7 +153,7 @@
       "time": 180
     },
     {
-      "name": "Pepperonibðatur",
+      "name": "Pepperonibátur",
       "price": 1300,
       "description": "Inniheldur Pepperoni, skinku, ost, kál og sinnepssósu",
       "time": 180
@@ -165,7 +165,19 @@
       "time": 90
     },
     {
-      "name": "Klúbbsamloka",
+      "name": "BeikonSamloka",
+      "price": 950,
+      "description": "Inniheldur beikon, skinku, ost kál og sósu",
+      "time": 90
+    },
+    {
+      "name": "Þriggja Hæða Samloka",
+      "price": 1100,
+      "description": "Inniheldur skinku, ost, beikon, kál, tómat og sósu",
+      "time": 90
+    },
+    {
+      "name": "KlúbbSamloka",
       "price": 830,
       "description": "Inniheldur skinku, ost, beikon, sveppi, kál, tómat og hamborgara sósu",
       "time": 120

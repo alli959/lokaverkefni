@@ -5,6 +5,10 @@ const {
     getHighestId,
     getFood,
     getOffers,
+    getBurgers,
+    getBoats,
+    getSandwiches,
+    getMaterials,
 } = require('./food-db');
 const xss = require('xss');
 
@@ -133,12 +137,64 @@ async function getOffer(){
 
 }
 
+/**
+ * get Burger
+ * 
+ * @returns {promise}
+ */
+
+ async function getBurger(){
+     const data = await getBurgers();
+     return data;
+ }
+
+
+ /**
+ * get Boat
+ * 
+ * @returns {promise}
+ */
+
+async function getBoat(){
+    const data = await getBoats();
+    return data;
+}
+
+
+
+ /**
+ * get Sandwich
+ * 
+ * @returns {promise}
+ */
+
+async function getSandwich(){
+    const data = await getSandwiches();
+    return data;
+}
+
+ /**
+ * get Materials
+ * 
+ * @returns {promise}
+ */
+
+async function getMaterial(){
+    const data = await getMaterials();
+    return data;
+}
+
+
 
 
 module.exports = {
     newOrder,
     getallFood,
     getOffer,
+    getBurger,
+    getBoat,
+    getSandwich,
+    getMaterial,
 };
  
 

@@ -1,0 +1,30 @@
+.offer-list{
+    max-width: 920px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: inherit;
+}
+
+li{
+    width: 25%;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0px 10px 20px 10px;
+    vertical-align: top;
+}
+
+@media(max-width: 930px){
+    li{
+        display: flex;
+        align-items: flex-start;
+        align-self: flex-start
+    }
+}
+
+.description{
+    max-width: 8em;
+}
+
+
+
+

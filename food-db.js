@@ -215,6 +215,81 @@ async function getOffers(){
 
 }
 
+async function getBurgers(){
+  const client = new Client({ connectionString });
+  const query = `SELECT * FROM food WHERE name like '%borgari' `;
+  await client.connect();
+
+  try{
+    const data = await client.query(query,null);
+    const { rows } = data;
+    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
+
+async function getBoats(){
+  const client = new Client({ connectionString });
+  const query = `SELECT * FROM food WHERE name like '%bátur' `;
+  await client.connect();
+
+  try{
+    const data = await client.query(query,null);
+    const { rows } = data;
+    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
+
+async function getSandwiches(){
+  const client = new Client({ connectionString });
+  const query = `SELECT * FROM food WHERE name like '%amloka' `;
+  await client.connect();
+
+  try{
+    const data = await client.query(query,null);
+    const { rows } = data;
+    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
+
+async function getMaterials(){
+  const client = new Client({ connectionString });
+  const query = `SELECT * FROM materials`;
+  await client.connect();
+
+  try{
+    const data = await client.query(query,null);
+    const { rows } = data;
+    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
 
 
 
@@ -232,6 +307,10 @@ module.exports = {
     getHighestId,
     getFood,
     getOffers,
+    getBurgers,
+    getBoats,
+    getSandwiches,
+    getMaterials,
 };
 
 

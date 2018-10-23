@@ -28,6 +28,7 @@ class App extends Component {
             <h2>Hello World</h2>
             <Switch location={this.props.location}>
               <Route path="/" exact component={Offer} />
+              <Route path="/offers" exact component={Offer} />
             </Switch>
           </div>
       </main>
