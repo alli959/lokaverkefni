@@ -12,12 +12,15 @@ async function saveFood(data) {
     const client = new Client({ connectionString });
     const {
       name,
+      isOffer,
+      contains,
       description,
       price,
       time,
     } = data;
 
     const bname = xss(name);
+    const bcontains = xss(contains);
     const bdescription = xss(description);
     const bprice = xss(price);
     const btime = xss(time);
@@ -27,10 +30,10 @@ async function saveFood(data) {
     await client.connect();
   
     const query =
-    `INSERT INTO food(name, description, price, time) VALUES($1, $2, $3, $4) returning *`;
+    `INSERT INTO food(name, isOffer, contains, description, price, time) VALUES($1, $2, $3, $4, $5, $6) returning *`;
   
     const values = [
-      bname, bdescription, bprice, btime
+      bname, isOffer, bcontains, bdescription, bprice, btime
     ];
   
     try {

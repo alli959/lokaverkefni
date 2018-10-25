@@ -1,6 +1,8 @@
 CREATE Table food(
     id serial PRIMARY KEY,
     name Varchar(255),
+    isOffer boolean,
+    contains text,
     description text,
     price Integer,
     time Integer

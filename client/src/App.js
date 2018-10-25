@@ -3,6 +3,8 @@ import './App.css';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import Offer from './routes/offers/';
+import Header from './components/header';
+import Button from './components/button';
 
 class App extends Component {
 
@@ -25,10 +27,9 @@ class App extends Component {
     return (
       <main className="main">
           <div className="main__content">
-            <h2>Hello World</h2>
+            <Header />
             <Switch location={this.props.location}>
-              <Route path="/" exact component={Offer} />
-              <Route path="/offers" exact component={Offer} />
+              <Route path="/panta" exact component={Offer} />
             </Switch>
           </div>
       </main>

@@ -59,25 +59,26 @@ class Offer extends Component {
     
     return (
         
-      <div>
+      <div class = "content">
 
         <ul class = "offer-list">
             {result.map(offers =>
                 <li key={offers.id}>
                     <div class = "offer-item">
                         <div class = "name">
-                            <span> {offers.name} </span>
+                            <h2> {offers.name} </h2>
                         </div>
                         <div class = "offerImage">
                             <img src={require('../../Images/Menu-items/' + offers.name + '.png')} alt = "Mynd finst ekki" />
 
                         </div>
-                        <div class = "price">
-                            {offers.price}
-
-                        </div>
                         <div class = "description">
                             {offers.description}
+                        </div>
+                        <div class = "price">
+                            <span> Verð: </span>
+                            {offers.price}
+
                         </div>
                     </div>
                 </li>
