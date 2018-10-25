@@ -6,14 +6,14 @@ export const BURGER_FAILURE = 'BURGER_FAILURE';
 export const SEARCH_BURGER_SUCCESS = 'SEARCH_BURGER_SUCCESS';
 
 
-function requestOffer() {
+function requestBurger() {
     return {
         type: BURGER_REQUEST,
         isFetching: true,
     }
 }
 
-function receiveOffer(burger) {
+function receiveBurger(burger) {
     return {
       type: BURGER_SUCCESS,
       isFetching: false,
@@ -30,10 +30,10 @@ function burgerError(message) {
   }
 
 
-export const fetchOffers = () => {
+export const fetchBurgers = () => {
     return async (dispatch) => {
 
-        dispatch(requestOffer());
+        dispatch(requestBurger());
 
         let endpoint = '/burgers';
 
@@ -48,6 +48,6 @@ export const fetchOffers = () => {
         if (burgers.status !== 200 || !burgers){
             dispatch(burgerError('fail'))
         }
-        dispatch(receiveOffer(burgers));
+        dispatch(receiveBurger(burgers));
     }
 }

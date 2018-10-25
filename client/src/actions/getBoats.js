@@ -6,14 +6,14 @@ export const BOAT_FAILURE = 'BOAT_FAILURE';
 export const SEARCH_BOAT_SUCCESS = 'SEARCH_BOAT_SUCCESS';
 
 
-function requestOffer() {
+function requestBoat() {
     return {
         type: BOAT_REQUEST,
         isFetching: true,
     }
 }
 
-function receiveOffer(boat) {
+function receiveBoat(boat) {
     return {
       type: BOAT_SUCCESS,
       isFetching: false,
@@ -30,10 +30,10 @@ function boatError(message) {
   }
 
 
-export const fetchOffers = () => {
+export const fetchBoats = () => {
     return async (dispatch) => {
 
-        dispatch(requestOffer());
+        dispatch(requestBoat());
 
         let endpoint = '/boats';
 
@@ -48,6 +48,6 @@ export const fetchOffers = () => {
         if (boats.status !== 200 || !boats){
             dispatch(boatError('fail'))
         }
-        dispatch(receiveOffer(boats));
+        dispatch(receiveBoat(boats));
     }
 }

@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import querystring from 'querystring';
-import { fetchOffers } from '../../actions/getOffers'
+import { fetchOffers } from '../../actions/getOffers';
+import Burgers from '../../components/burgers';
+import Boats from '../../components/boats';
+import Sandwiches from '../../components/sandwiches';
 import './offer.css';
 
 class Offer extends Component {
@@ -20,6 +23,9 @@ class Offer extends Component {
         offer: PropTypes.object,
         message: PropTypes.object,
     }
+
+
+
 
 
 
@@ -56,7 +62,23 @@ class Offer extends Component {
                 </div>
             )
         }
-    
+
+    if(this.props.location.hash === '#burgers'){
+        return(
+            <Burgers />
+        );
+    }
+    if(this.props.location.hash === '#boats'){
+        return(
+            <Boats />
+        );
+    }
+    if(this.props.location.hash === '#sandwiches'){
+        return(
+            <Sandwiches />
+        );
+    }
+
     return (
         
       <div class = "content">

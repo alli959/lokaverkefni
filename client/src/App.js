@@ -29,7 +29,7 @@ class App extends Component {
           <div className="main__content">
             <Header />
             <Switch location={this.props.location}>
-              <Route path="/panta" exact component={Offer} />
+              <Route path="/menu" exact component={Offer} />
             </Switch>
           </div>
       </main>

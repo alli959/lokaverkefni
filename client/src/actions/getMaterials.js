@@ -6,14 +6,14 @@ export const MATERIAL_FAILURE = 'MATERIAL_FAILURE';
 export const SEARCH_MATERIAL_SUCCESS = 'SEARCH_MATERIAL_SUCCESS';
 
 
-function requestOffer() {
+function requestMaterial() {
     return {
         type: MATERIAL_REQUEST,
         isFetching: true,
     }
 }
 
-function receiveOffer(material) {
+function receiveMaterial(material) {
     return {
       type: MATERIAL_SUCCESS,
       isFetching: false,
@@ -30,10 +30,10 @@ function materialError(message) {
   }
 
 
-export const fetchOffers = () => {
+export const fetchMaterials = () => {
     return async (dispatch) => {
 
-        dispatch(requestOffer());
+        dispatch(requestMaterial());
 
         let endpoint = '/materials';
 
@@ -48,6 +48,6 @@ export const fetchOffers = () => {
         if (materials.status !== 200 || !materials){
             dispatch(materialError('fail'))
         }
-        dispatch(receiveOffer(materials));
+        dispatch(receiveMaterial(materials));
     }
 }

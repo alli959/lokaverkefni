@@ -6,14 +6,14 @@ export const SANDWICH_FAILURE = 'SANDWICH_FAILURE';
 export const SEARCH_SANDWICH_SUCCESS = 'SEARCH_SANDWICH_SUCCESS';
 
 
-function requestOffer() {
+function requestSandwich() {
     return {
         type: SANDWICH_REQUEST,
         isFetching: true,
     }
 }
 
-function receiveOffer(sandwich) {
+function receiveSandwich(sandwich) {
     return {
       type: SANDWICH_SUCCESS,
       isFetching: false,
@@ -30,10 +30,10 @@ function sandwichError(message) {
   }
 
 
-export const fetchOffers = () => {
+export const fetchSandwiches = () => {
     return async (dispatch) => {
 
-        dispatch(requestOffer());
+        dispatch(requestSandwich());
 
         let endpoint = '/sandwiches';
 
@@ -48,6 +48,6 @@ export const fetchOffers = () => {
         if (sandwiches.status !== 200 || !sandwiches){
             dispatch(sandwichError('fail'))
         }
-        dispatch(receiveOffer(sandwiches));
+        dispatch(receiveSandwich(sandwiches));
     }
 }
