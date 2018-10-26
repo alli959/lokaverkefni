@@ -63,27 +63,12 @@ class Offer extends Component {
             )
         }
 
-    if(this.props.location.hash === '#burgers'){
-        return(
-            <Burgers />
-        );
-    }
-    if(this.props.location.hash === '#boats'){
-        return(
-            <Boats />
-        );
-    }
-    if(this.props.location.hash === '#sandwiches'){
-        return(
-            <Sandwiches />
-        );
-    }
 
     return (
         
-      <div class = "content">
+      <div className = "content">
 
-        <ul class = "offer-list">
+        <ul className = "offer-list">
             {result.map(offers =>
                 <li key={offers.id}>
                     <div class = "offer-item">

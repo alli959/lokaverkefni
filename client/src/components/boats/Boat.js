@@ -37,7 +37,6 @@ class Boat extends Component {
             boat: boats,
         })
         dispatch(fetchBoats());
-        console.log(this.props);
 
 
     }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter } from 'react-router-dom'
-import Offer from './routes/offers/';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/header';
 import Button from './components/button';
+import Menu from './routes/menu';
 
 class App extends Component {
 
@@ -29,7 +29,7 @@ class App extends Component {
           <div className="main__content">
             <Header />
             <Switch location={this.props.location}>
-              <Route path="/menu" exact component={Offer} />
+              <Route path="/menu" exact component={Menu} />
             </Switch>
           </div>
       </main>
