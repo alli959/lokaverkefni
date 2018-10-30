@@ -40,21 +40,13 @@ class Header extends Component {
     
     return (
       <header className="header">
-        <div className="navBar">
-            <a className="Offers" href="#offers">Tilboð</a>
-            <a className="Burgers" href="#burgers">Borgarar</a>
-            <a className="Boats" href="#boats">Bátar</a>
-            <a className="Sandwiches" href="#sandwiches">Samlokur</a>
-        </div>
         <h1 className="header__heading"><Link to="/">Gullnesti</Link></h1>
+        <Button className="button__heading"><Link to="/menu">Matseðill</Link></Button>
       </header>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  }
-}
+
 
 export default withRouter(Header);

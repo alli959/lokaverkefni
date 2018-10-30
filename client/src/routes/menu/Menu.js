@@ -8,11 +8,20 @@ import Offers from '../../components/offers';
 import Burgers from '../../components/burgers';
 import Boats from '../../components/boats';
 import Sandwiches from '../../components/sandwiches';
+import Navbar from '../../components/navbar';
+import OrderView from '../../components/orderView';
 
 import './menu.css';
 
 
+
+
+
 class Menu extends Component {
+
+    state = {
+        name: ""
+    }
 
 
     render() {
@@ -20,6 +29,14 @@ class Menu extends Component {
             case '#offers':
                 return(
                     <div>
+                        <div>
+                            <OrderView
+                            name = {this.state.name} />
+                        </div>
+                        <div classname = "Navbar">
+                            <Navbar />
+                        </div>
+
                         <h1 className = "Menu_title">Tilboð</h1>
                         <Offers />
                     </div>
@@ -27,6 +44,9 @@ class Menu extends Component {
             case '#burgers':
                 return(
                     <div>
+                        <div classname = "Navbar">
+                            <Navbar />
+                        </div>
                         <h1 className = "Menu_title">Borgarar</h1>
                         <Burgers />
                     </div>
@@ -34,6 +54,9 @@ class Menu extends Component {
             case '#boats':
                 return(
                     <div>
+                        <div classname = "Navbar">
+                            <Navbar />
+                        </div>
                         <h1 className = "Menu_title">Bátar</h1>
                         <Boats />
                     </div>
@@ -41,6 +64,9 @@ class Menu extends Component {
             case '#sandwiches':
                 return(
                     <div>
+                        <div classname = "Navbar">
+                            <Navbar />
+                        </div>
                         <h1 className = "Menu_title">Samlokur</h1>
                         <Sandwiches />
                     </div>
@@ -48,14 +74,11 @@ class Menu extends Component {
             default:
                 return(
                     <div>
+                        <div classname = "Navbar">
+                            <Navbar />
+                        </div>
                         <h1 className = "Menu_title">Tilboð</h1>
                         <Offers />
-                        <h1 className = "Menu_title">Borgarar</h1>
-                        <Burgers />
-                        <h1 className = "Menu_title">Bátar</h1>
-                        <Boats />
-                        <h1 className = "Menu_title">Samlokur</h1>
-                        <Sandwiches />
                     </div>
                 );
             

@@ -4,8 +4,9 @@ import getBurgers from './getBurgers';
 import getBoats from './getBoats';
 import getMaterials from './getMaterials';
 import getSandwiches from './getSandwiches';
+import getFood from './getFood';
 
 
 export default combineReducers({
-    getOffers, getBurgers, getBoats, getMaterials, getSandwiches
+    getOffers, getBurgers, getBoats, getMaterials, getSandwiches, getFood
 })

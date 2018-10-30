@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import querystring from 'querystring';
 import { fetchOffers } from '../../actions/getOffers';
-import Burgers from '../../components/burgers';
-import Boats from '../../components/boats';
-import Sandwiches from '../../components/sandwiches';
+import Button from '../../components/button'
+import { fetchFood } from '../../actions/getFood';
+import OrderView from '../../components/orderView';
+
+
+
 import './offer.css';
+
 
 class Offer extends Component {
 
     state = {
         isFetching: false,
         offer: null,
+        clickName: null,
         message: null,
     }
 
@@ -22,6 +26,7 @@ class Offer extends Component {
         isFetching: PropTypes.bool,
         offer: PropTypes.object,
         message: PropTypes.object,
+        name: "",
     }
 
 
@@ -30,7 +35,16 @@ class Offer extends Component {
 
 
 
+    onClick = (name) => {
+        this.setState({
+            clickName: name,
+        })
 
+
+        
+        
+    }
+    
 
 
     async componentDidMount() {
@@ -64,13 +78,17 @@ class Offer extends Component {
         }
 
 
-    return (
-        
-      <div className = "content">
 
+    return (
+      <div className = "content">
         <ul className = "offer-list">
+        <div>
+            <OrderView
+            name="hello"/>
+        </div>
             {result.map(offers =>
                 <li key={offers.id}>
+                <Button onClick={() => this.onClick(offers.name)}>
                     <div class = "offer-item">
                         <div class = "name">
                             <h2> {offers.name} </h2>
@@ -88,8 +106,12 @@ class Offer extends Component {
 
                         </div>
                     </div>
+                    
+                </Button>
                 </li>
                 
+                
+
                 
             )}
         </ul>
