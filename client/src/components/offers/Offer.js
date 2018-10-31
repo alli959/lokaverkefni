@@ -15,9 +15,9 @@ import './offer.css';
 class Offer extends Component {
 
     state = {
+        name: "",
         isFetching: false,
         offer: null,
-        clickName: null,
         message: null,
     }
 
@@ -37,7 +37,7 @@ class Offer extends Component {
 
     onClick = (name) => {
         this.setState({
-            clickName: name,
+            name: name,
         })
 
 
@@ -82,10 +82,9 @@ class Offer extends Component {
     return (
       <div className = "content">
         <ul className = "offer-list">
-        <div>
             <OrderView
-            name="hello"/>
-        </div>
+            name = {this.state.name}/>
+
             {result.map(offers =>
                 <li key={offers.id}>
                 <Button onClick={() => this.onClick(offers.name)}>

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchFoods } from '../../actions/getFood';
 import { fetchFood } from '../../actions/getFood';
 
-import Button from '../../components/button'
+import Offer from '../offers';
 
 
 import './orderView.css';
@@ -13,7 +13,8 @@ import './orderView.css';
 
 class OrderView extends Component {
 
-    /*state = {
+    state = {
+        name: "",
         isFetching: false,
         food: null,
         message: null,
@@ -42,20 +43,17 @@ class OrderView extends Component {
         let name = await this.props.name;
         await this.setState({
             food: foods,
+            name: name,
         })
-        console.log(name);
         dispatch(fetchFood(name));
         
 
-    }*/
+    }
 
     render() {
-        const {
-            name,
-            onClick,
-        } = this.props;
-       
-        console.log(name);
+        
+        console.log(this.props.food);
+       console.log(this.props);
         
         
 
@@ -68,8 +66,13 @@ class OrderView extends Component {
 }
 
 
-OrderView.propTypes = {
-    name: PropTypes.string,
-}
+const mapStateToProps = (state) => {
+    return {
+      isFetching: state.getFood.isFetching,
+      food: state.getFood.food,
+      message: state.getFood.message,
 
-export default OrderView;
+    };
+  }
+
+export default connect(mapStateToProps)(OrderView);
