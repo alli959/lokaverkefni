@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchFoods } from '../../actions/getFood';
 import { fetchFood } from '../../actions/getFood';
+import { Route, Switch, withRouter } from 'react-router-dom'
+
 
 import Offer from '../offers';
 
@@ -14,65 +16,69 @@ import './orderView.css';
 class OrderView extends Component {
 
     state = {
-        name: "",
-        isFetching: false,
         food: null,
-        message: null,
     }
 
     static propTypes = {
-        name: PropTypes.string,
-        dispatch: PropTypes.func,
-        isFetching: PropTypes.bool,
         food: PropTypes.object,
-        message: PropTypes.object,
     }
 
-
-
-
-
-
+    
 
 
 
 
     async componentDidMount() {
-        const { dispatch } = this.props;
         let foods = await this.props.food;
-        let name = await this.props.name;
         await this.setState({
             food: foods,
-            name: name,
         })
-        dispatch(fetchFood(name));
-        
+        console.log(this.props);
+
 
     }
+        
+
 
     render() {
+
+        const {
+            food,
+        } = this.props;
+    
+
         
-        console.log(this.props.food);
-       console.log(this.props);
-        
+        if(this.state.food === null){
+            this.setState({
+                food: food,
+            })
+        }
+
+        console.log(this.state);
+        console.log("hello world");
         
 
-
-    return (
-      <div>
-    </div>
+    if(food != null){
+        return (
+        <div>
+            <h1>{food.name}</h1>
+        </div>
+        );
+    }
+    return(
+        <div>
+        </div>
     );
   }
 }
 
+OrderView.propTypes = {
+    food: PropTypes.object,
+}
 
-const mapStateToProps = (state) => {
-    return {
-      isFetching: state.getFood.isFetching,
-      food: state.getFood.food,
-      message: state.getFood.message,
 
-    };
-  }
+export default withRouter(OrderView);
 
-export default connect(mapStateToProps)(OrderView);
+
+
+

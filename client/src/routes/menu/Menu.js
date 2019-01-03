@@ -30,8 +30,7 @@ class Menu extends Component {
                 return(
                     <div>
                         <div>
-                            <OrderView
-                            name = {this.state.name} />
+                            <OrderView />
                         </div>
                         <div classname = "Navbar">
                             <Navbar />

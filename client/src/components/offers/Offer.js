@@ -15,7 +15,7 @@ import './offer.css';
 class Offer extends Component {
 
     state = {
-        name: "",
+        food: null,
         isFetching: false,
         offer: null,
         message: null,
@@ -26,7 +26,6 @@ class Offer extends Component {
         isFetching: PropTypes.bool,
         offer: PropTypes.object,
         message: PropTypes.object,
-        name: "",
     }
 
 
@@ -35,14 +34,11 @@ class Offer extends Component {
 
 
 
-    onClick = (name) => {
+    onClick = (food) => {
         this.setState({
-            name: name,
+            food: food
         })
-
-
-        
-        
+                
     }
     
 
@@ -81,30 +77,30 @@ class Offer extends Component {
 
     return (
       <div className = "content">
+    
         <ul className = "offer-list">
-            <OrderView
-            name = {this.state.name}/>
 
             {result.map(offers =>
                 <li key={offers.id}>
-                <Button onClick={() => this.onClick(offers.name)}>
-                    <div class = "offer-item">
-                        <div class = "name">
-                            <h2> {offers.name} </h2>
-                        </div>
-                        <div class = "offerImage">
-                            <img src={require('../../Images/Menu-items/' + offers.name + '.png')} alt = "Mynd finst ekki" />
+                    <Button onClick={() => this.onClick(offers)}>
+                    
+                        <div class = "offer-item">
+                            <div class = "name">
+                                <h2> {offers.name} </h2>
+                            </div>
+                            <div class = "offerImage">
+                                <img src={require('../../Images/Menu-items/' + offers.name + '.png')} alt = "Mynd finst ekki" />
 
-                        </div>
-                        <div class = "description">
-                            {offers.description}
-                        </div>
-                        <div class = "price">
-                            <span> Verð: </span>
-                            {offers.price}
+                            </div>
+                            <div class = "description">
+                                {offers.description}
+                            </div>
+                            <div class = "price">
+                                <span> Verð: </span>
+                                {offers.price}
 
+                            </div>
                         </div>
-                    </div>
                     
                 </Button>
                 </li>

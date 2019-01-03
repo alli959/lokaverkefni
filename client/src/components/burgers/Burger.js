@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import querystring from 'querystring';
 import { fetchBurgers } from '../../actions/getBurgers'
+import OrderView from '../orderView';
+import Button from '../button';
 import './burger.css';
 
 class Burger extends Component {
@@ -71,7 +73,7 @@ class Burger extends Component {
 
         <ul class = "burger-list">
             {result.map(burgers =>
-                <li key={burgers.id}>
+                <Button onClick={<OrderView food= {burgers} />}><li key={burgers.id}>
                     <div class = "burger-item">
                         <div class = "name">
                             <h2> {burgers.name} </h2>
@@ -85,7 +87,7 @@ class Burger extends Component {
 
                         </div>
                     </div>
-                </li>
+                </li></Button>
                 
                 
             )}

@@ -12,8 +12,13 @@ const {
 const router = express.Router();
 router.use(express.urlencoded({ extended: true}));
 
+router.get('/', async (req, res) => {
 
-router.post('/', async (req, res) => {
+
+})
+
+
+router.post('/orders', async (req, res) => {
     const {
         orderName,
         foodName,

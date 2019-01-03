@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import querystring from 'querystring';
 import {fetchSandwiches} from '../../actions/getSandwiches'
+import Button from '../../components/button'
+import OrderView from '../../components/orderView';
+
 import './sandwich.css';
 
 class Sandwich extends Component {
 
     state = {
+        food: null,
         isFetching: false,
         sandwich: null,
         message: null,
@@ -24,6 +28,13 @@ class Sandwich extends Component {
 
 
 
+
+    onClick = (food) => {
+        this.setState({
+            food: food
+        })
+                
+    }
 
 
 
@@ -66,25 +77,32 @@ class Sandwich extends Component {
 
 
     return (
-        
+    
       <div class = "content">
+            <div>
+                <OrderView
+                food={this.state.food}/>
+            </div>
+            <ul class = "sandwich-list">
 
-        <ul class = "sandwich-list">
             {result.map(sandwiches =>
                 <li key={sandwiches.id}>
-                    <div class = "sandwich-item">
-                        <div class = "name">
-                            <h2> {sandwiches.name} </h2>
-                        </div>
-                        <div class = "description">
-                            {sandwiches.description}
-                        </div>
-                        <div class = "price">
-                            <span> Verð: </span>
-                            {sandwiches.price}
+                    <Button onClick={() => this.onClick(sandwiches)}>
+                        <div class = "sandwich-item">
+                            <div class = "name">
+                                <h2> {sandwiches.name} </h2>
+                            </div>
+                            <div class = "description">
+                                {sandwiches.description}
+                            </div>
+                            <div class = "price">
+                                <span> Verð: </span>
+                                {sandwiches.price}
 
+                            </div>
                         </div>
-                    </div>
+                    </Button>
+                
                 </li>
                 
                 
