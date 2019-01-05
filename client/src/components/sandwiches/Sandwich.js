@@ -12,7 +12,6 @@ import './sandwich.css';
 class Sandwich extends Component {
 
     state = {
-        food: null,
         isFetching: false,
         sandwich: null,
         message: null,
@@ -23,20 +22,9 @@ class Sandwich extends Component {
         isFetching: PropTypes.bool,
         sandwich: PropTypes.object,
         message: PropTypes.object,
+        clickHandler: PropTypes.func,
+
     }
-
-
-
-
-
-    onClick = (food) => {
-        this.setState({
-            food: food
-        })
-                
-    }
-
-
 
 
 
@@ -48,10 +36,15 @@ class Sandwich extends Component {
             sandwich: sandwiches,
         })
         dispatch(fetchSandwiches());
-        console.log(this.props);
-
 
     }
+
+    handleButtonClick = (e) => {
+        const {result} = this.props.sandwich;
+        const index = e.currentTarget.getAttribute('id');
+
+        this.props.clickHandler(result[index]);
+      }
 
     render() {
         const { isFetching, sandwich } = this.props;
@@ -78,32 +71,28 @@ class Sandwich extends Component {
 
     return (
     
-      <div class = "content">
-            <div>
-                <OrderView
-                food={this.state.food}/>
-            </div>
-            <ul class = "sandwich-list">
+      <div className = "content">
+        
+        <ul className = "sandwich-list">
 
             {result.map(sandwiches =>
-                <li key={sandwiches.id}>
-                    <Button onClick={() => this.onClick(sandwiches)}>
-                        <div class = "sandwich-item">
-                            <div class = "name">
-                                <h2> {sandwiches.name} </h2>
-                            </div>
-                            <div class = "description">
-                                {sandwiches.description}
-                            </div>
-                            <div class = "price">
-                                <span> Verð: </span>
-                                {sandwiches.price}
-
-                            </div>
+                <button key={sandwiches.id} id={result.indexOf(sandwiches)} onClick={this.handleButtonClick}><li key={sandwiches.id}>
+                    
+                    <div class = "sandwich-item">
+                        <div class = "name">
+                            <h2> {sandwiches.name} </h2>
                         </div>
-                    </Button>
+                        <div class = "description">
+                            {sandwiches.description}
+                        </div>
+                        <div class = "price">
+                            <span> Verð: </span>
+                            {sandwiches.price}
+
+                        </div>
+                    </div>
                 
-                </li>
+                </li></button>
                 
                 
             )}

@@ -19,6 +19,7 @@ class Boat extends Component {
         isFetching: PropTypes.bool,
         boat: PropTypes.object,
         message: PropTypes.object,
+        clickHandler: PropTypes.func,
     }
 
 
@@ -40,6 +41,14 @@ class Boat extends Component {
 
 
     }
+
+
+    handleButtonClick = (e) => {
+        const {result} = this.props.boat;
+        const index = e.currentTarget.getAttribute('id');
+
+        this.props.clickHandler(result[index]);
+      }
 
     render() {
         const { isFetching, boat } = this.props;
@@ -66,11 +75,11 @@ class Boat extends Component {
 
     return (
         
-      <div class = "content">
+      <div className = "content">
 
-        <ul class = "boat-list">
+        <ul className = "boat-list">
             {result.map(boats =>
-                <li key={boats.id}>
+                 <button key={boats.id} id={result.indexOf(boats)} onClick={this.handleButtonClick}><li key={boats.id}>
                     <div class = "boat-item">
                         <div class = "name">
                             <h2> {boats.name} </h2>
@@ -84,7 +93,7 @@ class Boat extends Component {
 
                         </div>
                     </div>
-                </li>
+                </li></button>
                 
                 
             )}

@@ -3,7 +3,7 @@
     background-color: rgb(251, 255, 0);
 }
 
-ul{
+.offer-list{
     background-color: rgb(255, 174, 0);
     list-style: none;
     max-width: 51em;

@@ -1,0 +1,25 @@
+.orderBox {
+    border: 1px;
+    padding: 5px;
+    font: 12px/36px sans-serif;
+    max-width: 30em;
+    height: 18em;
+    overflow: auto;
+}
+
+.orderBoxValues{
+    list-style: none;
+    flex-wrap: wrap;
+
+}
+
+.orderItem{
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalPrice{
+    display: flex;
+    justify-content: space-between;
+    border-top-style: groove;
+}

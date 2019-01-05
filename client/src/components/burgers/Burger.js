@@ -21,6 +21,7 @@ class Burger extends Component {
         isFetching: PropTypes.bool,
         burger: PropTypes.object,
         message: PropTypes.object,
+        clickHandler: PropTypes.func,
     }
 
 
@@ -43,6 +44,13 @@ class Burger extends Component {
 
 
     }
+
+    handleButtonClick = (e) => {
+        const {result} = this.props.burger;
+        const index = e.currentTarget.getAttribute('id');
+
+        this.props.clickHandler(result[index]);
+      }
 
     render() {
         const { isFetching, burger } = this.props;
@@ -67,16 +75,22 @@ class Burger extends Component {
     
 
 
+
+      
+
     return (
         
       <div class = "content">
 
         <ul class = "burger-list">
             {result.map(burgers =>
-                <Button onClick={<OrderView food= {burgers} />}><li key={burgers.id}>
+
+                //using indexOf to find the index of the button that is pushed
+
+                <button key={burgers.id} id={result.indexOf(burgers)} onClick={this.handleButtonClick}><li key={burgers.id}>
                     <div class = "burger-item">
                         <div class = "name">
-                            <h2> {burgers.name} </h2>
+                            <h2 class="foodName"> {burgers.name} </h2>
                         </div>
                         <div class = "description">
                             {burgers.description}
@@ -87,7 +101,7 @@ class Burger extends Component {
 
                         </div>
                     </div>
-                </li></Button>
+                </li></button>
                 
                 
             )}

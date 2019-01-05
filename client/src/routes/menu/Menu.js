@@ -17,11 +17,34 @@ import './menu.css';
 
 
 
+
+
 class Menu extends Component {
 
     state = {
-        name: ""
+        name: "",
+        itemsInOrderView:[],
     }
+
+
+    handleButtonClick = (e) => {
+        console.log('E', e);
+        if(e === "clear"){
+            this.setState({
+                itemsInOrderView: []
+            });
+        }
+        else{
+            const { itemsInOrderView } = this.state;
+            itemsInOrderView.push(e);
+        
+            this.setState({
+            itemsInOrderView: itemsInOrderView 
+            });
+        }
+      }
+      
+      
 
 
     render() {
@@ -29,45 +52,53 @@ class Menu extends Component {
             case '#offers':
                 return(
                     <div>
-                        <div>
-                            <OrderView />
-                        </div>
                         <div classname = "Navbar">
                             <Navbar />
                         </div>
 
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
                         <h1 className = "Menu_title">Tilboð</h1>
-                        <Offers />
+                        <div>
+                            <Offers  clickHandler={this.handleButtonClick}/>
+                        </div>
                     </div>
                     );
             case '#burgers':
+
+
                 return(
                     <div>
                         <div classname = "Navbar">
                             <Navbar />
                         </div>
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
                         <h1 className = "Menu_title">Borgarar</h1>
-                        <Burgers />
+                        <Burgers clickHandler={this.handleButtonClick} />
                     </div>
                     );
             case '#boats':
+
+
                 return(
                     <div>
                         <div classname = "Navbar">
                             <Navbar />
                         </div>
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
                         <h1 className = "Menu_title">Bátar</h1>
-                        <Boats />
+                        <Boats clickHandler={this.handleButtonClick} />
                     </div>
                     );
+
             case '#sandwiches':
                 return(
                     <div>
                         <div classname = "Navbar">
                             <Navbar />
                         </div>
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
                         <h1 className = "Menu_title">Samlokur</h1>
-                        <Sandwiches />
+                        <Sandwiches clickHandler={this.handleButtonClick} />
                     </div>
                     );
             default:
@@ -76,8 +107,9 @@ class Menu extends Component {
                         <div classname = "Navbar">
                             <Navbar />
                         </div>
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
                         <h1 className = "Menu_title">Tilboð</h1>
-                        <Offers />
+                        <Offers clickHandler={this.handleButtonClick} />
                     </div>
                 );
             

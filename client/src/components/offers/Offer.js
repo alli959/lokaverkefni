@@ -15,7 +15,6 @@ import './offer.css';
 class Offer extends Component {
 
     state = {
-        food: null,
         isFetching: false,
         offer: null,
         message: null,
@@ -26,20 +25,10 @@ class Offer extends Component {
         isFetching: PropTypes.bool,
         offer: PropTypes.object,
         message: PropTypes.object,
+        clickHandler: PropTypes.func,
     }
 
 
-
-
-
-
-
-    onClick = (food) => {
-        this.setState({
-            food: food
-        })
-                
-    }
     
 
 
@@ -52,6 +41,15 @@ class Offer extends Component {
         dispatch(fetchOffers());
 
     }
+
+
+
+    handleButtonClick = (e) => {
+        const {result} = this.props.offer;
+        const index = e.currentTarget.getAttribute('id');
+
+        this.props.clickHandler(result[index]);
+      }
 
     render() {
         const { isFetching, offer } = this.props;
@@ -81,8 +79,7 @@ class Offer extends Component {
         <ul className = "offer-list">
 
             {result.map(offers =>
-                <li key={offers.id}>
-                    <Button onClick={() => this.onClick(offers)}>
+                <button key={offers.id} id={result.indexOf(offers)} onClick={this.handleButtonClick}><li key={offers.id}>
                     
                         <div class = "offer-item">
                             <div class = "name">
@@ -102,8 +99,7 @@ class Offer extends Component {
                             </div>
                         </div>
                     
-                </Button>
-                </li>
+                </li></button>
                 
                 
 

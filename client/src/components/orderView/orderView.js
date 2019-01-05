@@ -7,21 +7,26 @@ import { fetchFood } from '../../actions/getFood';
 import { Route, Switch, withRouter } from 'react-router-dom'
 
 
+
 import Offer from '../offers';
 
 
 import './orderView.css';
 
 
+
 class OrderView extends Component {
 
     state = {
-        food: null,
+        food:[],
     }
 
     static propTypes = {
-        food: PropTypes.object,
+        dispatch: PropTypes.func,
+        food: PropTypes.array,
+        clickHandler: PropTypes.func,
     }
+
 
     
 
@@ -33,9 +38,13 @@ class OrderView extends Component {
         await this.setState({
             food: foods,
         })
-        console.log(this.props);
 
 
+    }
+
+    handleButtonClick = (e) =>{
+    
+        this.props.clickHandler("clear");
     }
         
 
@@ -49,31 +58,66 @@ class OrderView extends Component {
 
         
         if(this.state.food === null){
-            this.setState({
-                food: food,
-            })
+            if(!this.state.clear){
+                this.setState({
+                    food: food,
+                })
+            }
         }
 
-        console.log(this.state);
-        console.log("hello world");
         
 
-    if(food != null){
-        return (
-        <div>
-            <h1>{food.name}</h1>
-        </div>
+    if(food.length !== 0){
+        console.log("food", food);
+        // start by finding total price.
+        let totalPrice = 0;
+        food.map(foods =>
+            totalPrice += foods.price
         );
+
+
+        return (
+            
+        <div className = "order">
+            <div className = "orderBox">
+                <ul className = "orderBoxValues">
+                    {food.map(foods =>
+                    <li className = "orderItem">
+                        <div className = "foodName">
+                            <h4>{foods.name}</h4>
+                        </div>
+
+                        <div className = "foodPrice">
+                            <h4>{foods.price}kr.</h4>
+                        </div>
+                    </li>
+                    )}
+                    <div className = "totalPrice">
+                        <h4>Samtals:</h4>
+                        <h4>{totalPrice}kr.</h4>
+                    </div>
+                </ul>
+            </div>
+            <ul className = "orderButtons">
+                <button><a className = "change_Order" href="/changeorder">Breyta Pöntun</a></button>
+                <button><a className = "finish_Order" href="/finishorder">Klára Pöntun</a></button>
+                <button onClick={this.handleButtonClick}>Hreinsa Pöntun</button>
+            </ul>
+        </div>
+        )
     }
+    
+    
     return(
-        <div>
+        <div className = "orderBox">
+            Engar pantanir skráðar
         </div>
     );
   }
 }
 
 OrderView.propTypes = {
-    food: PropTypes.object,
+    food: PropTypes.array,
 }
 
 
