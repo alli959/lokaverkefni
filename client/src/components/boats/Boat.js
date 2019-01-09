@@ -80,14 +80,14 @@ class Boat extends Component {
         <ul className = "boat-list">
             {result.map(boats =>
                  <button key={boats.id} id={result.indexOf(boats)} onClick={this.handleButtonClick}><li key={boats.id}>
-                    <div class = "boat-item">
-                        <div class = "name">
+                    <div className = "boat-item">
+                        <div className = "name">
                             <h2> {boats.name} </h2>
                         </div>
-                        <div class = "description">
+                        <div className = "description">
                             {boats.description}
                         </div>
-                        <div class = "price">
+                        <div className = "price">
                             <span> Verð: </span>
                             {boats.price}
 

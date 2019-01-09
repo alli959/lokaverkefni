@@ -81,18 +81,18 @@ class Offer extends Component {
             {result.map(offers =>
                 <button key={offers.id} id={result.indexOf(offers)} onClick={this.handleButtonClick}><li key={offers.id}>
                     
-                        <div class = "offer-item">
-                            <div class = "name">
+                        <div className = "offer-item">
+                            <div className = "name">
                                 <h2> {offers.name} </h2>
                             </div>
-                            <div class = "offerImage">
+                            <div className = "offerImage">
                                 <img src={require('../../Images/Menu-items/' + offers.name + '.png')} alt = "Mynd finst ekki" />
 
                             </div>
-                            <div class = "description">
+                            <div className = "description">
                                 {offers.description}
                             </div>
-                            <div class = "price">
+                            <div className = "price">
                                 <span> Verð: </span>
                                 {offers.price}
 

@@ -4,7 +4,7 @@
     {
       "name": "Tilboð 1",
       "isOffer": true,
-      "contains": "Ostborgari,Litlar Franskar,meðl.sósa",
+      "contains": "Ostborgari,Litlar Franskar,kokteilsósa",
       "price": 1690,
       "description": "Inniheldur ostborgara, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
       "time": 240
@@ -12,7 +12,7 @@
     {
       "name": "Tilboð 2",
       "isOffer": true,
-      "contains": "Bernesborgari,Litlar Franskar,meðl.sósa",
+      "contains": "Bernesborgari,Litlar Franskar,kokteilsósa",
       "price": 1690,
       "description": "Inniheldur bernesborgara, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
       "time": 240
@@ -20,7 +20,7 @@
     {
       "name": "Tilboð 3",
       "isOffer": true,
-      "contains": "Samloka,Litlar Franskar,meðl.sósa",
+      "contains": "Samloka,Litlar Franskar,kokteilsósa",
       "price": 1690,
       "description": "Inniheldur samloku, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
       "time": 240
@@ -28,7 +28,7 @@
     {
       "name": "Tilboð 4",
       "isOffer": true,
-      "contains": "Kjúklingaborgari,Litlar Franskar,meðl.sósa",
+      "contains": "Kjúklingaborgari,Litlar Franskar,kokteilsósa",
       "price": 1720,
       "description": "Inniheldur kjúklingaborgara, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
       "time": 270
@@ -44,7 +44,7 @@
     {
       "name": "Tilboð 6",
       "isOffer": true,
-      "contains": "Ostborgari,Ostborgari,Ostborgari,Ostborgari,Stórar Franskar,meðl.sósa,meðl.sósa",
+      "contains": "Ostborgari,Ostborgari,Ostborgari,Ostborgari,Stórar Franskar,kokteilsósa,kokteilsósa",
       "price": 4690,
       "description": "Inniheldur fjóra ostborgara, stórar franskar, tvær kokteil sósur og tveggja lítra gos að eigin vali",
       "time": 240
@@ -68,7 +68,7 @@
     {
       "name": "Tilboð 9",
       "isOffer": true,
-      "contains": "snitsel,Litlar Franskar,kál,gúrka,tómatur,paprika,sinnepssósa",
+      "contains": "snitsel,Litlar Franskar,kál,gúrka,tómatur,paprika,sinnepssósa,bernessósa",
       "price": 1750,
       "description": "Inniheldur snitsel, litlar franskar, salat, bernessósu og hálfs lítra gos að eigin vali",
       "time": 270
@@ -328,37 +328,32 @@
     },
     {
       "material": "bernessósa",
-      "price": 0
+      "price": 260
     },
     {
       "material": "hamborgarasósa",
-      "price": 0
+      "price": 260
     },
     {
       "material": "tómatssósa",
-      "price": 0
+      "price": 260
     },
     {
       "material": "BBQsósa",
-      "price": 0
+      "price": 260
     },
     {
       "material": "sinnepssósa",
-      "price": 0
+      "price": 260
     },
     {
       "material": "laukssósa",
-      "price": 0
+      "price": 260
     },
     {
       "material": "kokteilsósa",
-      "price": 0
-    },
-    {
-      "material": "meðl.sósa",
       "price": 260
     }
-
 
   ]
 }

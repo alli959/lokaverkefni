@@ -51,39 +51,3 @@ export const fetchFoods = () => {
         dispatch(receiveFood(foods));
     }
 }
-
-export const fetchFood = (name) => {
-    return async (dispatch) => {
-        dispatch(requestFood());
-        let endpoint = '/food';
-
-        let foods;
-        try{
-            foods = await api.get(endpoint);
-            
-        } catch (error) {
-            dispatch(foodError(error));
-        }
-
-        if (foods.status !== 200 || !foods){
-            dispatch(foodError('fail'))
-        }
-
-        let food;
-        for(let i = 0; i<foods.result.length; i++){
-            if(foods.result[i].name === name){
-                food = foods.result[i];
-            }
-        /*if(food === null){
-            dispatch(foodError('fail'))
-        }*/
-        dispatch(receiveFood(food));
-        
-        
-
-        
-
-        }
-
-    }
-}

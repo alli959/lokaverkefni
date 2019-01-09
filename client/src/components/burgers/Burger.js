@@ -80,22 +80,22 @@ class Burger extends Component {
 
     return (
         
-      <div class = "content">
+      <div className = "content">
 
-        <ul class = "burger-list">
+        <ul className = "burger-list">
             {result.map(burgers =>
 
-                //using indexOf to find the index of the button that is pushed
+                //using indexOf to find the index of the button that is pressed
 
                 <button key={burgers.id} id={result.indexOf(burgers)} onClick={this.handleButtonClick}><li key={burgers.id}>
-                    <div class = "burger-item">
-                        <div class = "name">
-                            <h2 class="foodName"> {burgers.name} </h2>
+                    <div className = "burger-item">
+                        <div className = "name">
+                            <h2 className="foodName"> {burgers.name} </h2>
                         </div>
-                        <div class = "description">
+                        <div className = "description">
                             {burgers.description}
                         </div>
-                        <div class = "price">
+                        <div className = "price">
                             <span> Verð: </span>
                             {burgers.price}
 

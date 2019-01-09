@@ -44,7 +44,16 @@ class OrderView extends Component {
 
     handleButtonClick = (e) =>{
     
-        this.props.clickHandler("clear");
+        let buttonName = e.currentTarget.getAttribute('name');
+        if(buttonName === "clearOrder"){
+            this.props.clickHandler("clear");
+        }
+        else if(buttonName === "finishOrder"){
+            this.props.clickHandler("finish");
+        }
+        else{
+            this.props.clickHandler("change");
+        }
     }
         
 
@@ -58,11 +67,9 @@ class OrderView extends Component {
 
         
         if(this.state.food === null){
-            if(!this.state.clear){
                 this.setState({
                     food: food,
                 })
-            }
         }
 
         
@@ -99,9 +106,9 @@ class OrderView extends Component {
                 </ul>
             </div>
             <ul className = "orderButtons">
-                <button><a className = "change_Order" href="/changeorder">Breyta Pöntun</a></button>
-                <button><a className = "finish_Order" href="/finishorder">Klára Pöntun</a></button>
-                <button onClick={this.handleButtonClick}>Hreinsa Pöntun</button>
+                <button onClick={this.handleButtonClick} key="changeOrder" name="changeOrder"><a className = "change_Order" href="#changeorder">Breyta Pöntun</a></button>
+                <button onClick={this.handleButtonClick} key="finishOrder" name="finishOrder"><a className = "finish_Order" href="#finishorder">Klára Pöntun</a></button>
+                <button onClick={this.handleButtonClick} key="clearOrder" name="clearOrder">Hreinsa Pöntun</button>
             </ul>
         </div>
         )

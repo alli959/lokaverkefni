@@ -78,14 +78,14 @@ class Sandwich extends Component {
             {result.map(sandwiches =>
                 <button key={sandwiches.id} id={result.indexOf(sandwiches)} onClick={this.handleButtonClick}><li key={sandwiches.id}>
                     
-                    <div class = "sandwich-item">
-                        <div class = "name">
+                    <div className = "sandwich-item">
+                        <div className = "name">
                             <h2> {sandwiches.name} </h2>
                         </div>
-                        <div class = "description">
+                        <div className = "description">
                             {sandwiches.description}
                         </div>
-                        <div class = "price">
+                        <div className = "price">
                             <span> Verð: </span>
                             {sandwiches.price}
 

@@ -6,10 +6,13 @@ import querystring from 'querystring';
 
 import Offers from '../../components/offers';
 import Burgers from '../../components/burgers';
+import {fetchFoods} from '../../actions/getFood'
 import Boats from '../../components/boats';
 import Sandwiches from '../../components/sandwiches';
 import Navbar from '../../components/navbar';
 import OrderView from '../../components/orderView';
+import ChangeOrder from '../../components/changeOrder';
+
 
 import './menu.css';
 
@@ -22,32 +25,53 @@ import './menu.css';
 class Menu extends Component {
 
     state = {
-        name: "",
+        isFetching: false,
+        foods: null,
+        message: null,
         itemsInOrderView:[],
+    }
+    
+    static PropTypes = {
+        foods: PropTypes.object,
+        dispatch: PropTypes.func,
+        isFetching: PropTypes.object,
+        message: PropTypes.object,
     }
 
 
+    async componentDidMount() {
+        const { dispatch} = this.props;
+        let foods = await this.props.food;
+        await this.setState({
+            food: foods,
+        })
+        dispatch(fetchFoods());
+    }
+
     handleButtonClick = (e) => {
-        console.log('E', e);
         if(e === "clear"){
             this.setState({
                 itemsInOrderView: []
             });
         }
         else{
-            const { itemsInOrderView } = this.state;
-            itemsInOrderView.push(e);
-        
-            this.setState({
-            itemsInOrderView: itemsInOrderView 
-            });
+            if(e !== "change" && e !== "finish"){
+                const { itemsInOrderView} = this.state;
+                itemsInOrderView.push(e);
+                this.setState({
+                itemsInOrderView: itemsInOrderView,
+                });
+            }
         }
+        console.log("itemsInOrderView", this.state.itemsInOrderView);
+        
       }
       
       
 
 
     render() {
+        console.log(this.state.foods);
         switch(this.props.location.hash){
             case '#offers':
                 return(
@@ -68,7 +92,7 @@ class Menu extends Component {
 
                 return(
                     <div>
-                        <div classname = "Navbar">
+                        <div className = "Navbar">
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
@@ -101,10 +125,17 @@ class Menu extends Component {
                         <Sandwiches clickHandler={this.handleButtonClick} />
                     </div>
                     );
+
+            case '#changeorder':
+                return(
+                    <div>
+                        <ChangeOrder food={this.state.itemsInOrderView} menu={this.props.foods} />
+                    </div>
+                )
             default:
                 return(
                     <div>
-                        <div classname = "Navbar">
+                        <div className = "Navbar">
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
@@ -125,7 +156,9 @@ class Menu extends Component {
 const mapStateToProps = (state) => {
 
     return {
-
+        isFetching: state.getFood.isFetching,
+        foods: state.getFood.food,
+        message: state.getFood.message
     }
         
 }
