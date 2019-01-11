@@ -12,6 +12,7 @@ import Boats from '../../components/boats';
 import Sandwiches from '../../components/sandwiches';
 import Navbar from '../../components/navbar';
 import OrderView from '../../components/orderView';
+import Menu from '../../routes/menu';
 import { Route, Switch, withRouter } from 'react-router-dom'
 
 import './changeOrder.css';
@@ -49,14 +50,14 @@ class ChangeOrder extends Component {
 
         
         //putting it allt in a dirrerent array so It will be easier to send in the order.
-        let foods = await this.props.food;
+        let foods = this.props.food;
         let names = [];
         let isOffers = [];
         let contains = [];
         let plus = [];
         let minus = [];
         let price = [];
-        let menu = await this.props.menu;
+        let menu = this.props.menu;
 
         foods.map(result => {
             names.push(result.name)
@@ -68,7 +69,7 @@ class ChangeOrder extends Component {
         })
    
 
-        await this.setState({
+        this.setState({
             menu: menu,
             food: foods,
             name: names,
@@ -94,6 +95,7 @@ class ChangeOrder extends Component {
 
     checkisOffer(isOffer, value){
         let menu = this.props.menu.result;
+        console.log("menu", menu);
         let contains = value.contains.split(',');
         if(isOffer){
             let subContains = [];
@@ -127,6 +129,7 @@ class ChangeOrder extends Component {
                 {contains.map(result =>
                     <p>{result}, </p>
                 )}
+                <Menu test = "works" />
                 </div>
             </div>
         )
@@ -141,12 +144,8 @@ class ChangeOrder extends Component {
 
     render() {
         const {food } = this.props;
+        console.log(food)
 
-        if(this.state.food === null) {
-            this.setState({
-                food: food,
-            })
-        }
 
 
         if(food === null || food.length === 0){

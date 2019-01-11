@@ -34,6 +34,7 @@ class Menu extends Component {
     }
     
     static PropTypes = {
+        test: PropTypes.string,
         foods: PropTypes.object,
         dispatch: PropTypes.func,
         isFetching: PropTypes.object,
@@ -41,20 +42,31 @@ class Menu extends Component {
     }
 
 
-    async componentDidMount() {
+    componentDidMount() {
         const { dispatch} = this.props;
-        let foods = await this.props.foods;
-        await this.setState({
-            foods: foods,
-        })
+        let foods = this.props.foods;
+            this.setState({
+                foods: foods,
+            },() => {console.log("foods",this.state.foods)})
         dispatch(fetchFoods());
     }
+    
+    
+
 
     handleButtonClick = (e) => {
-        if(e[0] === "changeMaterials"){
-            console.log("yes");
+        if(Array.isArray(e)){
+            let {foods} = this.props;
+            foods.result[0].name = "works";
+            this.setState({
+                foods: foods
+            });
+            
+            
+
+
         }
-        if(e === "clear"){
+        else if(e === "clear"){
             this.setState({
                 itemsInOrderView: []
             });
@@ -77,6 +89,14 @@ class Menu extends Component {
 
 
     render() {
+
+        const {
+            foods,
+        } = this.props;
+
+       
+        console.log("statefoods",this.state.foods);
+        console.log("propsfood",this.props.foods);
         
         switch(this.props.location.hash){
             case '#offers':

@@ -30,6 +30,8 @@ class Materials extends Component {
     }
 
     static PropTypes = {
+        foodToChange: PropTypes.string,
+        foods: PropTypes.object,
         material: PropTypes.object,
         dispatch: PropTypes.func,
         isFetching: PropTypes.object,

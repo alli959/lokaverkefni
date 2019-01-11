@@ -53,6 +53,7 @@ class Burger extends Component {
       }
 
     render() {
+        console.log(this.state.burger);
         const { isFetching, burger } = this.props;
         if (isFetching || !burger) {
             return (
