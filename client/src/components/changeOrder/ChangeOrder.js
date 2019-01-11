@@ -41,6 +41,7 @@ class ChangeOrder extends Component {
     static PropTypes = {
         menu: PropTypes.object,
         food: PropTypes.array,
+        clickHandler: PropTypes.func,
     }
 
     async componentDidMount() {
@@ -81,6 +82,15 @@ class ChangeOrder extends Component {
 
     }
 
+    handleButtonClick = (e) => {
+        let name = e.currentTarget.getAttribute('id');
+        let changeMaterials = []
+        changeMaterials.push("changeMaterials");
+        changeMaterials.push(name);
+        this.props.clickHandler(changeMaterials);
+       
+    }
+
 
     checkisOffer(isOffer, value){
         let menu = this.props.menu.result;
@@ -96,18 +106,30 @@ class ChangeOrder extends Component {
             return(
                 <div className = "item">
                     <h2 className = "item_name">{value.name}</h2>
-                    <h3 className = "subItem_name">{item}</h3>
+                    <button key = "changeMaterials" id={item} onClick = {this.handleButtonClick}><h3 className = "subItem_name">{item}</h3></button>
+                    <div className = "subContains">
                     {subContains.map(result =>  
-                        <p className = "subContains">{result}, </p>
+                        <p>{result}, </p>
                     )}
+                    </div>
                     {contains.map(result =>
                         <h3 className = "contains">{result}</h3>
                     )}
                     
-                    
                 </div>
             )
         }
+
+        return(
+            <div className = "item">
+                <h2 className = "item_name">{value.name}</h2>
+                <div className = "subContains">
+                {contains.map(result =>
+                    <p>{result}, </p>
+                )}
+                </div>
+            </div>
+        )
     }
         
     

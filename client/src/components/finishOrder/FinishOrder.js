@@ -22,7 +22,7 @@ import './changeOrder.css';
 
 
 
-class ChangeOrder extends Component {
+class FinishOrder extends Component {
 
     state = {
         menu: null,
@@ -82,32 +82,7 @@ class ChangeOrder extends Component {
     }
 
 
-    checkisOffer(isOffer, value){
-        let menu = this.props.menu.result;
-        let contains = value.contains.split(',');
-        if(isOffer){
-            let subContains = [];
-            menu.map(result => {
-                if(result.name === contains[0]){
-                    subContains = result.contains.split(',');
-                }
-            })
-            let item = contains.shift();
-            return(
-                <div className = "item">
-                    <h2 className = "item_name">{value.name}</h2>
-                    <h3 className = "subItem_name">{item}</h3>
-                    {subContains.map(result =>  
-                        <p className = "subContains">{result}, </p>
-                    )}
-                    {contains.map(result =>
-                        <h3 className = "contains">{result}</h3>
-                    )}
-                    
-                </div>
-            )
-        }
-    }
+    
         
     
 
@@ -136,7 +111,7 @@ class ChangeOrder extends Component {
 
 
         return (
-            <div className = "changeOrder">
+            <div className = "finishOrder">
                 <ul className = "changeOrderBox">
                     {food.map(result =>
                     <div>
@@ -153,9 +128,9 @@ class ChangeOrder extends Component {
     }
 }
 
-ChangeOrder.PropTypes = {
+FinishOrder.PropTypes = {
     food: PropTypes.array,
     menu: PropTypes.object,
 }
 
-export default withRouter(ChangeOrder);
+export default withRouter(FinishOrder);

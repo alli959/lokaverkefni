@@ -13,7 +13,7 @@ import Sandwiches from '../../components/sandwiches';
 import Navbar from '../../components/navbar';
 import OrderView from '../../components/orderView';
 
-import './changeOrder.css';
+import './materials.css';
 
 
 
@@ -76,7 +76,16 @@ class Materials extends Component {
 
 
         return (
-            <h1> Hello world </h1>
+            <div className = "materials">
+                <ul className = "materialsBox">
+                    {result.map(materials =>
+                        <li>
+                            <input type="checkbox" id={materials.material} name={materials.material} />
+                            <label for={materials.material}>{materials.material}</label>
+                        </li>
+                    )}
+                </ul>
+            </div>
         )
 
         

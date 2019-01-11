@@ -7,6 +7,7 @@ import querystring from 'querystring';
 import Offers from '../../components/offers';
 import Burgers from '../../components/burgers';
 import {fetchFoods} from '../../actions/getFood'
+import Materials from '../../components/materials'
 import Boats from '../../components/boats';
 import Sandwiches from '../../components/sandwiches';
 import Navbar from '../../components/navbar';
@@ -25,8 +26,9 @@ import './menu.css';
 class Menu extends Component {
 
     state = {
-        isFetching: false,
         foods: null,
+        isFetching: false,
+        foodToChange: null,
         message: null,
         itemsInOrderView:[],
     }
@@ -41,14 +43,17 @@ class Menu extends Component {
 
     async componentDidMount() {
         const { dispatch} = this.props;
-        let foods = await this.props.food;
+        let foods = await this.props.foods;
         await this.setState({
-            food: foods,
+            foods: foods,
         })
         dispatch(fetchFoods());
     }
 
     handleButtonClick = (e) => {
+        if(e[0] === "changeMaterials"){
+            console.log("yes");
+        }
         if(e === "clear"){
             this.setState({
                 itemsInOrderView: []
@@ -64,6 +69,7 @@ class Menu extends Component {
             }
         }
         console.log("itemsInOrderView", this.state.itemsInOrderView);
+        console.log("food", this.state.foods);
         
       }
       
@@ -71,7 +77,7 @@ class Menu extends Component {
 
 
     render() {
-        console.log(this.state.foods);
+        
         switch(this.props.location.hash){
             case '#offers':
                 return(
@@ -129,7 +135,9 @@ class Menu extends Component {
             case '#changeorder':
                 return(
                     <div>
-                        <ChangeOrder food={this.state.itemsInOrderView} menu={this.props.foods} />
+                        <ChangeOrder food={this.state.itemsInOrderView} menu={this.props.foods}
+                            clickHandler = {this.handleButtonClick} />
+                        <Materials />
                     </div>
                 )
             default:
