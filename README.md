@@ -30,6 +30,7 @@ login again with psql -U postgres -d <databaseName> to see if it works
 you need to create a file called ".env" in the root lokaverkefni insert this data to the file and save:
 
 DATABASE_URL=postgres://postgres:@localhost/<databaseName>
+  
 PORT=5000
   
 you need to create one more .env file in ./client where you put this value:
