@@ -5,7 +5,6 @@
 first you need to clone this git project with "git clone https://github.com/alli959/lokaverkefni"
 
 NodeJS for package management: https://nodejs.org/en/
-It's importand in custom setup to choose npm package management
 
 you also need to download postgres database from https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
