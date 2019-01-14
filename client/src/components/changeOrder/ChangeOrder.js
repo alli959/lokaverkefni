@@ -84,18 +84,20 @@ class ChangeOrder extends Component {
     }
 
     handleButtonClick = (e) => {
-        let name = e.currentTarget.getAttribute('id');
+        let name = e.currentTarget.getAttribute('name');
+        let index = e.currentTarget.getAttribute('id');
         let changeMaterials = []
+        console.log("e", e.currentTarget);
         changeMaterials.push("changeMaterials");
         changeMaterials.push(name);
+        changeMaterials.push(index);
         this.props.clickHandler(changeMaterials);
        
     }
 
 
-    checkisOffer(isOffer, value){
+    checkisOffer(isOffer, value, index){
         let menu = this.props.menu.result;
-        console.log("menu", menu);
         let contains = value.contains.split(',');
         if(isOffer){
             let subContains = [];
@@ -108,7 +110,7 @@ class ChangeOrder extends Component {
             return(
                 <div className = "item">
                     <h2 className = "item_name">{value.name}</h2>
-                    <button key = "changeMaterials" id={item} onClick = {this.handleButtonClick}><h3 className = "subItem_name">{item}</h3></button>
+                    <button key = "changeMaterials" id={index} name={item} onClick = {this.handleButtonClick}><h3 className = "subItem_name">{item}</h3></button>
                     <div className = "subContains">
                     {subContains.map(result =>  
                         <p>{result}, </p>
@@ -129,7 +131,6 @@ class ChangeOrder extends Component {
                 {contains.map(result =>
                     <p>{result}, </p>
                 )}
-                <Menu test = "works" />
                 </div>
             </div>
         )
@@ -160,9 +161,9 @@ class ChangeOrder extends Component {
         return (
             <div className = "changeOrder">
                 <ul className = "changeOrderBox">
-                    {food.map(result =>
+                    {food.map((result, index) =>
                     <div>
-                        {this.checkisOffer(result.isoffer, result)}
+                        {this.checkisOffer(result.isoffer, result, index)}
                     </div>
                     )}
                 </ul>

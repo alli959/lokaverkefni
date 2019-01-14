@@ -7,7 +7,7 @@ const connectionString = process.env.DATABASE_URL;
 console.log(connectionString);
 
 
-//Food insert
+//inserting food into the database, always used when insert-data.js runs
 async function saveFood(data) {
     const client = new Client({ connectionString });
     const {
@@ -49,7 +49,7 @@ async function saveFood(data) {
 }
 
 
-//Material insert
+//inserting materials into the database, alwas used when insert-data.js runs.
 async function saveMaterials(data) {
   const client = new Client({ connectionString });
   const {
@@ -85,7 +85,11 @@ async function saveMaterials(data) {
 }
 
 
-//order creation
+//creating a new order, you can create order with for example postman, see orderFood.js
+
+/* TODO:
+  Impliment the front end so you can send in a new order
+*/
 async function addOrder(data) {
   const client = new Client({ connectionString });
   const {
@@ -141,7 +145,7 @@ async function getMaterialPrice(material){
   }
 }
 
-//get Price of food
+//get Price of each food
 async function getFoodPrice(food){
   const client = new Client({ connectionString});
   const query = 'SELECT price FROM food WHERE name = $1';
@@ -178,8 +182,8 @@ async function getHighestId(){
   }
 }
 
-//test to get json
 
+//get All food on the menu
 async function getFood(){
   const client = new Client({ connectionString });
   const query = 'SELECT * FROM food';
@@ -198,6 +202,8 @@ async function getFood(){
   }
 
 }
+
+//get all offers from the menu
 
 async function getOffers(){
   const client = new Client({ connectionString });
@@ -218,6 +224,8 @@ async function getOffers(){
 
 }
 
+
+//get all burgers from the menu
 async function getBurgers(){
   const client = new Client({ connectionString });
   const query = `SELECT * FROM food WHERE name like '%borgari' `;
@@ -237,6 +245,8 @@ async function getBurgers(){
 
 }
 
+
+//get all boats from the menu
 async function getBoats(){
   const client = new Client({ connectionString });
   const query = `SELECT * FROM food WHERE name like '%bátur' `;
@@ -256,6 +266,8 @@ async function getBoats(){
 
 }
 
+
+//get all sandwiches from the menu
 async function getSandwiches(){
   const client = new Client({ connectionString });
   const query = `SELECT * FROM food WHERE name like '%amloka' `;
@@ -275,6 +287,8 @@ async function getSandwiches(){
 
 }
 
+
+//get all materials from the menu
 async function getMaterials(){
   const client = new Client({ connectionString });
   const query = `SELECT * FROM materials`;

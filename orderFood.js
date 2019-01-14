@@ -1,3 +1,8 @@
+//these are all the data in the back end.
+//you can reach the data if you go to the correct page
+//for example localhost:5000/food , where you get the food from the menu.
+//or localhost:5000/offers , where you get every offer.
+
 const express = require('express');
 const {
     newOrder,

@@ -24,6 +24,9 @@ import './materials.css';
 class Materials extends Component {
 
     state = {
+        foodToChange: null,
+        orderItemToChange: null,
+        materialToChange: null,
         isFetching: false,
         material: null,
         message: null,
@@ -31,11 +34,14 @@ class Materials extends Component {
 
     static PropTypes = {
         foodToChange: PropTypes.string,
+        materialToChange: PropTypes.string,
+        orderItemToChange: PropTypes.object,
         foods: PropTypes.object,
         material: PropTypes.object,
         dispatch: PropTypes.func,
         isFetching: PropTypes.object,
         message: PropTypes.object,
+
 
         
     }
@@ -43,10 +49,39 @@ class Materials extends Component {
     async componentDidMount() {
         const { dispatch} = this.props;
         let materials = await this.props.material;
+        let foodToChange = await this.props.foodToChange;
+        let orderItemToChange = await this.props.orderItemToChange;
+        let materialToChange = await this.props.materialToChange;
         await this.setState({
             material: materials,
+            foodToChange: foodToChange,
+            orderItemToChange: orderItemToChange,
+            materialToChange: materialToChange,
         })
         dispatch(fetchMaterials());
+    }
+
+    isChecked(material){
+        let {orderItemToChange} = this.props;
+        let {foodToChange} = this.props;
+        let {materialToChange} = this.props;
+        if(materialToChange.includes(material)){
+            console.log(material);
+            return(
+                    <li>
+                        <input type="checkbox" id={material} name={material} checked/>
+                        <label for={material}>{material}</label>
+                    </li>
+            )
+        }
+        else{
+            return(
+                    <li>
+                        <input type="checkbox" id={material} name={material}/>
+                        <label for={material}>{material}</label>
+                    </li>
+            )
+        }
     }
 
 
@@ -55,6 +90,7 @@ class Materials extends Component {
 
 
     render() {
+
         const { isFetching, material} = this.props;
         if(isFetching || !material) {
             return (
@@ -74,21 +110,30 @@ class Materials extends Component {
             )
         }
 
-        console.log("materials",result);
 
+        if(this.props.orderItemToChange === null){
+            return(
+                <h1>Hello</h1>
+            )
+        }
 
-        return (
-            <div className = "materials">
-                <ul className = "materialsBox">
-                    {result.map(materials =>
-                        <li>
-                            <input type="checkbox" id={materials.material} name={materials.material} />
-                            <label for={materials.material}>{materials.material}</label>
-                        </li>
-                    )}
-                </ul>
-            </div>
+        if(this.props.orderItemToChange != null){
+            return (
+                <div className = "materials">
+                    <ul className = "materialsBox">
+                        {result.map(materials =>
+                        <div>
+                                {this.isChecked(materials.material)}
+                        </div>
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+        return(
+            <h1>hello</h1>
         )
+        
 
         
 

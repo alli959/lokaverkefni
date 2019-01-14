@@ -29,6 +29,8 @@ class Menu extends Component {
         foods: null,
         isFetching: false,
         foodToChange: null,
+        materialsToChange: null,
+        orderItemToChange: null,
         message: null,
         itemsInOrderView:[],
     }
@@ -36,6 +38,7 @@ class Menu extends Component {
     static PropTypes = {
         test: PropTypes.string,
         foods: PropTypes.object,
+        materialsToChange: PropTypes.string,
         dispatch: PropTypes.func,
         isFetching: PropTypes.object,
         message: PropTypes.object,
@@ -56,15 +59,23 @@ class Menu extends Component {
 
     handleButtonClick = (e) => {
         if(Array.isArray(e)){
-            let {foods} = this.props;
-            foods.result[0].name = "works";
+            let food = this.props.foods.result;
+            let foodToChange = e[1];
+            console.log("foodToChange", foodToChange);
+            let orderItemToChange = this.state.itemsInOrderView[e[2]];
+            let materialsToChange = "";
+            food.map(result => {
+                if(result.name === foodToChange){
+                    materialsToChange = result.contains;
+                }
+            })
+
             this.setState({
-                foods: foods
-            });
+                foodToChange: foodToChange,
+                orderItemToChange: orderItemToChange,
+                materialsToChange: materialsToChange,
+            })
             
-            
-
-
         }
         else if(e === "clear"){
             this.setState({
@@ -94,9 +105,6 @@ class Menu extends Component {
             foods,
         } = this.props;
 
-       
-        console.log("statefoods",this.state.foods);
-        console.log("propsfood",this.props.foods);
         
         switch(this.props.location.hash){
             case '#offers':
@@ -157,7 +165,8 @@ class Menu extends Component {
                     <div>
                         <ChangeOrder food={this.state.itemsInOrderView} menu={this.props.foods}
                             clickHandler = {this.handleButtonClick} />
-                        <Materials />
+                        <Materials foodToChange = {this.state.foodToChange} orderItemToChange = {this.state.orderItemToChange}
+                                                    materialToChange = {this.state.materialsToChange} />
                     </div>
                 )
             default:

@@ -1,3 +1,6 @@
+//Create database in postgres from schema.sql
+//always needs to be run before using this project.
+
 require('dotenv').config();
 
 const fs = require('fs');

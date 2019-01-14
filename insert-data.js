@@ -13,7 +13,8 @@ const food = [];
 
 
 
-
+//always need to run this after running createdb.js
+//importand to insert the food data into the database, data from ./data/food.json
 async function insertFood() {
   const food = jsonFilePath.food;
   for (let i = 0; i < food.length; i += 1) {
