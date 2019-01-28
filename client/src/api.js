@@ -8,7 +8,7 @@ async function get(endpoint){
 
     const url = `${baseurl}${endpoint}`;
 
-
+    console.log("url",url);
 
     const response = await fetch(url);
     const result = await response.json();

@@ -7,12 +7,14 @@ import querystring from 'querystring';
 import Offers from '../../components/offers';
 import Burgers from '../../components/burgers';
 import {fetchFoods} from '../../actions/getFood'
+import {newOrders} from '../../actions/newOrder'
 import Materials from '../../components/materials'
 import Boats from '../../components/boats';
 import Sandwiches from '../../components/sandwiches';
 import Navbar from '../../components/navbar';
 import OrderView from '../../components/orderView';
 import ChangeOrder from '../../components/changeOrder';
+import FinishOrder from '../../components/finishOrder';
 
 
 import './menu.css';
@@ -33,6 +35,7 @@ class Menu extends Component {
         orderItemToChange: null,
         message: null,
         itemsInOrderView:[],
+        
     }
     
     static PropTypes = {
@@ -56,8 +59,16 @@ class Menu extends Component {
     
     
 
+    handleSubmit = async (e) => {
+         console.log("ejamarr",e);
+
+
+    }
 
     handleButtonClick = (e) => {
+        if(e == "finish"){
+
+        }
         if(Array.isArray(e)){
             let food = this.props.foods.result;
             let foodToChange = e[1];
@@ -169,6 +180,12 @@ class Menu extends Component {
                                                     materialToChange = {this.state.materialsToChange} />
                     </div>
                 )
+            case '#finishorder':
+                    return(
+                        <div>
+                            <FinishOrder food={this.state.itemsInOrderView} />
+                        </div>
+                    )
             default:
                 return(
                     <div>
@@ -190,7 +207,7 @@ class Menu extends Component {
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps1 = (state) => {
 
     return {
         isFetching: state.getFood.isFetching,
@@ -200,4 +217,8 @@ const mapStateToProps = (state) => {
         
 }
 
-export default connect(mapStateToProps)(Menu);
+const mapStateToProps2 = (state) => {
+
+}
+
+export default connect(mapStateToProps1)(Menu);

@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/header';
 import Button from './components/button';
 import Menu from './routes/menu';
+import SendOrder from './routes/sendOrder'
 
 class App extends Component {
 
@@ -30,6 +31,8 @@ class App extends Component {
             <Header />
             <Switch location={this.props.location}>
               <Route path="/menu" exact component={Menu} />
+              <Route path="/finish" exact component={SendOrder} />
+
             </Switch>
           </div>
       </main>
