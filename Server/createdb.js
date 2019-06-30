@@ -10,6 +10,7 @@ const { runQuery } = require('./miscellaneous-db');
 const readFileAsync = util.promisify(fs.readFile);
 const schemaFile = './schema.sql';
 
+
 async function create() {
   const data = await readFileAsync(schemaFile);
 

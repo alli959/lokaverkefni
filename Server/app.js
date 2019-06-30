@@ -5,11 +5,13 @@ const food = require('./orderFood');
 
 //the host and the port that the backend uses
 const {
-    PORT: port = 5000,
+    PORT: port =  process.env.PORT || 5000,
     HOST: host = '127.0.0.1',
 } = process.env;
 
 const app = express();
+
+
 
 //giving the frontend access to the backend, with GET, POST PATCH, DELETE
 app.use((req, res, next) => {
