@@ -4,13 +4,16 @@ const express = require('express');
 const food = require('./orderFood');
 
 //the host and the port that the backend uses
-const {
-    PORT: port =  process.env.PORT || 5000,
-    HOST: host = '127.0.0.1',
-} = process.env;
+
 
 const app = express();
 
+
+const {
+    HOST: hostname = '127.0.0.1',
+    PORT: port = 5000,
+  } = process.env;
+  
 
 
 //giving the frontend access to the backend, with GET, POST PATCH, DELETE
@@ -44,6 +47,7 @@ function errorHandler(err, req, res, next) {
 app.use(notFoundHandler);
 app.use(errorHandler);
 
+
 app.listen(port, () => {
-    console.info(`Server running at http://${host}:${port}/`)
+    console.info(`Server running at http://${hostname}:${port}/`)
 });
