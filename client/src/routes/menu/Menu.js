@@ -38,7 +38,7 @@ class Menu extends Component {
         
     }
     
-    static PropTypes = {
+    static propTypes = {
         test: PropTypes.string,
         foods: PropTypes.object,
         materialsToChange: PropTypes.string,

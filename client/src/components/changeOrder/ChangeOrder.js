@@ -39,7 +39,7 @@ class ChangeOrder extends Component {
         totalPrice: 0,
     }
 
-    static PropTypes = {
+    static propTypes = {
         menu: PropTypes.object,
         food: PropTypes.array,
         clickHandler: PropTypes.func,
@@ -176,7 +176,7 @@ class ChangeOrder extends Component {
     }
 }
 
-ChangeOrder.PropTypes = {
+ChangeOrder.propTypes = {
     food: PropTypes.array,
     menu: PropTypes.object,
 }

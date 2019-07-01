@@ -37,7 +37,7 @@ class FinishOrder extends Component {
         order: null,
     }
 
-    static PropTypes = {
+    static propTypes = {
         food: PropTypes.array,
         dispatch: PropTypes.func,
         isFetching: PropTypes.bool,
@@ -164,7 +164,7 @@ class FinishOrder extends Component {
     }
 }
 
-FinishOrder.PropTypes = {
+FinishOrder.propTypes = {
     food: PropTypes.array,
 }
 
