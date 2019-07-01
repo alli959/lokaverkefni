@@ -32,7 +32,7 @@ class Materials extends Component {
         message: null,
     }
 
-    static PropTypes = {
+    static propTypes = {
         foodToChange: PropTypes.string,
         materialToChange: PropTypes.string,
         orderItemToChange: PropTypes.object,
