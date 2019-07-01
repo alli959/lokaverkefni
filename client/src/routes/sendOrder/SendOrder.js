@@ -34,7 +34,7 @@ class SendOrder extends Component {
         
     }
     
-    static PropTypes = {
+    static propTypes = {
         order: PropTypes.object,
         dispatch: PropTypes.func,
         isFetching: PropTypes.object,
