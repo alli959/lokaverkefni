@@ -1,8 +1,7 @@
-const baseurl = process.env.REACT_APP_SERVICE_URL;
+const baseurl = "https://api-gullnesti.herokuapp.com";
 
 
 async function get(endpoint){
-
 
 
 
