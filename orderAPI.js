@@ -184,6 +184,107 @@ async function getMaterial(){
     return data;
 }
 
+/**
+ * show api
+ * 
+ * @returns {promise}
+ */
+
+ async function apiInfo(){
+     const data = {
+        "method":{
+            "GET":{
+                "/":{
+                    "returns":{
+                        "": "api-info"
+                    }
+                } ,
+                "/food":{
+                    "returns type: array of all-food": {
+                        "id": "id",
+                        "name": "String",
+                        "isoffer": "boolean",
+                        "description": "String",
+                        "price": "Int",
+                        "time": "Int"
+                    }
+                },
+                "/offers":{
+                    "returns type: array of offers": {
+                        "id": "id",
+                        "name": "String",
+                        "isoffer": "boolean",
+                        "description": "String",
+                        "price": "Int",
+                        "time": "Int"
+                    }
+                },
+                "/burgers":{
+                    "returns type: array of burgers": {
+                        "id": "id",
+                        "name": "String",
+                        "isoffer": "boolean",
+                        "description": "String",
+                        "price": "Int",
+                        "time": "Int"
+                    }
+                },
+                "/boats":{
+                    "returns type: array of boats": {
+                        "id": "id",
+                        "name": "String",
+                        "isoffer": "boolean",
+                        "description": "String",
+                        "price": "Int",
+                        "time": "Int"
+                    }
+                },
+                "/sandwiches":{
+                    "returns type: array of sandwiches": {
+                        "id": "id",
+                        "name": "String",
+                        "isoffer": "boolean",
+                        "description": "String",
+                        "price": "Int",
+                        "time": "Int"
+                    }
+                },
+                "/materials":{
+                    "returns type: Array of materials": {
+                        "id": "id",
+                        "material": "String",
+                        "price": "Int"
+                    }
+                }
+
+            },
+
+            "Post":{
+                "/orders":{
+                    "body":{
+                        "orderName": "String",
+                        "foodName": "String",
+                        "minus": "Array of Strings",
+                        "plus": "Array of Strings",
+                        "totalTime": "Int"
+                    },
+                    "returns":{
+                        "orderName": "String",
+                        "foodName": "String",
+                        "minus": "Array of Strings",
+                        "plus": "Array of Strings",
+                        "totalTime": "Int"
+                    }
+                    
+                }
+            }
+        }
+
+     }
+     return data;
+ }
+
+
 
 
 
@@ -195,6 +296,7 @@ module.exports = {
     getBoat,
     getSandwich,
     getMaterial,
+    apiInfo,
 };
  
 

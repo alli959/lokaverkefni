@@ -12,13 +12,15 @@ const {
     getBoat,
     getSandwich,
     getMaterial,
+    apiInfo,
 } = require('./orderAPI');
 
 const router = express.Router();
 router.use(express.urlencoded({ extended: true}));
 
 router.get('/', async (req, res) => {
-
+    const data = await apiInfo();
+    await res.json(data);
 
 })
 
