@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import querystring from 'querystring';
 
-import { fetchFoods } from '../../actions/getFood'
-import { fetchMaterials } from '../../actions/getMaterials'
-import Offers from '../../components/offers';
-import Burgers from '../../components/burgers';
-import Boats from '../../components/boats';
-import Sandwiches from '../../components/sandwiches';
-import Navbar from '../../components/navbar';
-import OrderView from '../../components/orderView';
-import { Route, Switch, withRouter } from 'react-router-dom'
-import SendOrder from '../../routes/sendOrder'
-
-import {newOrder} from '../../actions/newOrder'
+import {withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
 
@@ -60,7 +46,6 @@ class FinishOrder extends Component {
         
         e.preventDefault();
 
-        const {dispatch} = this.props;
         let order = {};
         let foods = this.state.food;
         let orderName = this.state.name;
@@ -150,8 +135,8 @@ class FinishOrder extends Component {
                 </div>
                 <div className = "textBox">
                     <form onSubmit={this.handleSubmit}>
-                        <a className = "name">nafn: </a>
-                        <input type="text" value={this.state.name} onChange={this.handleChange}  name="name"></input>
+                        <a className = "Name">nafn: </a>
+                        <input type="text" value={this.state.name} onChange={this.handleChange}  name="Name"></input>
                         <input type = "submit" value="Submit" name="finish"></input>
                     </form>
                 </div>

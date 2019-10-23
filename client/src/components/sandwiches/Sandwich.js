@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import querystring from 'querystring';
 import {fetchSandwiches} from '../../actions/getSandwiches'
-import Button from '../../components/button'
-import OrderView from '../../components/orderView';
+
 
 import './sandwich.css';
 
@@ -76,7 +73,7 @@ class Sandwich extends Component {
         <ul className = "sandwich-list">
 
             {result.map(sandwiches =>
-                <button key={sandwiches.id} id={result.indexOf(sandwiches)} onClick={this.handleButtonClick}><li key={sandwiches.id}>
+                <button key={sandwiches.id} id={result.indexOf(sandwiches)} onClick={this.handleButtonClick} style = {{marginTop: '1em'}}><li key={sandwiches.id}>
                     
                     <div className = "sandwich-item">
                         <div className = "name">
