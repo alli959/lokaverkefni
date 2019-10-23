@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchOffers } from '../../actions/getOffers';
-import Button from '../../components/button'
-import { fetchFood } from '../../actions/getFood';
-import OrderView from '../../components/orderView';
+
 
 
 
@@ -79,7 +76,7 @@ class Offer extends Component {
         <ul className = "offer-list">
 
             {result.map(offers =>
-                <button key={offers.id} id={result.indexOf(offers)} onClick={this.handleButtonClick}><li key={offers.id}>
+                <button key={offers.id} id={result.indexOf(offers)} onClick={this.handleButtonClick} style = {{marginTop: '1em'}}><li key={offers.id}>
                     
                         <div className = "offer-item">
                             <div className = "name">

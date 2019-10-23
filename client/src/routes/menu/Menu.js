@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import querystring from 'querystring';
 
 import Offers from '../../components/offers';
 import Burgers from '../../components/burgers';
 import {fetchFoods} from '../../actions/getFood'
-import {newOrders} from '../../actions/newOrder'
 import Materials from '../../components/materials'
 import Boats from '../../components/boats';
 import Sandwiches from '../../components/sandwiches';
@@ -66,7 +63,7 @@ class Menu extends Component {
     }
 
     handleButtonClick = (e) => {
-        if(e == "finish"){
+        if(e === "finish"){
 
         }
         if(Array.isArray(e)){
@@ -112,16 +109,13 @@ class Menu extends Component {
 
     render() {
 
-        const {
-            foods,
-        } = this.props;
 
         
         switch(this.props.location.hash){
             case '#offers':
                 return(
                     <div>
-                        <div classname = "Navbar">
+                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 174, 0)'}}>
                             <Navbar />
                         </div>
 
@@ -137,7 +131,7 @@ class Menu extends Component {
 
                 return(
                     <div>
-                        <div className = "Navbar">
+                        <div className = "Navbar" style = {{backgroundColor: 'rgb(255, 174, 0)'}}>
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
@@ -150,7 +144,7 @@ class Menu extends Component {
 
                 return(
                     <div>
-                        <div classname = "Navbar">
+                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 174, 0)'}}>
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
@@ -162,7 +156,7 @@ class Menu extends Component {
             case '#sandwiches':
                 return(
                     <div>
-                        <div classname = "Navbar">
+                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 174, 0)'}}>
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
@@ -215,10 +209,6 @@ const mapStateToProps1 = (state) => {
         message: state.getFood.message
     }
         
-}
-
-const mapStateToProps2 = (state) => {
-
 }
 
 export default connect(mapStateToProps1)(Menu);

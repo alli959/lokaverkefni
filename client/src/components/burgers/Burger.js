@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import querystring from 'querystring';
 import { fetchBurgers } from '../../actions/getBurgers'
-import OrderView from '../orderView';
-import Button from '../button';
+
 import './burger.css';
 
 class Burger extends Component {
@@ -88,7 +85,7 @@ class Burger extends Component {
 
                 //using indexOf to find the index of the button that is pressed
 
-                <button key={burgers.id} id={result.indexOf(burgers)} onClick={this.handleButtonClick}><li key={burgers.id}>
+                <button key={burgers.id} id={result.indexOf(burgers)} onClick={this.handleButtonClick} style = {{marginTop: '1em'}}><li key={burgers.id}>
                     <div className = "burger-item">
                         <div className = "name">
                             <h2 className="foodName"> {burgers.name} </h2>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import querystring from 'querystring';
 import { fetchBoats } from '../../actions/getBoats'
 import './boat.css';
 
@@ -79,7 +77,7 @@ class Boat extends Component {
 
         <ul className = "boat-list">
             {result.map(boats =>
-                 <button key={boats.id} id={result.indexOf(boats)} onClick={this.handleButtonClick}><li key={boats.id}>
+                 <button key={boats.id} id={result.indexOf(boats)} onClick={this.handleButtonClick} style = {{marginTop: '1em'}}><li key={boats.id}>
                     <div className = "boat-item">
                         <div className = "name">
                             <h2> {boats.name} </h2>

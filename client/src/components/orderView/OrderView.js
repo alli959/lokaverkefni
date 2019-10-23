@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
-import { fetchFoods } from '../../actions/getFood';
-import { fetchFood } from '../../actions/getFood';
-import { Route, Switch, withRouter } from 'react-router-dom'
+
+import {withRouter } from 'react-router-dom'
 
 
-//a
-import Offer from '../offers';
+
 
 
 import './orderView.css';

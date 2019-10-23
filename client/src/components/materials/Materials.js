@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import querystring from 'querystring';
 
-import { fetchFoods } from '../../actions/getFood'
+
 import { fetchMaterials } from '../../actions/getMaterials'
-import Offers from '../../components/offers';
-import Burgers from '../../components/burgers';
-import Boats from '../../components/boats';
-import Sandwiches from '../../components/sandwiches';
-import Navbar from '../../components/navbar';
-import OrderView from '../../components/orderView';
+
 
 import './materials.css';
 
@@ -62,8 +55,6 @@ class Materials extends Component {
     }
 
     isChecked(material){
-        let {orderItemToChange} = this.props;
-        let {foodToChange} = this.props;
         let {materialToChange} = this.props;
         if(materialToChange.includes(material)){
             console.log(material);

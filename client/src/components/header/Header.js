@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
 import Button from '../button';
-import { Route, Switch, withRouter } from 'react-router-dom'
+import {withRouter } from 'react-router-dom'
 
 import './Header.css';
 
-import querystring from 'querystring';
-
-import createHistory from 'history/createBrowserHistory';
 
 class Header extends Component {
   state = {
@@ -26,17 +22,6 @@ class Header extends Component {
 
   render() {
 
-    const {pathname} = this.props.location;
-    
-    /*if(pathname === '/'){
-      return (
-        <header className="header">
-          <div class="menu">
-            <h2 className="menu__button"><Link to="/menu">Matseðill</Link></h2>
-          </div>
-        </header>
-      );
-    }*/
     
     return (
       <header className="header">

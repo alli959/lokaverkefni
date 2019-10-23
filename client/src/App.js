@@ -10,8 +10,6 @@ import SendOrder from './routes/sendOrder'
 class App extends Component {
 
   async componentDidMount() {
-
-    const { dispatch } = await this.props;
     
 
   }
