@@ -1,13 +1,12 @@
 .Navbar{
-    background-color: rgb(255, 174, 0);
+    background-color: rgb(201, 40, 152);
 }
 
 .navBar button{
-    height: 2em;
+    height: 4em;
     width: 10em;
     background-color: red;
     color: #fff;
-    border: thick double rgba(238, 127, 1, 0.6);;
     min-width: 5em;
 
 }
@@ -20,11 +19,13 @@
     text-decoration: none;
     color: #fff;
     text-shadow: 0 1px 0 rgba(0,0,0,.2);
-    text-size-adjust: inherit;
+    font-size: 18px;
+    font-weight: bold;
+
 }
 
 .navBar {
-    background-color: rgb(251, 255, 0);
+    background-color: rgb(117, 117, 110);
     max-width: 51em;
     display: flex;
     flex-wrap: wrap;
@@ -34,5 +35,5 @@
     margin: 0 auto;
     width: 50%;
     justify-content: space-between;
-    border: 4mm ridge rgba(238, 127, 1, 0.6);
+    border: 4mm ridge #282c34;
 }
