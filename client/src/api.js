@@ -1,4 +1,4 @@
-const baseurl = "https://api-gullnesti.herokuapp.com/";
+const baseurl = "https://api-gullnesti.herokuapp.com";
 
 
 async function get(endpoint){
