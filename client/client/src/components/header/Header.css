@@ -1,0 +1,11 @@
+.button__heading{
+    background-color: grey;
+    margin-left: 3em;
+}
+
+.header-start{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+}

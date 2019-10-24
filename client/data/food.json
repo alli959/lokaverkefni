@@ -1,0 +1,360 @@
+{
+  "food":
+  [
+    {
+      "name": "Tilboð 1",
+      "isOffer": true,
+      "contains": "Ostborgari,Litlar Franskar,kokteilsósa",
+      "price": 1690,
+      "description": "Inniheldur ostborgara, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
+      "time": 240
+    },
+    {
+      "name": "Tilboð 2",
+      "isOffer": true,
+      "contains": "Bernesborgari,Litlar Franskar,kokteilsósa",
+      "price": 1690,
+      "description": "Inniheldur bernesborgara, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
+      "time": 240
+    },
+    {
+      "name": "Tilboð 3",
+      "isOffer": true,
+      "contains": "Samloka,Litlar Franskar,kokteilsósa",
+      "price": 1690,
+      "description": "Inniheldur samloku, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
+      "time": 240
+    },
+    {
+      "name": "Tilboð 4",
+      "isOffer": true,
+      "contains": "Kjúklingaborgari,Litlar Franskar,kokteilsósa",
+      "price": 1720,
+      "description": "Inniheldur kjúklingaborgara, litlar franskar, kokteil sósu og hálfs lítra gos af eigin vali",
+      "time": 270
+    },
+    {
+      "name": "Tilboð 5",
+      "isOffer": true,
+      "contains": "Samloka",
+      "price": 990,
+      "description": "Inniheldur samloku og gos í gleri",
+      "time": 90
+    },
+    {
+      "name": "Tilboð 6",
+      "isOffer": true,
+      "contains": "Ostborgari,Ostborgari,Ostborgari,Ostborgari,Stórar Franskar,kokteilsósa,kokteilsósa",
+      "price": 4690,
+      "description": "Inniheldur fjóra ostborgara, stórar franskar, tvær kokteil sósur og tveggja lítra gos að eigin vali",
+      "time": 240
+    },
+    {
+      "name": "Tilboð 7",
+      "isOffer": true,
+      "contains": "Fiskur,Litlar Franskar,kál,gúrka,tómatur,paprika,sinnepssósa",
+      "price": 1720,
+      "description": "Inniheldur fisk, salat litlar franskar, kokteil sósu og hálfs lítra gos að eigin vali",
+      "time": 300
+    },
+    {
+      "name": "Tilboð 8",
+      "isOffer": true,
+      "contains": "",
+      "price": 1500,
+      "description": "Inniheldur bát að eigin vali og gos í gleri",
+      "time": 180
+    },
+    {
+      "name": "Tilboð 9",
+      "isOffer": true,
+      "contains": "snitsel,Litlar Franskar,kál,gúrka,tómatur,paprika,sinnepssósa,bernessósa",
+      "price": 1750,
+      "description": "Inniheldur snitsel, litlar franskar, salat, bernessósu og hálfs lítra gos að eigin vali",
+      "time": 270
+    },
+    {
+      "name": "Tilboð 10",
+      "isOffer": true,
+      "contains": "kjúklingur,kál,gúrka,tómatur,paprika,skinka,ostur,egg,sinnepssósa",
+      "price": 1690,
+      "description": "Inniheldur kjúklingasalat, kokteil sósu og hálfs líters gos af eigin vali",
+      "time": 270
+    },
+    {
+      "name": "Tilboð 11",
+      "isOffer": true,
+      "contains": "kjúklingur,Litlar Franskar,kál,gúrka,tómatur,paprika,sinnepssósa",
+      "price": 1720,
+      "description": "Inniheldur kjúkling, litlar franskar, salat og hálfs lítra gos að eigin vali",
+      "time": 270
+    },
+    {
+      "name": "Ostborgari",
+      "isOffer": false,
+      "contains": "ostur,kál,tómatur,hamborgarasósa",
+      "price": 920,
+      "description": "Inniheldur ost , hamborgara sósu, kál og tómat",
+      "time": 120
+    },
+    {
+      "name": "Barnaborgari",
+      "isOffer": false,
+      "contains": "hamborgarasósa",
+      "price": 690,
+      "description": "Inniheldur hamborgara sósu",
+      "time": 180
+    },
+    {
+      "name": "Hamborgari",
+      "isOffer": false,
+      "contains": "kál,tómatur,hamborgarasósa",
+      "price": 800,
+      "description": "Inniheldur hamborgara sósu, kál og tómat",
+      "time": 120
+    },
+    {
+      "name": "Bernesborgari",
+      "isOffer": false,
+      "contains": "kál,paprika,laukur,bernessósa",
+      "price": 920,
+      "description": "Inniheldur ost, kál, lauk, papriku og bernessósu",
+      "time": 120
+    },
+    {
+      "name": "Beikonborgari",
+      "isOffer": false,
+      "contains": "kál,tómatur,beikon,hamborgarasósa",
+      "price": 1020,
+      "description": "Inniheldur ost, beikon, hamborgara sósu, kál og tómat",
+      "time": 120
+    },
+    {
+      "name": "PalliSpes Ostborgari",
+      "isOffer": false,
+      "contains": "sveppir,skinka,ostur,beikon,hamborgarasósa",
+      "price": 1100,
+      "description": "Inniheldur ost, beikon, skinku, sveppi og hamborgara sósu",
+      "time": 150
+    },
+    {
+      "name": "BBQborgari",
+      "isOffer": false,
+      "contains": "kál,laukur,beikon,tómat,BBQsósa",
+      "price": 1000,
+      "description": "Inniheldur beikon, kál, lauk, tómat og BBQ sósu",
+      "time": 120
+    },
+    {
+      "name": "Kjúklingaborgari",
+      "isOffer": false,
+      "contains": "kál,laukur,gúrka,laukssósa",
+      "price": 1050,
+      "description": "Inniheldur lauk, gúrku, kál og sósu",
+      "time": 270
+    },
+    {
+      "name": "Tvöfaldur Hamborgari",
+      "isOffer": false,
+      "contains": "kál,tómatur,hamborgarasósa",
+      "price": 1050,
+      "description": "Inniheldur kál, tómat og sósu",
+      "time": 120
+    },
+    {
+      "name": "Tvöfaldur Ostborgari",
+      "isOffer": false,
+      "contains": "ostur,kál,tómatur,hamborgarasósa",
+      "price": 1090,
+      "description": "Inniheldur ost, hamborgara sósu, kál og tómat",
+      "time": 120
+    },
+
+    {
+      "name": "Hamborgari",
+      "isOffer": false,
+      "contains": "kál,tómatur,hamborgarasósa",
+      "price": 1300,
+      "description": "Inniheldur hamborgara sósu, kál og tómat",
+      "time": 180
+    },
+    {
+      "name": "Skinkubátur",
+      "isOffer": false,
+      "contains": "skinka,ostur,beikon,kál,paprika,gúrka,ananas,laukssósa",
+      "price": 1300,
+      "description": "Inniheldur skinku, ost, beikon, kál, papriku, gúrku, ananas og lauksósu",
+      "time": 180
+    },
+    {
+      "name": "Roastbeefbátur",
+      "isOffer": false,
+      "contains": "roast beef,laukur,sveppir,paprika,kál,sinnepssósa",
+      "price": 1300,
+      "description": "Inniheldur Roastbeef, lauk, sveppi, papriku, kál og sinnepssósu",
+      "time": 180
+    },
+    {
+      "name": "Rækjubátur",
+      "isOffer": false,
+      "contains": "rækjur,skinka,ostur,kál,sinnepssósa",
+      "price": 1300,
+      "description": "Inniheldur Rækjur, skinku, ost, kál og sinnepssósu",
+      "time": 180
+    },
+    {
+      "name": "Pepperonibátur",
+      "isOffer": false,
+      "contains": "pepperoni,skinka,ostur,kál,sinnepssósa",
+      "price": 1300,
+      "description": "Inniheldur Pepperoni, skinku, ost, kál og sinnepssósu",
+      "time": 180
+    },
+    {
+      "name": "Samloka",
+      "isOffer": false,
+      "contains": "skinka,ostur,kál,sinnepssósa",
+      "price": 780,
+      "description": "Inniheldur Skinku, ost, kál og sósu",
+      "time": 90
+    },
+    {
+      "name": "BeikonSamloka",
+      "isOffer": false,
+      "contains": "beikon,skinka,ostur,kál,sinnepssósa",
+      "price": 950,
+      "description": "Inniheldur beikon, skinku, ost kál og sósu",
+      "time": 90
+    },
+    {
+      "name": "Þriggja Hæða Samloka",
+      "isOffer": false,
+      "contains": "skinka,ostur,beikon,kál,tómatur,sinnepssósa",
+      "price": 1100,
+      "description": "Inniheldur skinku, ost, beikon, kál, tómat og sósu",
+      "time": 90
+    },
+    {
+      "name": "KlúbbSamloka",
+      "isOffer": false,
+      "contains": "skinka,ostur,beikon,sveppir,kál,tómatur,hamborgarasósa",
+      "price": 830,
+      "description": "Inniheldur skinku, ost, beikon, sveppi, kál, tómat og hamborgara sósu",
+      "time": 120
+    },{
+      "name": "Litlar Franskar",
+      "isOffer": false,
+      "contains": "karteflukrydd",
+      "price": 470,
+      "description": "",
+      "time": 240
+    },{
+      "name": "Miðstærð Franskar",
+      "isOffer": false,
+      "contains": "karteflukrydd",
+      "price": 680,
+      "description": "",
+      "time": 240
+    },{
+      "name": "Stórar Franskar",
+      "isOffer": false,
+      "contains": "karteflukrydd",
+      "price": 830,
+      "description": "",
+      "time": 240
+    }
+
+  ],
+  "materials": [
+    {
+      "material": "tómatur",
+      "price": 50
+    },
+    {
+      "material": "kál",
+      "price": 50
+    },
+    {
+      "material": "gúrka",
+      "price": 50
+    },
+    {
+      "material": "laukur",
+      "price": 50
+    },
+    {
+      "material": "paprika",
+      "price": 50
+    },
+    {
+      "material": "sveppir",
+      "price": 160
+    },
+    {
+      "material": "egg",
+      "price": 100
+    },
+    {
+      "material": "ostur",
+      "price": 100
+    },
+    {
+      "material": "skinka",
+      "price": 260
+    },
+    {
+      "material": "pepperoni",
+      "price": 260
+    },
+    {
+      "material": "beikon",
+      "price": 260
+    },
+    {
+      "material": "roast beef",
+      "price": 260
+    },
+    {
+      "material": "kjöt",
+      "price": 260
+    },
+    {
+      "material": "snitsel",
+      "price": 580
+    },
+    {
+      "material": "kjúklingur",
+      "price": 290
+    },
+    {
+      "material": "bernessósa",
+      "price": 260
+    },
+    {
+      "material": "hamborgarasósa",
+      "price": 260
+    },
+    {
+      "material": "tómatssósa",
+      "price": 260
+    },
+    {
+      "material": "BBQsósa",
+      "price": 260
+    },
+    {
+      "material": "sinnepssósa",
+      "price": 260
+    },
+    {
+      "material": "laukssósa",
+      "price": 260
+    },
+    {
+      "material": "kokteilsósa",
+      "price": 260
+    }
+
+  ]
+}
+

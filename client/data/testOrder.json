@@ -1,0 +1,11 @@
+[
+    {
+        "orderId": 1,
+        "orderName": "Test",
+        "foodName": ["Tilboð1","Tilboð2"],
+        "minus": ["tómat","paprika"],
+        "plus": ["beikon", " "],
+        "totalprice": 1000,
+        "time": 100
+    }
+]
