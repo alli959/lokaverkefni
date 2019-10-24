@@ -3,16 +3,22 @@ import './App.css';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/header';
-import Button from './components/button';
 import Menu from './routes/menu';
 import SendOrder from './routes/sendOrder'
 
 class App extends Component {
 
-  async componentDidMount() {
-    
-
+  constructor(){
+    super();
+    this.state = {
+      isHeader: true,
+    }
   }
+
+
+
+
+
   render() {
     const { isFetching } = this.props;
 
@@ -26,12 +32,16 @@ class App extends Component {
     return (
       <main className="main">
           <div className="main__content">
-            <Header />
+            <Header/>
             <Switch location={this.props.location}>
-              <Route path="/menu" exact component={Menu} />
+              <Route path="/menu"  exact component={Menu} />
               <Route path="/finish" exact component={SendOrder} />
 
             </Switch>
+
+            {console.log(this.state.isHeader)}
+            {console.log(this.props.location)}
+
           </div>
       </main>
     );

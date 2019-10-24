@@ -115,7 +115,7 @@ class Menu extends Component {
             case '#offers':
                 return(
                     <div>
-                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(201, 40, 152)'}}>
+                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
 
@@ -131,7 +131,7 @@ class Menu extends Component {
 
                 return(
                     <div>
-                        <div className = "Navbar" style = {{backgroundColor: 'rgb(201, 40, 152)'}}>
+                        <div className = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
@@ -144,7 +144,7 @@ class Menu extends Component {
 
                 return(
                     <div>
-                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(201, 40, 152)'}}>
+                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
@@ -156,7 +156,7 @@ class Menu extends Component {
             case '#sandwiches':
                 return(
                     <div>
-                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(201, 40, 152)'}}>
+                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
                         <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />

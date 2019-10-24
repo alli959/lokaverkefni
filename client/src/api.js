@@ -1,4 +1,4 @@
-const baseurl = "https://api-gullnesti.herokuapp.com";
+const baseurl = "http://localhost:5000";
 
 
 async function get(endpoint){
