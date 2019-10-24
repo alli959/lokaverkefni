@@ -85,7 +85,7 @@ class OrderView extends Component {
         return (
             
         <div className = "order">
-            <div className = "orderBox">
+            <div className = "orderBox" style = {{background: "white", marginTop: '1em'}}>
                 <ul className = "orderBoxValues">
                     {food.map(foods =>
                     <li className = "orderItem">
@@ -107,7 +107,7 @@ class OrderView extends Component {
             <ul className = "orderButtons">
                 <button onClick={this.handleButtonClick} key="changeOrder" name="changeOrder"><a className = "change_Order" href="#changeorder">Breyta Pöntun</a></button>
                 <button onClick={this.handleButtonClick} key="finishOrder" name="finishOrder"><a className = "finish_Order" href="#finishorder">Klára Pöntun</a></button>
-                <button onClick={this.handleButtonClick} key="clearOrder" name="clearOrder">Hreinsa Pöntun</button>
+                <button onClick={this.handleButtonClick} key="clearOrder" name="clearOrder"><a className = "clearOrder_font">Hreinsa Pöntun</a></button>
             </ul>
         </div>
         )

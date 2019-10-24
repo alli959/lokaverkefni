@@ -21,12 +21,20 @@ class Header extends Component {
 
 
   render() {
-
+    if(this.props.location.pathname !== '/'){
+      return(
+        <div></div>
+      )
+    }
     
     return (
-      <header className="header">
-        <h1 className="header__heading"><Link to="/">Gullnesti</Link></h1>
-        <Button className="button__heading"><Link to="/menu">Matseðill</Link></Button>
+      <header className="header" style = {{background: "rgb(255, 188, 5)"}}>
+        <div className = "header-start">
+          <Link to="/">
+          <img src={require('../../Images/gullnesti-logo.png')} alt = "Gullnesti" style = {{maxWidth: '9em', maxHeight: '8em'}} />
+          </Link>
+          <Button className="button__heading"><Link to="/menu">Matseðill</Link></Button>
+        </div>
       </header>
     );
   }

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import {withRouter } from 'react-router-dom'
 
+import { Link } from 'react-router-dom';
+
+import Button from '../button';
+
 import './navbar.css';
 
 
@@ -13,9 +17,9 @@ class Navbar extends Component {
         this.state = {
             colors: [
             {background: 'black'},
-            {background: 'rgb(201, 40, 152)'},
-            {background: 'rgb(201, 40, 152)'}, 
-            {background: 'rgb(201, 40, 152)'}
+            {background: 'rgb(255, 1, 1)'},
+            {background: 'rgb(255, 1, 1)'}, 
+            {background: 'rgb(255, 1, 1)'}
         ]
 
         }
@@ -30,7 +34,7 @@ class Navbar extends Component {
                 temp[i] = {background: 'black'};
             }
             else{
-                temp[i] = {background: 'rgb(201, 40, 152)'};
+                temp[i] = {background: 'rgb(255, 1, 1)'};
             }
         }
         this.setState({
@@ -40,12 +44,21 @@ class Navbar extends Component {
     
     render(){
         return (
-            <ul className="navBar">
-                <button style = {this.state.colors[0]} onClick = {() => this.changeColor(0)}><a className="Offers" href="#offers">Tilboð</a></button>
-                <button style = {this.state.colors[1]} onClick = {() => this.changeColor(1)}><a className="Burgers" href="#burgers">Borgarar</a></button>
-                <button style = {this.state.colors[2]} onClick = {() => this.changeColor(2)}><a className="Boats" href="#boats">Bátar</a></button>
-                <button style = {this.state.colors[3]} onClick = {() => this.changeColor(3)}><a className="Sandwiches" href="#sandwiches">Samlokur</a></button>
-            </ul>
+            <div className = "Top">
+
+                <div className = "Header">
+                    <Link to="/">
+                        <img src={require('../../Images/gullnesti-logo.png')} alt = "Gullnesti" style = {{maxWidth: '9em', maxHeight: '8em'}} />
+                    </Link>
+                    <Button className="button__heading"><Link to="/menu">Matseðill</Link></Button>
+                </div>
+                <ul className="navBar">
+                    <button style = {this.state.colors[0]} onClick = {() => this.changeColor(0)}><a className="Offers" href="#offers">Tilboð</a></button>
+                    <button style = {this.state.colors[1]} onClick = {() => this.changeColor(1)}><a className="Burgers" href="#burgers">Borgarar</a></button>
+                    <button style = {this.state.colors[2]} onClick = {() => this.changeColor(2)}><a className="Boats" href="#boats">Bátar</a></button>
+                    <button style = {this.state.colors[3]} onClick = {() => this.changeColor(3)}><a className="Sandwiches" href="#sandwiches">Samlokur</a></button>
+                </ul>
+            </div>
 
         )
     }

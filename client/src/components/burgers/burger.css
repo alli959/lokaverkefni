@@ -6,7 +6,7 @@
 }
 
 .burger-list{
-    background-color: rgb(201, 40, 152);
+    background: rgb(255, 242, 0);
     list-style: none;
     max-width: 51em;
     margin-left: auto;
@@ -16,4 +16,13 @@
     flex-wrap: wrap;
     padding: 0px 10px 20px 10px;
     vertical-align: top;
+    border-width:5px;
+    border-color: rgb(255, 188, 5);
+    border-top-color: rgb(255, 242, 0);
+    border-bottom-color: rgb(255, 242, 0);
+    border-style: groove ;
+}
+
+.burger-list button{
+    margin-right: 1em;
 }
