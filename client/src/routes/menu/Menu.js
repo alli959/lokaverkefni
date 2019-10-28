@@ -123,6 +123,8 @@ class Menu extends Component {
                         <h1 className = "Menu_title">Tilboð</h1>
                         <div>
                             <Offers  clickHandler={this.handleButtonClick}/>
+                            {console.log("props",this.props)}
+
                         </div>
                     </div>
                     );

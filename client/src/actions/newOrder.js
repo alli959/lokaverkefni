@@ -33,18 +33,16 @@ function orderError(message) {
 export const newOrders = (order) => {
     return async (dispatch) => {
 
-        dispatch(requestOrder());
+        await dispatch(requestOrder());
 
         let endpoint = '/orders';
 
         let orders;
         try{
             orders = await api.post(endpoint, order);
-            
         } catch (error) {
-            dispatch(orderError(error));
+            dispatch(orderError("error"));
         }
-
         if (orders.status !== 200 || !orders){
             dispatch(orderError('fail'))
         }

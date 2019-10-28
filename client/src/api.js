@@ -1,4 +1,4 @@
-const baseurl = "https://api-gullnesti.herokuapp.com";
+const baseurl = "http://localhost:5000";
 
 
 async function get(endpoint){
@@ -11,6 +11,7 @@ async function get(endpoint){
 
     const response = await fetch(url);
     const result = await response.json();
+
 
     return { result, status: response.status};
 }
@@ -26,10 +27,11 @@ async function post(endpoint, data) {
       method: 'POST',
     };
   
-  
+
     const response = await fetch(url, options);
     const result = await response.json();
-  
+    console.log(await result);
+
     return { result, status: response.status };
   }
   

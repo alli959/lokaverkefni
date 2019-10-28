@@ -2,7 +2,7 @@ import {
     ORDER_REQUEST,
     ORDER_SUCCESS,
     ORDER_FAILURE
-  } from '../actions/getOrder';
+  } from '../actions/newOrder';
 
 
   const initialState = {

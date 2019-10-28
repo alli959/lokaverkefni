@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 
 import {withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
+import { newOrders } from '../../actions/newOrder';
+
+
 
 import './finishOrder.css';
+
 
 
 
@@ -34,16 +40,16 @@ class FinishOrder extends Component {
     async componentDidMount() {
 
         let foods = await this.props.food;
-        await this.setState({
+        this.setState({
             food: foods,
         })
-
     }
 
 
     
     handleSubmit = async (e) => {
-        
+        const {dispatch} = this.props;
+
         e.preventDefault();
 
         let order = {};
@@ -59,21 +65,18 @@ class FinishOrder extends Component {
         order.foodName = foodName;
         order.minus = minus;
         order.plus = plus;
+        order.totalPrice = 0;
 
         this.setState({
             order: order
         });
-
-        console.log("hello");
-        return <Redirect to='/finish'/>
-
+        await dispatch(newOrders(order))
 
         
         
     }
      
      handleChange = async (e) => {
-
         this.setState({
             name: e.target.value,
         });
@@ -149,10 +152,15 @@ class FinishOrder extends Component {
     }
 }
 
-FinishOrder.propTypes = {
-    food: PropTypes.array,
-}
+const mapStateToProps = (state) => {
+    return {
+      isFetching: state.newOrder.isFetching,
+      order: state.newOrder.order,
+      message: state.newOrder.message,
+    };
+  }
 
 
 
-export default withRouter(FinishOrder);
+
+export default withRouter(connect(mapStateToProps)(FinishOrder));

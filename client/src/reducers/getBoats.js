@@ -20,6 +20,7 @@ import {
               isFetching: action.isFetching,
           };
         case BOAT_SUCCESS:
+          
           return {
             ...state,
              isFetching: action.isFetching,
