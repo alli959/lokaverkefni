@@ -203,6 +203,29 @@ async function getFood(){
 
 }
 
+
+
+//get all Orders
+
+async function getOrders(){
+  const client = new Client({ connectionString });
+  const query = `SELECT * FROM orders`;
+  await client.connect();
+
+  try{
+    const data = await client.query(query,null);
+    const { rows } = data;
+    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
+
 //get all offers from the menu
 
 async function getOffers(){
@@ -328,6 +351,7 @@ module.exports = {
     getBoats,
     getSandwiches,
     getMaterials,
+    getOrders,
 };
 
 

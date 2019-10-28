@@ -9,6 +9,7 @@ const {
     getBoats,
     getSandwiches,
     getMaterials,
+    getOrders,
 } = require('./food-db');
 const xss = require('xss');
 
@@ -111,9 +112,21 @@ const validator = require('validator');
     }
     console.info('Finished inserting order');
 
-    return ({ status: 200, output: arr });
+    return ({ status: 200, data: arr });
   
 }
+
+/**
+ * 
+ * get Orders
+ * 
+ * @returns {promise}
+ */
+
+ async function getOrder(){
+     const data = await getOrders();
+     return data;
+ }
 
 /**
  * get food
@@ -298,6 +311,7 @@ module.exports = {
     getSandwich,
     getMaterial,
     apiInfo,
+    getOrder,
 };
  
 

@@ -65,7 +65,8 @@ class FinishOrder extends Component {
         order.foodName = foodName;
         order.minus = minus;
         order.plus = plus;
-        order.totalPrice = 0;
+        order.totalTime = 0;
+        console.log(order);
 
         this.setState({
             order: order

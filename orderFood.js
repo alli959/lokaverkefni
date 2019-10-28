@@ -13,6 +13,7 @@ const {
     getSandwich,
     getMaterial,
     apiInfo,
+    getOrder,
 } = require('./orderAPI');
 
 const router = express.Router();
@@ -22,6 +23,11 @@ router.get('/', async (req, res) => {
     const data = await apiInfo();
     await res.json(data);
 
+});
+
+router.get('/orders', async (req, res) => {
+    const data = await getOrder();
+    await res.json(data);
 })
 
 
@@ -37,8 +43,7 @@ router.post('/orders', async (req, res) => {
     const {status, data} = await newOrder({
         orderName, foodName, minus, plus, totalTime,
     });
-
-    return res.status(status).json(data);
+     res.status(status).json(data);
 });
 
 
