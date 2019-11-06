@@ -28,6 +28,8 @@ class Header extends Component {
     }
     
     return (
+      <div className = "Front">
+
       <header className="header" style = {{background: "rgb(255, 188, 5)"}}>
         <div className = "header-start">
           <Link to="/">
@@ -36,6 +38,10 @@ class Header extends Component {
           <Button className="button__heading"><Link to="/menu">Matseðill</Link></Button>
         </div>
       </header>
+        <div className = "IceCreamBoard" style = {{background: "rgba(238, 228, 218, 0.5)" , display: 'flex'}}>
+          <img src={require('../../Images/ice-cream.png')} alt = "Ice Cream" style = {{ display: 'flex', margin: 'auto', width: 'auto', maxWidth: '42em', border: '1px'}}/>
+        </div>
+      </div>
     );
   }
 }

@@ -32,7 +32,7 @@ class Materials extends Component {
         foods: PropTypes.object,
         material: PropTypes.object,
         dispatch: PropTypes.func,
-        isFetching: PropTypes.object,
+        isFetching: PropTypes.bool,
         message: PropTypes.object,
 
 
@@ -55,7 +55,7 @@ class Materials extends Component {
     }
 
     isChecked(material){
-        let {materialToChange} = this.props;
+        let {materialToChange} = this.state;
         if(materialToChange.includes(material)){
             console.log(material);
             return(
@@ -113,7 +113,7 @@ class Materials extends Component {
                 <div className = "materials">
                     <ul className = "materialsBox">
                         {result.map(materials =>
-                        <div>
+                        <div onChange = {() => {console.log("change")}}>
                                 {this.isChecked(materials.material)}
                         </div>
                         )}

@@ -39,9 +39,6 @@ class App extends Component {
 
             </Switch>
 
-            {console.log(this.state.isHeader)}
-            {console.log(this.props.location)}
-
           </div>
       </main>
     );

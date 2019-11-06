@@ -34,6 +34,7 @@ router.get('/orders', async (req, res) => {
 router.post('/orders', async (req, res) => {
     const {
         orderName,
+        offerName,
         foodName,
         minus,
         plus,
@@ -41,7 +42,7 @@ router.post('/orders', async (req, res) => {
     } = req.body;
 
     const {status, data} = await newOrder({
-        orderName, foodName, minus, plus, totalTime,
+        orderName, offerName, foodName, minus, plus, totalTime,
     });
      res.status(status).json(data);
 });

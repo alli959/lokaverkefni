@@ -88,7 +88,7 @@ class OrderView extends Component {
             <div className = "orderBox" style = {{background: "white", marginTop: '1em'}}>
                 <ul className = "orderBoxValues">
                     {food.map(foods =>
-                    <li className = "orderItem">
+                    <li className = "orderItem" key = {foods.name}>
                         <div className = "foodName">
                             <h4>{foods.name}</h4>
                         </div>
