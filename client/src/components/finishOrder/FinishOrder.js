@@ -55,19 +55,30 @@ class FinishOrder extends Component {
         let order = {};
         let foods = this.state.food;
         let orderName = this.state.name;
+        let offerName = [];
         let foodName = [];
         let minus = [];
         let plus = [];
         for(var i = 0; i<foods.length; i++){
-            foodName.push(foods[i].name);
+            if(foods[i].name.includes("Tilboð")){
+                offerName.push(foods[i].name);
+                foodName.push('');
+            }
+            else{
+                offerName.push('');
+                foodName.push(foods[i].name);
+            }
+
+            //temp
+            minus.push('');
+            plus.push('');
         }
         order.orderName = orderName;
+        order.offerName = offerName;
         order.foodName = foodName;
         order.minus = minus;
         order.plus = plus;
         order.totalTime = 0;
-        console.log(order);
-
         this.setState({
             order: order
         });
@@ -121,7 +132,7 @@ class FinishOrder extends Component {
                 <div className = "orderBox">
                     <ul className = "orderBoxValues">
                         {food.map(foods =>
-                        <li className = "orderItem">
+                        <li className = "orderItem" key = {foods.name}>
                             <div className = "foodName">
                                 <h4>{foods.name}</h4>
                             </div>

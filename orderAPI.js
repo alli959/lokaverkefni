@@ -10,6 +10,10 @@ const {
     getSandwiches,
     getMaterials,
     getOrders,
+    getOfferPrice,
+    getMaterialsForFood,
+    getFoodFromOffer,
+    getOfferItem
 } = require('./food-db');
 const xss = require('xss');
 
@@ -44,6 +48,7 @@ const validator = require('validator');
  * @param {Object} order - order object to add
  * @param {Int} order.orderId - ID of the person who orders
  * @param {String} order.orderName - name of the person who orders
+ * @param {Array} order.offerName - name of the order if it is a offer
  * @param {Array} order.name - name of the order
  * @param {Array} order.minus - items the person doesn't want
  * @param {Array} order.plus  - items the person wants extra
@@ -54,6 +59,7 @@ const validator = require('validator');
 
  async function newOrder({
      orderName,
+     offerName,
      foodName,
      minus,
      plus,
@@ -61,61 +67,124 @@ const validator = require('validator');
  } = {}) {
      console.log("validation here");
 
-     
+     for(var i = 0; i<offerName.length; i++){
+         console.log("before",plus[i])
+         if(offerName[i] === ""){
+             offerName[i] = "NONE";
+         }
+         if(foodName[i] === ""){
+             foodName[i] = "NONE";
+         }
+         if(minus[i] === ""){
+            minus[i] = "NONE";
+         }
+         if(plus[i] === ""){
+            plus[i] = "NONE";
+         }
+
+         console.log("after",plus[i])
+
+
+     }
+    
+    let itemId = 1;
     const tempId = await getHighestId();
     const id = tempId[0].max + 1;
     const arr = [];
 
     let totalPrice = 0;
     for(let i = 0; i<foodName.length; i++){
-        let materialPrice = 0;
-        if(plus[i] === undefined){
-            materialPrice = 0;
-        }
-        else{
-            const materials = await plus[i].split(',');
+        if(offerName[i] !== "NONE"){
+            let materialPrice = 0;
+            let foodMinus = await minus[i].split('&');
+            let foodPlus = await plus[i].split('&');
 
-            for(let j = 0; j<materials.length; j++){
-                const temp = await getMaterialPrice(materials[j])
-                materialPrice += temp[0].price;
-                if(materialPrice == undefined){
-                    materialPrice = 0;
+                for(let j = 0; j<foodPlus.length; j++){
+                    if(foodPlus[j] !== "NONE"){
+                        const materials = await foodPlus[j].split(',');
+                        for(let k = 0; k<materials.length; k++){
+                            const temp = await getMaterialPrice(materials[k]);
+                            materialPrice += temp[0].price;
+                        }
+                    }
+                
+            };
+            const offerPrice = await getOfferPrice(offerName[i]);;
+            const foodmaterialPrice = materialPrice + offerPrice[0].price;
+            const offer = await getOfferItem(offerName[i]);
+            const offerItems = await getFoodFromOffer(offer[0].id);
+            totalPrice += foodmaterialPrice;
+            for(let j = 0; j<offerItems.length; j++){
+
+                const data = {
+                    orderId: id,
+                    orderName: xss(orderName),
+                    itemId: itemId,
+                    offerName: xss(offerName[i]),
+                    foodName: xss(offerItems[j].foodname),
+                    minus: xss(foodMinus[j]),
+                    plus: xss(foodPlus[j]),
+                    price: foodmaterialPrice,
+                    totalprice: totalPrice,
+                    totalTime: totalTime,
+                };
+                arr.push(data);
+            }
+            itemId += 1;
+        }
+        
+
+        else{
+
+            let materialPrice = 0;
+            if(plus[i] === "NONE"){
+                materialPrice = 0;
+            }
+            else{
+                const materials = await plus[i].split(',');
+                
+                for(let j = 0; j<materials.length; j++){
+                    const temp = await getMaterialPrice(materials[j])
+                    materialPrice += temp[0].price;
+                    if(materialPrice === undefined){
+                        materialPrice = 0;
+                    }
                 }
             }
-        }
-
-
-        const foodPrice = await getFoodPrice(foodName[i]);
-        console.log("foodPrice", foodPrice);
-        const foodmaterialPrice = materialPrice + foodPrice[0].price;
-        console.log(foodmaterialPrice);
-        totalPrice += foodmaterialPrice;
-        const data = {
-            orderId: id,
-            orderName: xss(orderName),
-            foodName: xss(foodName[i]),
-            minus: xss(minus[i]),
-            plus: xss(plus[i]),
-            price: foodmaterialPrice,
-            totalprice: totalPrice,
-            totalTime: totalTime,
-        };
-        await arr.push(data);
-    }
-    for (let i = 0; i < arr.length; i += 1) {
-        try{
-        await addOrder(arr[i]); // eslint-disable-line
-        } catch(err){
-        console.error("Error inserting order");
-        throw err;
+            
+            const foodPrice = await getFoodPrice(foodName[i]);
+            const foodmaterialPrice = materialPrice + foodPrice[0].price;
+            totalPrice += foodmaterialPrice;
+            const data = {
+                orderId: id,
+                orderName: xss(orderName),
+                itemId: itemId,
+                offerName: xss(offerName[i]),
+                foodName: xss(foodName[i]),
+                minus: xss(minus[i]),
+                plus: xss(plus[i]),
+                price: foodmaterialPrice,
+                totalprice: totalPrice,
+                totalTime: totalTime,
+            };
+            arr.push(data);
+            itemId += 1;
         }
     }
-    console.info('Finished inserting order');
-
-    return ({ status: 200, data: arr });
-  
-}
-
+        for (let i = 0; i < arr.length; i += 1) {
+            try{
+                await addOrder(arr[i]); // eslint-disable-line
+            } catch(err){
+                console.error("Error inserting order");
+                throw err;
+            }
+        }
+        console.info('Finished inserting order');
+        
+        return ({ status: 200, data: arr });
+        
+    }
+    
 /**
  * 
  * get Orders

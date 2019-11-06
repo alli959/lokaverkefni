@@ -150,7 +150,7 @@ class ChangeOrder extends Component {
             <div className = "changeOrder">
                 <ul className = "changeOrderBox">
                     {food.map((result, index) =>
-                    <div>
+                    <div key = {index}>
                         {this.checkisOffer(result.isoffer, result, index)}
                     </div>
                     )}

@@ -40,7 +40,7 @@ class Menu extends Component {
         foods: PropTypes.object,
         materialsToChange: PropTypes.string,
         dispatch: PropTypes.func,
-        isFetching: PropTypes.object,
+        isFetching: PropTypes.bool,
         message: PropTypes.object,
     }
 
@@ -115,7 +115,7 @@ class Menu extends Component {
             case '#offers':
                 return(
                     <div>
-                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
+                        <div className = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
 
@@ -170,10 +170,13 @@ class Menu extends Component {
             case '#changeorder':
                 return(
                     <div>
+                        <React.Fragment>
+
                         <ChangeOrder food={this.state.itemsInOrderView} menu={this.props.foods}
                             clickHandler = {this.handleButtonClick} />
                         <Materials foodToChange = {this.state.foodToChange} orderItemToChange = {this.state.orderItemToChange}
                                                     materialToChange = {this.state.materialsToChange} />
+                        </React.Fragment>
                     </div>
                 )
             case '#finishorder':

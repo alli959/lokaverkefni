@@ -4,7 +4,6 @@ const xss = require('xss');
 
 const connectionString = process.env.DATABASE_URL;
 
-console.log(connectionString);
 
 
 //inserting food into the database, always used when insert-data.js runs
@@ -12,7 +11,6 @@ async function saveFood(data) {
     const client = new Client({ connectionString });
     const {
       name,
-      isOffer,
       contains,
       description,
       price,
@@ -30,10 +28,10 @@ async function saveFood(data) {
     await client.connect();
   
     const query =
-    `INSERT INTO food(name, isOffer, contains, description, price, time) VALUES($1, $2, $3, $4, $5, $6) returning *`;
+    `INSERT INTO food(name, contains, description, price, time) VALUES($1, $2, $3, $4, $5) returning *`;
   
     const values = [
-      bname, isOffer, bcontains, bdescription, bprice, btime
+      bname, bcontains, bdescription, price, time
     ];
   
     try {
@@ -46,6 +44,148 @@ async function saveFood(data) {
     } finally {
       await client.end();
     }
+}
+
+
+//inserting food into the database, always used when insert-data.js runs
+async function saveOffers(data) {
+  const client = new Client({ connectionString });
+  const {
+    name,
+    contains,
+    sauce,
+    description,
+    price,
+    time,
+  } = data;
+
+  const bname = xss(name);
+  const bcontains = xss(contains);
+  const bsauce = xss(sauce);
+  const bdescription = xss(description);
+  const bprice = xss(price);
+  const btime = xss(time);
+
+
+
+  await client.connect();
+
+  const query =
+  `INSERT INTO offers(name, contains, sauce, description, price, time) VALUES($1, $2, $3, $4, $5, $6) returning *`;
+
+  const values = [
+    bname, bcontains, bsauce, bdescription, price, btime
+  ];
+
+  try {
+    const result = await client.query(query, values);
+    const { rows } = result;
+    return rows;
+  } catch (err) {
+    console.error('Error inserting data');
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+
+async function saveSauces(data) {
+  const client = new Client({ connectionString });
+  const {
+    name,
+    price,
+  } = data;
+
+  const bname = xss(name);
+
+
+
+
+  await client.connect();
+
+  const query =
+  `INSERT INTO sauces(name, price) VALUES($1, $2) returning *`;
+
+  const values = [
+    bname, price
+  ];
+
+  try {
+    const result = await client.query(query, values);
+    const { rows } = result;
+    return rows;
+  } catch (err) {
+    console.error('Error inserting data');
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+
+async function insertMaterialsIn(data) {
+  const client = new Client({ connectionString });
+  const {
+    foodId,
+    foodName,
+    materialId,
+    materialName,
+  } = data;
+
+
+
+  await client.connect();
+
+  const query =
+  `INSERT INTO materialIn(foodId, foodName, materialId, materialName) VALUES($1, $2, $3, $4) returning *`;
+
+  const values = [
+    foodId, foodName, materialId, materialName
+  ];
+  try {
+    const result = await client.query(query, values);
+    const { rows } = result;
+    return rows;
+  } catch (err) {
+    console.error('Error inserting data');
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+
+
+async function insertFoodInOffers(data) {
+  const client = new Client({ connectionString });
+  const {
+    offerId,
+    offerName,
+    foodId,
+    foodName,
+  } = data;
+
+
+
+  await client.connect();
+
+  const query =
+  `INSERT INTO foodInOffer(offerId, offerName, foodId, foodName) VALUES($1, $2, $3, $4) returning *`;
+
+  const values = [
+    offerId, offerName, foodId, foodName
+  ];
+  try {
+    const result = await client.query(query, values);
+    const { rows } = result;
+    return rows;
+  } catch (err) {
+    console.error('Error inserting data');
+    throw err;
+  } finally {
+    await client.end();
+  }
 }
 
 
@@ -94,6 +234,8 @@ async function addOrder(data) {
   const client = new Client({ connectionString });
   const {
     orderId,
+    itemId,
+    offerName,
     orderName,
     foodName,
     minus,
@@ -107,10 +249,10 @@ async function addOrder(data) {
   await client.connect();
 
   const query =
-  `INSERT INTO orders(orderId, orderName, foodName, minus, plus, price, totalprice, totalTime) VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
+  `INSERT INTO orders(orderId, itemId, offerName, orderName, foodName, minus, plus, price, totalprice, totalTime) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning *`;
 
   const values = [
-    orderId, orderName, foodName, minus, plus, price, totalprice, totalTime
+    orderId, itemId, offerName, orderName, foodName, minus, plus, price, totalprice, totalTime
   ];
 
 
@@ -131,7 +273,6 @@ async function getMaterialPrice(material){
   const client = new Client({ connectionString});
   const query = 'SELECT price FROM materials WHERE material = $1';
   await client.connect();
-  console.log(material);
 
   try{
     const data = await client.query(query, [material]);
@@ -145,15 +286,35 @@ async function getMaterialPrice(material){
   }
 }
 
+
+
 //get Price of each food
 async function getFoodPrice(food){
   const client = new Client({ connectionString});
   const query = 'SELECT price FROM food WHERE name = $1';
   await client.connect();
-  console.log(food);
 
   try{
     const data = await client.query(query, [food]);
+    const { rows } = data;
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+
+//get Price of each offer
+async function getOfferPrice(offer){
+  const client = new Client({ connectionString});
+  const query = 'SELECT price FROM offers WHERE name = $1';
+  await client.connect();
+
+  try{
+    const data = await client.query(query, [offer]);
     const { rows } = data;
     return rows;
   } catch (err) {
@@ -192,7 +353,6 @@ async function getFood(){
   try{
     const data = await client.query(query,null);
     const { rows } = data;
-    console.log(rows);
     return rows;
   } catch (err) {
     console.info(err);
@@ -215,7 +375,6 @@ async function getOrders(){
   try{
     const data = await client.query(query,null);
     const { rows } = data;
-    console.log(rows);
     return rows;
   } catch (err) {
     console.info(err);
@@ -226,17 +385,37 @@ async function getOrders(){
 
 }
 
+
+
 //get all offers from the menu
 
 async function getOffers(){
   const client = new Client({ connectionString });
-  const query = `SELECT * FROM food WHERE name like 'Tilboð%' `;
+  const query = `SELECT * FROM Offers `;
   await client.connect();
 
   try{
     const data = await client.query(query,null);
     const { rows } = data;
-    console.log(rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+
+}
+
+
+async function getOfferItem(name){
+  const client = new Client({ connectionString });
+  const query = `SELECT * FROM offers WHERE name = $1`;
+  await client.connect();
+
+  try{
+    const data = await client.query(query,[name]);
+    const { rows } = data;
     return rows;
   } catch (err) {
     console.info(err);
@@ -257,7 +436,6 @@ async function getBurgers(){
   try{
     const data = await client.query(query,null);
     const { rows } = data;
-    console.log(rows);
     return rows;
   } catch (err) {
     console.info(err);
@@ -278,7 +456,6 @@ async function getBoats(){
   try{
     const data = await client.query(query,null);
     const { rows } = data;
-    console.log(rows);
     return rows;
   } catch (err) {
     console.info(err);
@@ -299,7 +476,6 @@ async function getSandwiches(){
   try{
     const data = await client.query(query,null);
     const { rows } = data;
-    console.log(rows);
     return rows;
   } catch (err) {
     console.info(err);
@@ -320,7 +496,7 @@ async function getMaterials(){
   try{
     const data = await client.query(query,null);
     const { rows } = data;
-    console.log(rows);
+    (rows);
     return rows;
   } catch (err) {
     console.info(err);
@@ -333,6 +509,47 @@ async function getMaterials(){
 
 
 
+async function getFoodFromOffer(offerId){
+
+  const client = new Client({ connectionString });
+  const query = `SELECT foodName FROM foodInOffer WHERE offerId = $1`;
+
+  await client.connect();
+
+  try{
+    const data = await client.query(query,[offerId]);
+    const { rows } = data;
+    (rows);
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+
+async function getMaterialsForFood(foodId){
+  const client = new Client({ connectionString });
+  const query = `SELECT materialName FROM materialIn WHERE foodId = $1`;
+
+  await client.connect();
+
+  try{
+    const data = await client.query(query,[foodId]);
+    const { rows } = data;
+    return rows;
+  } catch (err) {
+    console.info(err);
+    throw err;
+  } finally {
+    await client.end();
+  }
+}
+
+
+
 
 
 
@@ -340,6 +557,7 @@ async function getMaterials(){
 
 module.exports = {
     saveFood,
+    saveOffers,
     saveMaterials,
     addOrder,
     getMaterialPrice,
@@ -352,6 +570,13 @@ module.exports = {
     getSandwiches,
     getMaterials,
     getOrders,
+    insertMaterialsIn,
+    insertFoodInOffers,
+    saveSauces,
+    getOfferPrice,
+    getMaterialsForFood,
+    getFoodFromOffer,
+    getOfferItem
 };
 
 
