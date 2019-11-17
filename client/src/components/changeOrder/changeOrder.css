@@ -1,6 +1,24 @@
 .changeOrder{
+    display: flex;
     border-style: outset;
-    background-color: rgb(255, 188, 5);
+    background-color: white;
+    margin: auto;
+    margin-top: 1em;
+    max-width: 20em;
+    height: 22em;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.changeOrderBox{
+    margin: auto;
+    padding: 0;
+}
+
+.foodItem .button{
+    background-color: orange;
+    width: 8em;
+    margin-top: 1em;
 }
 
 .item{
@@ -8,7 +26,6 @@
     border-bottom-style: double;
 }
 
-.subContains{
-    display: flex;
-
+.orderItem{
+    border-bottom: 1px;
 }

@@ -25,18 +25,20 @@ import './menu.css';
 class Menu extends Component {
 
     state = {
+        foodId: 0,
+        itemId: -1,
         foods: null,
         isFetching: false,
         foodToChange: null,
-        materialsToChange: null,
-        orderItemToChange: null,
+        minus: [],
+        plus: [],
         message: null,
         itemsInOrderView:[],
         
     }
     
     static propTypes = {
-        test: PropTypes.string,
+        foodId: PropTypes.number,
         foods: PropTypes.object,
         materialsToChange: PropTypes.string,
         dispatch: PropTypes.func,
@@ -53,16 +55,73 @@ class Menu extends Component {
             },() => {console.log("foods",this.state.foods)})
         dispatch(fetchFoods());
     }
+
+
+    /**ACTIONS */
     
+    handleNewItemInOrder = (e) => {
+        const {itemsInOrderView} = this.state;
     
+            itemsInOrderView.push(e);
+            const minus = this.state.minus;
+            const plus = this.state.plus;
+            const containsText = e.contains;
+            const tempArr = [];
+            if(e.name.includes("Tilboð")){
+                const contains = containsText.split(',');
+                for(let i = 0; i<contains.length; i++){
+                    minus.push("NONE");
+                    plus.push("NONE");
+                }
+
+            }
+            else{
+                plus.push("NONE");
+                minus.push("NONE");
+            }
+            this.setState({
+                plus: plus,
+                minus: minus,
+                itemsInOrderView: itemsInOrderView,
+            });
+        }
+
+    handleOrderViewAction = (e) => {
+        if(e === "clear"){
+            this.setState({
+                minus: [],
+                plus: [],
+                itemsInOrderView: []
+            });
+        }
+    }
 
     handleSubmit = async (e) => {
          console.log("ejamarr",e);
 
-
     }
 
+    handleMaterialsInFood = (e) => {
+        this.setState({
+            foodId: e,
+        })
+    }
+
+    changeFoodToCheck = (e)  =>{
+        console.log("this is the place",e);
+        const itemId = e.itemId;
+        const foodId = e.foodId;
+        this.setState({
+            itemId: itemId,
+            foodId: foodId,
+        });
+    }
+
+    /** */
+
+
     handleButtonClick = (e) => {
+
         if(e === "finish"){
 
         }
@@ -119,10 +178,10 @@ class Menu extends Component {
                             <Navbar />
                         </div>
 
-                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleOrderViewAction} />
                         <h1 className = "Menu_title">Tilboð</h1>
                         <div>
-                            <Offers  clickHandler={this.handleButtonClick}/>
+                            <Offers  clickHandler={this.handleNewItemInOrder}/>
                             {console.log("props",this.props)}
 
                         </div>
@@ -136,9 +195,9 @@ class Menu extends Component {
                         <div className = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
-                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleOrderViewAction} />
                         <h1 className = "Menu_title">Borgarar</h1>
-                        <Burgers clickHandler={this.handleButtonClick} />
+                        <Burgers clickHandler={this.handleNewItemInOrder} />
                     </div>
                     );
             case '#boats':
@@ -146,12 +205,12 @@ class Menu extends Component {
 
                 return(
                     <div>
-                        <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
+                        <div className = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
-                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleOrderViewAction} />
                         <h1 className = "Menu_title">Bátar</h1>
-                        <Boats clickHandler={this.handleButtonClick} />
+                        <Boats clickHandler={this.handleNewItemInOrder} />
                     </div>
                     );
 
@@ -161,9 +220,9 @@ class Menu extends Component {
                         <div classname = "Navbar" style = {{backgroundColor: 'rgb(255, 188, 5)'}}>
                             <Navbar />
                         </div>
-                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleButtonClick} />
+                        <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleOrderViewAction} />
                         <h1 className = "Menu_title">Samlokur</h1>
-                        <Sandwiches clickHandler={this.handleButtonClick} />
+                        <Sandwiches clickHandler={this.handleNewItemInOrder} />
                     </div>
                     );
 
@@ -171,11 +230,15 @@ class Menu extends Component {
                 return(
                     <div>
                         <React.Fragment>
-
-                        <ChangeOrder food={this.state.itemsInOrderView} menu={this.props.foods}
-                            clickHandler = {this.handleButtonClick} />
-                        <Materials foodToChange = {this.state.foodToChange} orderItemToChange = {this.state.orderItemToChange}
-                                                    materialToChange = {this.state.materialsToChange} />
+                        <ChangeOrder items={this.state.itemsInOrderView}
+                            clickHandler = {this.changeFoodToCheck}
+                            plus = {this.state.plus}
+                            minus = {this.state.minus} />
+                        <Materials foodId = {this.state.foodId}
+                                    itemId = {this.state.itemId}
+                                    plus = {this.state.plus}
+                                    minus = {this.state.minus}
+                        />
                         </React.Fragment>
                     </div>
                 )

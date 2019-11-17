@@ -197,6 +197,35 @@ const validator = require('validator');
      return data;
  }
 
+
+
+
+ /**
+  * 
+  * get Food from Offer 
+  * 
+  * @param {Int} id - ID of the offer
+  */
+
+  async function getFoodInOffer(id){
+      const data = await getFoodFromOffer(id);
+      return data;
+  }
+
+
+  /**
+   * 
+   *  get Materials from Food
+   * 
+   * @param {int} id - ID of the food
+   * 
+   */
+
+  async function getMaterialsInFood(id){
+      const data = await getMaterialsForFood(id);
+      return data;
+  }
+
 /**
  * get food
  * 
@@ -381,6 +410,8 @@ module.exports = {
     getMaterial,
     apiInfo,
     getOrder,
+    getFoodInOffer,
+    getMaterialsInFood,
 };
  
 

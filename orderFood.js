@@ -14,6 +14,8 @@ const {
     getMaterial,
     apiInfo,
     getOrder,
+    getFoodInOffer,
+    getMaterialsInFood,
 } = require('./orderAPI');
 
 const router = express.Router();
@@ -23,6 +25,18 @@ router.get('/', async (req, res) => {
     const data = await apiInfo();
     await res.json(data);
 
+});
+
+router.get('/foodinoffer/:id', async (req, res) =>{
+    const {id} = req.params;
+    const data = await getFoodInOffer(id);
+    await res.json(data);
+});
+
+router.get('/materialsinfood/:id', async (req, res) => {
+    const {id} = req.params;
+    const data = await getMaterialsInFood(id);
+    await res.json(data);
 });
 
 router.get('/orders', async (req, res) => {
@@ -41,6 +55,7 @@ router.post('/orders', async (req, res) => {
         totalTime,
     } = req.body;
 
+
     const {status, data} = await newOrder({
         orderName, offerName, foodName, minus, plus, totalTime,
     });
@@ -50,6 +65,7 @@ router.post('/orders', async (req, res) => {
 
 
 router.get('/food', async  (req, res) => {
+    await console.log(req);
     const food = await getallFood();
     await res.json(food);
 });

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {withRouter } from 'react-router-dom'
+
 
 
 import { fetchMaterials } from '../../actions/getMaterials'
+import { fetchMatFromFood } from '../../actions/getMaterialsFromFood';
 
 
 import './materials.css';
@@ -17,62 +20,120 @@ import './materials.css';
 class Materials extends Component {
 
     state = {
-        foodToChange: null,
-        orderItemToChange: null,
-        materialToChange: null,
-        isFetching: false,
-        material: null,
-        message: null,
+        isFetchingMaterials: false,
+        materials: null,
+        messageMaterials: null,
+        matInFood: [],
+        foodId: 0,
+        itemId: -1,
     }
 
     static propTypes = {
-        foodToChange: PropTypes.string,
-        materialToChange: PropTypes.string,
-        orderItemToChange: PropTypes.object,
-        foods: PropTypes.object,
-        material: PropTypes.object,
         dispatch: PropTypes.func,
-        isFetching: PropTypes.bool,
-        message: PropTypes.object,
+        minus: PropTypes.array,
+        plus: PropTypes.array,
+        isFetchingMaterials: PropTypes.bool,
+        itemId: PropTypes.number,
+        foodId: PropTypes.number,
+        materials: PropTypes.array,
+        messageMaterials: PropTypes.object,
+        matInFood: PropTypes.array,
 
+    }
 
-        
+    async componentDidUpdate(prevProps){
+        if(prevProps.itemId !== this.props.itemId){
+            const {dispatch} = this.props;
+            const {foodId} = this.props;
+            const {itemId} = this.props;
+            const {matInFood} = this.props;
+            await dispatch(fetchMatFromFood(foodId));
+
+            this.setState({
+                foodId: foodId,
+                itemId: itemId,
+                matInFood: matInFood
+
+            });
+        }
     }
 
     async componentDidMount() {
         const { dispatch} = this.props;
-        let materials = await this.props.material;
-        let foodToChange = await this.props.foodToChange;
-        let orderItemToChange = await this.props.orderItemToChange;
-        let materialToChange = await this.props.materialToChange;
-        await this.setState({
-            material: materials,
-            foodToChange: foodToChange,
-            orderItemToChange: orderItemToChange,
-            materialToChange: materialToChange,
+        let {foodId} =  this.props;
+        let {itemId} =  this.props;
+        const materials = await this.props.materials;
+        const matInFood = await this.props.matInFood;
+        this.setState({
+            foodId: foodId,
+            itemId: itemId,
+            materials: materials,
+            matInFood: matInFood,
         })
-        dispatch(fetchMaterials());
+        await dispatch(fetchMatFromFood(foodId));
+        await dispatch(fetchMaterials());
+
+
     }
 
     isChecked(material){
-        let {materialToChange} = this.state;
-        if(materialToChange.includes(material)){
-            console.log(material);
-            return(
-                    <li>
-                        <input type="checkbox" id={material} name={material} checked/>
-                        <label for={material}>{material}</label>
-                    </li>
-            )
+        const {matInFood} = this.props;
+        const {minus} = this.props;
+        const {plus} = this.props;
+        const {itemId} = this.props;
+        for(let i = 0; i<matInFood.length; i++){
+
+            if(matInFood[i].materialname === material){
+                let minusInFood = minus[itemId]
+
+                //check if the orderer has already taken this material off
+                if(minusInFood !== "NONE"){
+                    let temp = minusInFood.split(',');
+                    for(let i = 0; i<temp.length; i++){
+                        if(temp[i] === material){
+                            return(
+                                <li>
+                                    <input type="checkbox" id={material} name={material}/>
+                                    <label for={material}>{material}</label>
+                                </li>
+                            )
+                        }
+                    }
+                }
+                    return(
+                        <li>
+                            <input type="checkbox" id={material} name={material} checked/>
+                            <label for={material}>{material}</label>
+                        </li>
+                    )
+            }
+            
+
         }
-        else{
-            return(
-                    <li>
-                        <input type="checkbox" id={material} name={material}/>
-                        <label for={material}>{material}</label>
-                    </li>
-            )
+    
+        let plusInFood = plus[itemId];
+
+        if(plusInFood != "NONE"){
+            let temp = plusInFood.split(",");
+            for(let i = 0; i<temp.length; i++){
+                if(temp[i] === material){
+                    return(
+                        <li>
+                            <input type="checkbox" id={material} name={material} checked/>
+                            <label for={material}>{material}</label>
+                        </li>
+                    )
+                }
+            }
         }
+
+        return(
+                <li>
+                    <input type="checkbox" id={material} name={material}/>
+                    <label for={material}>{material}</label>
+                </li>
+        )
+        
     }
 
 
@@ -82,15 +143,15 @@ class Materials extends Component {
 
     render() {
 
-        const { isFetching, material} = this.props;
-        if(isFetching || !material) {
+        const {itemId, foodId, isFetchingMaterials, materials, isFetchingMatInFood, matInFood} = this.props;
+        if(isFetchingMaterials || !materials || isFetchingMatInFood || !matInFood) {
             return (
                 <div>
                     sæki álegg...
                 </div>
             );
         }
-        let result = material.result;
+        let result = materials.result;
 
 
         if(!result){
@@ -101,19 +162,19 @@ class Materials extends Component {
             )
         }
 
-
-        if(this.props.orderItemToChange === null){
+        if(this.state.itemId === -1){
             return(
-                <h1>Hello</h1>
+                <div>
+                    Select Food Item To Change
+                </div>
             )
         }
 
-        if(this.props.orderItemToChange != null){
             return (
                 <div className = "materials">
                     <ul className = "materialsBox">
                         {result.map(materials =>
-                        <div onChange = {() => {console.log("change")}}>
+                        <div>
                                 {this.isChecked(materials.material)}
                         </div>
                         )}
@@ -121,24 +182,28 @@ class Materials extends Component {
                 </div>
             )
         }
-        return(
-            <h1>hello</h1>
-        )
-        
 
         
 
-    }
+        
+
+    
 }
 
 const mapStateToProps = (state) => {
 
     return {
-        isFetching: state.getMaterials.isFetching,
-        material: state.getMaterials.material,
-        message: state.getMaterials.message
+        isFetchingMaterials: state.getMaterials.isFetching,
+        materials: state.getMaterials.material,
+        messageMaterials: state.getMaterials.message,
+        
+        isFetchingMatInFood: state.getMatFromFood.isFetching,
+        matInFood: state.getMatFromFood.matInFood,
+        messageMatInFood: state.getMatFromFood.message
+
+    
     };
         
 }
 
-export default connect(mapStateToProps)(Materials);
+export default withRouter(connect(mapStateToProps)(Materials));

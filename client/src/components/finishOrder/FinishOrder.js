@@ -131,8 +131,8 @@ class FinishOrder extends Component {
             <div className = "order">
                 <div className = "orderBox">
                     <ul className = "orderBoxValues">
-                        {food.map(foods =>
-                        <li className = "orderItem" key = {foods.name}>
+                        {food.map((foods,id) =>
+                        <li className = "orderItem" key = {id}>
                             <div className = "foodName">
                                 <h4>{foods.name}</h4>
                             </div>

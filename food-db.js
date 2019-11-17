@@ -512,7 +512,7 @@ async function getMaterials(){
 async function getFoodFromOffer(offerId){
 
   const client = new Client({ connectionString });
-  const query = `SELECT foodName FROM foodInOffer WHERE offerId = $1`;
+  const query = `SELECT foodName,foodId FROM foodInOffer WHERE offerId = $1`;
 
   await client.connect();
 

@@ -26,6 +26,58 @@ class Navbar extends Component {
     }
     
 
+    componentDidUpdate(prevProps){
+        const hash = this.props.location.hash;
+        const prevHash = prevProps.location.hash;
+        let colors = [];
+        if(prevHash !== hash){
+            if(hash === '#offers'){
+                    colors = [
+                        {background: 'black'},
+                        {background: 'rgb(255, 1, 1)'},
+                        {background: 'rgb(255, 1, 1)'}, 
+                        {background: 'rgb(255, 1, 1)'}
+                    ];
+                }
+
+                else if(hash === '#burgers'){
+
+                    colors = [
+                        {background: 'rgb(255, 1, 1)'},
+                        {background: 'black'},
+                        {background: 'rgb(255, 1, 1)'}, 
+                        {background: 'rgb(255, 1, 1)'}
+                    ];
+                
+                }
+                    else if(hash === "#boats"){
+
+                        colors = [
+                            {background: 'rgb(255, 1, 1)'},
+                            {background: 'rgb(255, 1, 1)'}, 
+                            {background: 'black'},
+                            {background: 'rgb(255, 1, 1)'}
+                        ];
+                        
+                    }
+                    else if(hash === "#sandwiches"){
+
+                        colors = [
+                            {background: 'rgb(255, 1, 1)'},
+                            {background: 'rgb(255, 1, 1)'}, 
+                            {background: 'rgb(255, 1, 1)'},
+                            {background: 'black'},
+                        ];
+                    
+                    }
+                    this.setState({colors: colors});
+                                
+                                
+                }
+            }
+                            
+        
+                        
     changeColor(index){
 
         const temp = this.state.colors;
@@ -45,7 +97,7 @@ class Navbar extends Component {
     render(){
         return (
             <div className = "Top">
-
+                {console.log("colors",this.state.colors)}
                 <div className = "Header">
                     <Link to="/">
                         <img src={require('../../Images/gullnesti-logo.png')} alt = "Gullnesti" style = {{maxWidth: '9em', maxHeight: '8em'}} />
@@ -53,10 +105,10 @@ class Navbar extends Component {
                     <Button className="button__heading"><Link to="/menu">Matseðill</Link></Button>
                 </div>
                 <ul className="navBar">
-                    <button style = {this.state.colors[0]} onClick = {() => this.changeColor(0)}><a className="Offers" href="#offers">Tilboð</a></button>
-                    <button style = {this.state.colors[1]} onClick = {() => this.changeColor(1)}><a className="Burgers" href="#burgers">Borgarar</a></button>
-                    <button style = {this.state.colors[2]} onClick = {() => this.changeColor(2)}><a className="Boats" href="#boats">Bátar</a></button>
-                    <button style = {this.state.colors[3]} onClick = {() => this.changeColor(3)}><a className="Sandwiches" href="#sandwiches">Samlokur</a></button>
+                    <button style = {this.state.colors[0]}><Link className="Offers" to="#offers">Tilboð</Link></button>
+                    <button style = {this.state.colors[1]}><Link className="Burgers" to="#burgers">Borgarar</Link></button>
+                    <button style = {this.state.colors[2]}><Link className="Boats" to="#boats">Bátar</Link></button>
+                    <button style = {this.state.colors[3]}><Link className="Sandwiches" to="#sandwiches">Samlokur</Link></button>
                 </ul>
             </div>
 

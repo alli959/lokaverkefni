@@ -44,6 +44,7 @@ class Burger extends Component {
 
     handleButtonClick = (e) => {
         const {result} = this.props.burger;
+        console.log(e.target);
         const index = e.currentTarget.getAttribute('id');
 
         this.props.clickHandler(result[index]);
