@@ -71,6 +71,52 @@ class OrderView extends Component {
             this.props.clickHandler("change");
         }
     }
+    
+
+
+    addFood = (foods, id, plusPriceArr) => {
+        const {plus} = this.props;
+        const {minus} = this.props;
+
+
+        return (
+            <div className = "FoodItem">
+
+            <li className = "orderItem" key = {id}>
+                <div className = "foodName">
+                    <h4>{foods.name}</h4>
+                </div>
+                <div className = "foodPrice">
+                    {foods.price !== 0?
+                    <h4>{foods.price}kr.</h4>:<h4></h4>
+                }
+                </div>
+            </li>
+            {minus[id] != "NONE"?
+            <div className = "MINUS">
+                <h5 style = {{maxHeight: "20px"}}>mínus</h5>
+                <p>{minus[id]}</p>    
+                </div>:<div></div>
+                }
+                {plus[id] !== "NONE"?
+                <div className = "PLUS">
+                    <h5 style = {{maxHeight: "20px"}}>plús</h5>
+                    <div>
+
+                    {plus[id].split(',').map((plusName, index) =>
+                    <div  className = "PLUS_VALUES">
+                        <p>{plusName}</p>
+                        <p style = {{fontWeight: "bold"}}>{plusPriceArr[id][index]}kr.</p>
+                    </div>
+                    )}
+                    </div>
+                </div>:<div></div>
+                    
+                }                           
+
+                </div>
+        )
+    }
         
 
 
@@ -88,6 +134,8 @@ class OrderView extends Component {
             const temp = plusPrice[i].split(',');
             plusPriceArr.push(temp);
         }
+
+        console.log("plusPriceArr",plusPriceArr);
 
         
 
@@ -108,6 +156,20 @@ class OrderView extends Component {
         });
         
 
+        //adding an itemId
+
+        let itemId = [];
+        for(let i = 0; i<food.length; i++){
+            if(food[i].name.includes('Tilboð')){
+                for(let j = 0; j<food[i].contains.length; j++){
+                    itemId.push(itemId.length);
+                }
+            }
+            else{
+                itemId.push(itemId.length);
+            }
+        }
+
 
 
         return (
@@ -118,56 +180,29 @@ class OrderView extends Component {
                     {food.map((foods,id) =>
                     <div key = {id}>
                     {countItemsInFood[id] === 1?
-                    <div className = "FoodItem">
-
-                        <li className = "orderItem" key = {id}>
-                            <div className = "foodName">
-                                <h4>{foods.name}</h4>
-                            </div>
-                            <div className = "foodPrice">
-                                <h4>{foods.price}kr.</h4>
-                            </div>
-                        </li>
-                        {minus[id] != "NONE"?
-                        <div className = "MINUS">
-                            <h5 style = {{maxHeight: "20px"}}>mínus</h5>
-                            <p>{minus[id]}</p>    
-                            </div>:<div></div>
-                            }
-                            {plus[id] !== "NONE"?
-                            <div className = "PLUS">
-                                <h5 style = {{maxHeight: "20px"}}>plús</h5>
-                                <div>
-
-                                {plus[id].split(',').map((plusName, index) =>
-                                <div  className = "PLUS_VALUES">
-                                    <p>{plusName}</p>
-                                    <p style = {{fontWeight: "bold"}}>{plusPriceArr[id][index]}kr.</p>
-                                </div>
-                                )}
-                                </div>
-                            </div>:<div></div>
-                                
-                            }                           
-
-                            </div>
-
+                    <div>
+                        {this.addFood(foods, itemId.shift(), plusPriceArr)}
+                    </div>
                     :
                     <div className = "OfferItem">
-
-                        <li className = "orderItem">
                             <div className = "foodName">
                                 <div className = "Offer">
-                                    <h3>{foods.name}</h3>
-                                    {foods.contains.map((contains,id) =>
-                                    <div className = "itemName">
-                                        
-                                        
+                                    <div className = "Offer-Header">
+                                        <h3>{foods.name}</h3>
+                                        <h3>{foods.price}</h3>
+                                    </div>
+                                    {foods.contains.split(',').map((contains,index) =>
+                                    <div  key = {index+"subItem"} className = "itemName">
+                                        <div>
+                                        {this.addFood({
+                                            name: contains,
+                                            price: 0
+                                        }, itemId.shift(), plusPriceArr)}
+                                        </div>
                                     </div>
                                     )}
                                 </div>
                             </div>
-                        </li>
                     </div>
                 }
                 </div>
