@@ -395,7 +395,14 @@ class Menu extends Component {
             case '#finishorder':
                     return(
                         <div>
-                            <FinishOrder food={this.state.itemsInOrderView} />
+                            <React.Fragment>
+                                <OrderView food={this.state.itemsInOrderView} clickHandler={this.handleOrderViewAction}
+                                        minus = {this.state.minus} plus = {this.state.plus} plusPrice = {this.state.plusPrice}
+                                        countItemsInFood = {this.state.countItemsInFood}
+
+                            />
+                                <FinishOrder food={this.state.itemsInOrderView} />
+                            </React.Fragment>
                         </div>
                     )
             default:

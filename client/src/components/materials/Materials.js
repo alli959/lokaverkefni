@@ -82,39 +82,7 @@ class Materials extends Component {
         
         const materials = await this.props.materials;
         const matInFood = await this.props.matInFood;
-        if(itemId != -1){
-            
-            const minusMat = minus[itemId].split(',');
-            const plusMat = plus[itemId].split(',');
-            //first remove from matInFood the minus materials
-            for(let i = 0; i<minusMat.length; i++){
-                for(let j = 0; j<matInFood.length; j++){
-                    if(minusMat[i] === matInFood[j].materialname){
-                        matInFood.splice(j);
-                        break;
-                    }
-                }
-            }
-            
-            
-            //start by creating a dict for the matInFood
-            let materialDict = {};
-            
-            for(let i = 0; i<matInFood.length; i++){
-                materialDict[matInFood[i].materialname] = true;
-            }
-            //now add to matInFood the plus materials
-            
-            
-            for(let i = 0; i<plusMat.length; i++){
-                if(!(plusMat[i] in materialDict)){
-                    if(plusMat[i] !== "NONE"){
-                        
-                        matInFood.push({materialname: plusMat[i]})
-                    }
-                }
-            }
-        }
+        
             
 
         await dispatch(fetchMatFromFood(foodId));
@@ -156,13 +124,53 @@ class Materials extends Component {
         const {plus} = this.props;
         const {itemId} = this.props;
 
-
-        
-
+        let temp = [];
 
         for(let i = 0; i<matInFood.length; i++){
+            temp.push(matInFood[i]);
+        }
 
-            if(matInFood[i].materialname === material){
+
+        if(itemId != -1){
+            
+            const minusMat = minus[itemId].split(',');
+            const plusMat = plus[itemId].split(',');
+            //first remove from temp the minus materials
+            for(let i = 0; i<minusMat.length; i++){
+                for(let j = 0; j<temp.length; j++){
+                    if(minusMat[i] === temp[j].materialname){
+                        temp.splice(j);
+                        break;
+                    }
+                }
+            }
+            
+            
+            //start by creating a dict for the temp
+            let materialDict = {};
+            
+            for(let i = 0; i<temp.length; i++){
+                materialDict[temp[i].materialname] = true;
+            }
+            //now add to temp the plus materials
+            
+            
+            for(let i = 0; i<plusMat.length; i++){
+                if(!(plusMat[i] in materialDict)){
+                    if(plusMat[i] !== "NONE"){
+                        
+                        temp.push({materialname: plusMat[i]})
+                    }
+                }
+            }
+        }
+
+        for(let i = 0; i<temp.length; i++){
+
+            if(temp[i].materialname === material){
+                for(let j = 0; j<temp.length; j++){
+
+                }
                 return(
                     <li>
                             <input type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck} defaultChecked/>
@@ -177,61 +185,7 @@ class Materials extends Component {
                 <label htmlFor={material}>{material}</label>
             </li>
         )
-                /*
-                
-                let minusInFood = minus[itemId];
-                
-                //check if the orderer has already taken this material off
-                
-                if(minusInFood !== "NONE"){
-
-                    let temp = minusInFood.split(',');
-                    
-                    for(let i = 0; i<temp.length; i++){
-                        if(temp[i] === material){
-                            return(
-                                <li>
-                                    <input type="checkbox" id={material} name={material} onChange = {this.handleCheck}/>
-                                    <label htmlFor={material}>{material}</label>
-                                </li>
-                            )
-                        }
-                    }
-                }
-                    return(
-                        <li>
-                            <input type="checkbox" id={material} name={material} onChange = {this.handleCheck} defaultChecked/>
-                            <label htmlFor={material}>{material}</label>
-                        </li>
-                    )
-            }
-            
-
-        }
-    
-        let plusInFood = plus[itemId];
-
-        if(plusInFood != "NONE"){
-            let temp = plusInFood.split(",");
-            for(let i = 0; i<temp.length; i++){
-                if(temp[i] === material){
-                    return(
-                        <li>
-                            <input type="checkbox" id={material} onChange = {this.handleCheck} name={material} defaultChecked/>
-                            <label htmlFor={material}>{material}</label>
-                        </li>
-                    )
-                }
-            }
-        }
-
-        return(
-                <li>
-                    <input type="checkbox" id={material} onChange = {this.handleCheck} name={material}/>
-                    <label htmlFor={material}>{material}</label>
-                </li>
-        )
-        */
+               
     }
 
 
@@ -245,7 +199,7 @@ class Materials extends Component {
 
         const {foodId, isFetchingMaterials, materials, isFetchingMatInFood, minus, plus} = this.props;
         let matInFood = this.props.matInFood
-        let itemId = this.state.itemId;
+        let itemId = this.props.itemId;
 
         
         if(isFetchingMaterials || !materials || isFetchingMatInFood || !matInFood) {
@@ -282,6 +236,7 @@ class Materials extends Component {
                 <div className = "materials">
                 
                     <ul className = "materialsBox">
+                        {console.log(this.props.matInFood)}
                         {result.map((materials,index) =>
                         <div key = {index}>
                                 {this.isChecked(materials.material,matInFood,materials.price)}
