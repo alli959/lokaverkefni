@@ -43,7 +43,7 @@
     },
     {
       "name": "Tilboð 6",
-      "contains": "Ostborgari,Ostborgari,Ostborgari,Ostborgari,Stórar Franskar,kokteilsósa,kokteilsósa",
+      "contains": "Ostborgari,Ostborgari,Ostborgari,Ostborgari,Stórar Franskar",
       "sauce": "kokteilsósa",
       "price": 4690,
       "description": "Inniheldur fjóra ostborgara, stórar franskar, tvær kokteil sósur og tveggja lítra gos að eigin vali",
@@ -266,6 +266,10 @@
     },
     {
       "material": "laukur",
+      "price": 50
+    },
+    {
+      "material": "ananas",
       "price": 50
     },
     {

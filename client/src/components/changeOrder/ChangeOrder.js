@@ -26,6 +26,7 @@ class ChangeOrder extends Component {
         offers: [],
         food: [],
         plus: [],
+        plusPrice: [],
         minus: [],
         foodInOffer: [],
         totalPrice: 0,
@@ -155,6 +156,9 @@ class ChangeOrder extends Component {
 }
 
     addFood(callback,food){
+
+        const {minus} = this.props.minus;
+        const {plus} = this.props.plus;
         if(food.name === "NONE"){
             return;
         }
@@ -174,6 +178,7 @@ class ChangeOrder extends Component {
                     })
                 }}>
                     <p>{food.name}</p>
+
                 </Button>
             </div>
         )

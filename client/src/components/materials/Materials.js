@@ -20,35 +20,46 @@ import './materials.css';
 class Materials extends Component {
 
     state = {
+        checked: [],
         isFetchingMaterials: false,
         materials: null,
         messageMaterials: null,
-        matInFood: [],
+        matInFood: ["NONE"],
         foodId: 0,
         itemId: -1,
     }
 
     static propTypes = {
         dispatch: PropTypes.func,
+        minusHandler: PropTypes.func,
+        plusHandler: PropTypes.func,
         minus: PropTypes.array,
         plus: PropTypes.array,
+        plusPrice: PropTypes.array,
         isFetchingMaterials: PropTypes.bool,
         itemId: PropTypes.number,
         foodId: PropTypes.number,
-        materials: PropTypes.array,
+        materials: PropTypes.object,
         messageMaterials: PropTypes.object,
         matInFood: PropTypes.array,
 
     }
 
     async componentDidUpdate(prevProps){
-        if(prevProps.itemId !== this.props.itemId){
-            const {dispatch} = this.props;
-            const {foodId} = this.props;
-            const {itemId} = this.props;
-            const {matInFood} = this.props;
-            await dispatch(fetchMatFromFood(foodId));
+        const {dispatch} = this.props;
+        const {foodId} = this.props;
+        const {itemId} = this.props;
+        const {materials} = this.props;
+        const {matInFood} = this.props;
+        const {minus} = this.props;
+        const {plus} = this.props;
 
+
+
+
+        if(prevProps.itemId !== this.props.itemId){
+            console.log("prevProps",prevProps);
+            await dispatch(fetchMatFromFood(foodId));
             this.setState({
                 foodId: foodId,
                 itemId: itemId,
@@ -62,39 +73,126 @@ class Materials extends Component {
         const { dispatch} = this.props;
         let {foodId} =  this.props;
         let {itemId} =  this.props;
+        let {minus} = this.props;
+        let {plus} = this.props;
+
+        let checked = [];
+
+        
+        
         const materials = await this.props.materials;
         const matInFood = await this.props.matInFood;
+        if(itemId != -1){
+            
+            const minusMat = minus[itemId].split(',');
+            const plusMat = plus[itemId].split(',');
+            //first remove from matInFood the minus materials
+            for(let i = 0; i<minusMat.length; i++){
+                for(let j = 0; j<matInFood.length; j++){
+                    if(minusMat[i] === matInFood[j].materialname){
+                        matInFood.splice(j);
+                        break;
+                    }
+                }
+            }
+            
+            
+            //start by creating a dict for the matInFood
+            let materialDict = {};
+            
+            for(let i = 0; i<matInFood.length; i++){
+                materialDict[matInFood[i].materialname] = true;
+            }
+            //now add to matInFood the plus materials
+            
+            
+            for(let i = 0; i<plusMat.length; i++){
+                if(!(plusMat[i] in materialDict)){
+                    if(plusMat[i] !== "NONE"){
+                        
+                        matInFood.push({materialname: plusMat[i]})
+                    }
+                }
+            }
+        }
+            
+
+        await dispatch(fetchMatFromFood(foodId));
+        await dispatch(fetchMaterials());
         this.setState({
             foodId: foodId,
             itemId: itemId,
             materials: materials,
             matInFood: matInFood,
         })
-        await dispatch(fetchMatFromFood(foodId));
-        await dispatch(fetchMaterials());
 
 
     }
 
-    isChecked(material){
-        const {matInFood} = this.props;
+
+    handleCheck = (e) => {
+        const isChecked = e.target.checked;
+        const name = e.target.name;
+        const price = e.target.value;
+        if(isChecked){
+            this.props.plusHandler({name: name, price: price});
+        }
+        else{
+            this.props.minusHandler(name);
+        }
+        
+        
+    }
+    
+
+    
+    
+        
+    
+
+
+    isChecked(material,matInFood, price){
         const {minus} = this.props;
         const {plus} = this.props;
         const {itemId} = this.props;
+
+
+        
+
+
         for(let i = 0; i<matInFood.length; i++){
 
             if(matInFood[i].materialname === material){
-                let minusInFood = minus[itemId]
-
+                return(
+                    <li>
+                            <input type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck} defaultChecked/>
+                            <label htmlFor={material}>{material}</label>
+                    </li>
+                )
+            }
+        }
+        return(
+            <li>
+                <input type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck}/>
+                <label htmlFor={material}>{material}</label>
+            </li>
+        )
+                /*
+                
+                let minusInFood = minus[itemId];
+                
                 //check if the orderer has already taken this material off
+                
                 if(minusInFood !== "NONE"){
+
                     let temp = minusInFood.split(',');
+                    
                     for(let i = 0; i<temp.length; i++){
                         if(temp[i] === material){
                             return(
                                 <li>
-                                    <input type="checkbox" id={material} name={material}/>
-                                    <label for={material}>{material}</label>
+                                    <input type="checkbox" id={material} name={material} onChange = {this.handleCheck}/>
+                                    <label htmlFor={material}>{material}</label>
                                 </li>
                             )
                         }
@@ -102,8 +200,8 @@ class Materials extends Component {
                 }
                     return(
                         <li>
-                            <input type="checkbox" id={material} name={material} checked/>
-                            <label for={material}>{material}</label>
+                            <input type="checkbox" id={material} name={material} onChange = {this.handleCheck} defaultChecked/>
+                            <label htmlFor={material}>{material}</label>
                         </li>
                     )
             }
@@ -119,8 +217,8 @@ class Materials extends Component {
                 if(temp[i] === material){
                     return(
                         <li>
-                            <input type="checkbox" id={material} name={material} checked/>
-                            <label for={material}>{material}</label>
+                            <input type="checkbox" id={material} onChange = {this.handleCheck} name={material} defaultChecked/>
+                            <label htmlFor={material}>{material}</label>
                         </li>
                     )
                 }
@@ -129,12 +227,14 @@ class Materials extends Component {
 
         return(
                 <li>
-                    <input type="checkbox" id={material} name={material}/>
-                    <label for={material}>{material}</label>
+                    <input type="checkbox" id={material} onChange = {this.handleCheck} name={material}/>
+                    <label htmlFor={material}>{material}</label>
                 </li>
         )
-        
+        */
     }
+
+
 
 
       
@@ -143,7 +243,11 @@ class Materials extends Component {
 
     render() {
 
-        const {itemId, foodId, isFetchingMaterials, materials, isFetchingMatInFood, matInFood} = this.props;
+        const {foodId, isFetchingMaterials, materials, isFetchingMatInFood, minus, plus} = this.props;
+        let matInFood = this.props.matInFood
+        let itemId = this.state.itemId;
+
+        
         if(isFetchingMaterials || !materials || isFetchingMatInFood || !matInFood) {
             return (
                 <div>
@@ -162,25 +266,31 @@ class Materials extends Component {
             )
         }
 
-        if(this.state.itemId === -1){
+        if(itemId === -1){
             return(
                 <div>
                     Select Food Item To Change
                 </div>
             )
         }
+        else{
+
+
+        
 
             return (
                 <div className = "materials">
+                
                     <ul className = "materialsBox">
-                        {result.map(materials =>
-                        <div>
-                                {this.isChecked(materials.material)}
+                        {result.map((materials,index) =>
+                        <div key = {index}>
+                                {this.isChecked(materials.material,matInFood,materials.price)}
                         </div>
                         )}
                     </ul>
                 </div>
             )
+                        }
         }
 
         

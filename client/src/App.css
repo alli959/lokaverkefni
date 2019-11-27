@@ -2,6 +2,22 @@
 html{
   background: rgb(255, 255, 5)
 }
+
+
+h4 {
+  margin: 0;
+}
+
+h5 {
+  margin: 0;
+}
+
+
+p {
+  margin: 0;
+}
+
+
 .main__content{
   
 }
