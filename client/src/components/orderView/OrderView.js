@@ -104,7 +104,7 @@ class OrderView extends Component {
                     <div>
 
                     {plus[id].split(',').map((plusName, index) =>
-                    <div  className = "PLUS_VALUES">
+                    <div key = {index + plusName}  className = "PLUS_VALUES">
                         <p>{plusName}</p>
                         <p style = {{fontWeight: "bold"}}>{plusPriceArr[id][index]}kr.</p>
                     </div>

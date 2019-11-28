@@ -132,14 +132,15 @@ class Materials extends Component {
 
 
         if(itemId != -1){
-            
+            console.log("tempBefore",temp);
             const minusMat = minus[itemId].split(',');
             const plusMat = plus[itemId].split(',');
             //first remove from temp the minus materials
             for(let i = 0; i<minusMat.length; i++){
                 for(let j = 0; j<temp.length; j++){
                     if(minusMat[i] === temp[j].materialname){
-                        temp.splice(j);
+                        temp.splice(j,1);
+                        console.log("tempAfter",temp);
                         break;
                     }
                 }
@@ -172,16 +173,16 @@ class Materials extends Component {
 
                 }
                 return(
-                    <li>
-                            <input type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck} defaultChecked/>
+                    <li className = "material">
+                            <input className = "checkbox" type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck} defaultChecked/>
                             <label htmlFor={material}>{material}</label>
                     </li>
                 )
             }
         }
         return(
-            <li>
-                <input type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck}/>
+            <li  className = "material">
+                <input className = "checkbox" type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck}/>
                 <label htmlFor={material}>{material}</label>
             </li>
         )
@@ -235,7 +236,7 @@ class Materials extends Component {
             return (
                 <div className = "materials">
                 
-                    <ul className = "materialsBox">
+                    <ul className = "materialsBox" data-columns="2">
                         {console.log(this.props.matInFood)}
                         {result.map((materials,index) =>
                         <div key = {index}>

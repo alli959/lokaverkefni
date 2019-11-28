@@ -1,3 +1,33 @@
-.materialsBox{
-    list-style: none;
+.materials {
+    width: 100%;
+    background: orange;
+    list-style-position: inside;
 }
+
+.materials .materialsBox{
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    padding: 0;
+    width: 50%;
+    list-style: none;
+    margin: auto;
+    margin-right: 3em;
+    background: yellow;
+}
+
+
+
+.material label {
+    margin-left: 2em;
+}
+
+.checkbox {
+position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
