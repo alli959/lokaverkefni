@@ -45,6 +45,12 @@ p {
   color: #61dafb;
 }
 
+.Menu_title {
+  text-align: center;
+  background: rgb(255, 188, 5);
+  margin-bottom: 0;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

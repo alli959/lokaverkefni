@@ -174,7 +174,7 @@ class Materials extends Component {
                 }
                 return(
                     <li className = "material">
-                            <input className = "checkbox" type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck} defaultChecked/>
+                            <input className = "checkbox" type="checkbox" id={material} name={material} value = {price} onClick = {this.handleCheck} defaultChecked/>
                             <label htmlFor={material}>{material}</label>
                     </li>
                 )
@@ -182,7 +182,7 @@ class Materials extends Component {
         }
         return(
             <li  className = "material">
-                <input className = "checkbox" type="checkbox" id={material} name={material} value = {price} onChange = {this.handleCheck}/>
+                <input className = "checkbox" type="checkbox" id={material} name={material} value = {price} onClick = {this.handleCheck}/>
                 <label htmlFor={material}>{material}</label>
             </li>
         )

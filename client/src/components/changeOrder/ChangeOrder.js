@@ -68,7 +68,24 @@ class ChangeOrder extends Component {
 
         
     }
+
+
+
+
+    static getDerivedStateFromProps(props, state) {
+    
+    
+    if(JSON.stringify(props.minus) !== JSON.stringify(state.minus)){
+        return {minus: props.minus}
+        }
+        return null;
+    }
+
+
+
+
     async componentDidMount() {
+        
         const {dispatch} = this.props;
         
         //putting it allt in a dirrerent array so It will be easier to send in the order.
@@ -77,6 +94,8 @@ class ChangeOrder extends Component {
         let offers = [];
         let food = [];
         let foodInOffers = [];
+        let {plus} = await this.props;
+        let {minus} = await this.props;
         items.map(result => {
             if(result.name.includes("Tilboð")){
                 offers.push({ id: result.id, name: result.name});
@@ -87,8 +106,6 @@ class ChangeOrder extends Component {
                 food.push({ id: result.id, name: result.name});
             }
         })
-        let {plus} = await this.props;
-        let {minus} = await this.props;
         
         for(let i = 0; i<offers.length; i++){
             const offerId = offers[i].id;
@@ -122,6 +139,21 @@ class ChangeOrder extends Component {
         
     }
 
+
+
+    componentDidUpdate(prevProps) {
+        const {minus} = this.props;
+        const {plus} = this.props;
+        console.log("mby?")
+        if((JSON.stringify(prevProps.minus) !== JSON.stringify(this.props.minus)) || (JSON.stringify(prevProps.plus) !== JSON.stringify(this.props.plus))){
+            console.log("yes");
+            this.setState({
+                minus: minus,
+                plus: plus,
+            })
+        }
+    } 
+
     addFoodItem(callback, id){
         const itemId = callback(false)
         console.log(itemId);
@@ -131,8 +163,18 @@ class ChangeOrder extends Component {
         })
     }
 
+    checkMinus(){
+        console.log("minus",this.props.minus);
+    }
 
-    addOffer(callback, foodinoffer,offer){
+    checkPlus(){
+        console.log("plus", this.props.plus);
+    }
+
+
+
+
+    addOffer(callback, foodinoffer,offer, minus, plus){
         if(foodinoffer[0].foodname === "NONE" || !foodinoffer){
             return;
         }
@@ -146,7 +188,7 @@ class ChangeOrder extends Component {
             </div>
             {foodinoffer.map((result,index) =>
                 <div key = {index} value = {result.foodname} className = "foodItem">
-                    {this.addFood(callback,{id: result.foodId, name: result.foodname})}
+                    {this.addFood(callback,{id: result.foodId, name: result.foodname}, minus, plus)}
             </div>
             
             )}
@@ -155,10 +197,9 @@ class ChangeOrder extends Component {
     }
 }
 
-    addFood(callback,food){
+    addFood(callback,food, minus, plus){
 
-        const {minus} = this.props.minus;
-        const {plus} = this.props.plus;
+
         if(food.name === "NONE"){
             return;
         }
@@ -172,14 +213,16 @@ class ChangeOrder extends Component {
         return(
             <div key = {key} id = {key} value = {food.id} className = "foodItem">
                 <Button id = {key} onClick = {() => {
+                    {this.checkMinus()}
                     this.props.clickHandler({
                         itemId: key,
                         foodId: food.id
                     })
                 }}>
                     <p>{food.name}</p>
-
                 </Button>
+                {minus[key] !== "NONE"?<p>-{minus[key]}</p>:<div></div>}
+                {plus[key] !== "NONE" ? <p>+{plus[key]}</p>:<div></div>}
             </div>
         )
     }
@@ -244,6 +287,8 @@ class ChangeOrder extends Component {
         const {offers} = this.state;
         const {food} = this.state;
         const {foodInOffer} = this.state;
+        const {minus} = this.props;
+        const {plus} = this.props;
 
         const order = [];
         //putting all information to an array of object so I can map through the object
@@ -258,7 +303,7 @@ class ChangeOrder extends Component {
 
 
 
-        //adding a itemId
+        //adding an itemId
 
         let itemId = [];
         for(let i = 0; i<order.length; i++){
@@ -305,8 +350,8 @@ class ChangeOrder extends Component {
                     {order.map((result,index) =>
                     <div className = "orderItem" key = {index}>
                         
-                        {this.addOffer(callback,result.foodInOffer,result.offer)}
-                        {this.addFood(callback, result.food)}
+                        {this.addOffer(callback,result.foodInOffer,result.offer, minus, plus)}
+                        {this.addFood(callback, result.food, minus, plus)}
                     </div>
                     )}
                 </ul>

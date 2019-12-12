@@ -23,7 +23,9 @@ import './menu.css';
 
 
 class Menu extends Component {
-
+    constructor(props){
+        super(props);
+    }
     state = {
         foodId: 0,
         itemId: -1,
