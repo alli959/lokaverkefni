@@ -144,9 +144,7 @@ class ChangeOrder extends Component {
     componentDidUpdate(prevProps) {
         const {minus} = this.props;
         const {plus} = this.props;
-        console.log("mby?")
         if((JSON.stringify(prevProps.minus) !== JSON.stringify(this.props.minus)) || (JSON.stringify(prevProps.plus) !== JSON.stringify(this.props.plus))){
-            console.log("yes");
             this.setState({
                 minus: minus,
                 plus: plus,
@@ -156,19 +154,10 @@ class ChangeOrder extends Component {
 
     addFoodItem(callback, id){
         const itemId = callback(false)
-        console.log(itemId);
         this.props.clickHandler({
             itemId: callback(false),
             foodId: id
         })
-    }
-
-    checkMinus(){
-        console.log("minus",this.props.minus);
-    }
-
-    checkPlus(){
-        console.log("plus", this.props.plus);
     }
 
 
@@ -198,13 +187,9 @@ class ChangeOrder extends Component {
 }
 
     addFood(callback,food, minus, plus){
-
-
         if(food.name === "NONE"){
             return;
         }
-        console.log("foodNAme",food.name);
-        console.log("foodId",food.id);
         const key = callback(true);
         const item = {
             itemId: key,
@@ -213,7 +198,6 @@ class ChangeOrder extends Component {
         return(
             <div key = {key} id = {key} value = {food.id} className = "foodItem">
                 <Button id = {key} onClick = {() => {
-                    {this.checkMinus()}
                     this.props.clickHandler({
                         itemId: key,
                         foodId: food.id
@@ -287,8 +271,8 @@ class ChangeOrder extends Component {
         const {offers} = this.state;
         const {food} = this.state;
         const {foodInOffer} = this.state;
-        const {minus} = this.props;
-        const {plus} = this.props;
+        const {minus} = this.state;
+        const {plus} = this.state;
 
         const order = [];
         //putting all information to an array of object so I can map through the object
@@ -318,7 +302,6 @@ class ChangeOrder extends Component {
         }
 
         const callback = (shouldShift) => {
-                console.log("shouldShift",shouldShift);
                 if(shouldShift){
                     return(itemId.shift());
                 }

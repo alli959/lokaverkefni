@@ -58,7 +58,6 @@ class Materials extends Component {
 
 
         if(prevProps.itemId !== this.props.itemId){
-            console.log("prevProps",prevProps);
             await dispatch(fetchMatFromFood(foodId));
             this.setState({
                 foodId: foodId,
@@ -132,7 +131,6 @@ class Materials extends Component {
 
 
         if(itemId != -1){
-            console.log("tempBefore",temp);
             const minusMat = minus[itemId].split(',');
             const plusMat = plus[itemId].split(',');
             //first remove from temp the minus materials
@@ -140,7 +138,6 @@ class Materials extends Component {
                 for(let j = 0; j<temp.length; j++){
                     if(minusMat[i] === temp[j].materialname){
                         temp.splice(j,1);
-                        console.log("tempAfter",temp);
                         break;
                     }
                 }
@@ -237,7 +234,6 @@ class Materials extends Component {
                 <div className = "materials">
                 
                     <ul className = "materialsBox" data-columns="2">
-                        {console.log(this.props.matInFood)}
                         {result.map((materials,index) =>
                         <div key = {index}>
                                 {this.isChecked(materials.material,matInFood,materials.price)}
