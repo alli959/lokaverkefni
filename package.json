@@ -24,7 +24,7 @@
     "csv": "^3.1.0",
     "csvtojson": "^2.0.8",
     "dotenv": "^6.0.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.0",
     "nodemon": "^1.18.4",
